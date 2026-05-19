@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>评论审核 - 华夏文脉</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&amp;family=Noto+Serif+SC:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#333029",
+                        "white-card": "#FFFCF6",
+                        "surface-tint": "#a93630",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad6",
+                        "on-surface-variant": "#58413f",
+                        "surface-dim": "#dfd9cf",
+                        "mist-border": "#E9E1D1",
+                        "secondary-fixed-dim": "#e9c174",
+                        "on-secondary-fixed": "#261900",
+                        "primary": "#690409",
+                        "on-surface": "#1d1c15",
+                        "success": "#2E7D32",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f3ede2",
+                        "on-tertiary-fixed": "#002019",
+                        "surface-bright": "#fff9ee",
+                        "on-primary-container": "#ff9c93",
+                        "on-secondary-container": "#785a17",
+                        "on-primary-fixed-variant": "#881e1c",
+                        "surface-container-low": "#f9f3e8",
+                        "secondary": "#775a16",
+                        "error-container": "#ffdad6",
+                        "error": "#B42318",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb4ac",
+                        "on-secondary-fixed-variant": "#5c4200",
+                        "surface-container-high": "#ede8dd",
+                        "surface-variant": "#e8e2d7",
+                        "tertiary-fixed": "#aef0da",
+                        "on-background": "#1d1c15",
+                        "on-primary-fixed": "#410003",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdea3",
+                        "background": "#fff9ee",
+                        "tertiary-container": "#075242",
+                        "surface-container-highest": "#e8e2d7",
+                        "outline-variant": "#dfbfbc",
+                        "tertiary": "#00392d",
+                        "outline": "#8b716e",
+                        "surface": "#fff9ee",
+                        "primary-container": "#8a1f1d",
+                        "secondary-container": "#fdd485",
+                        "on-tertiary-container": "#84c4af",
+                        "ink-text": "#1F2522",
+                        "tertiary-fixed-dim": "#93d3bf",
+                        "inverse-on-surface": "#f6f0e5",
+                        "on-tertiary-fixed-variant": "#055141",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ac"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "container-max": "1200px",
+                        "margin-tablet": "40px",
+                        "margin-desktop": "80px",
+                        "section-gap": "120px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Noto Serif SC"],
+                        "display-lg-mobile": ["Noto Serif SC"],
+                        "label-md": ["Noto Sans SC"],
+                        "headline-sm": ["Noto Serif SC"],
+                        "body-lg": ["Noto Sans SC"],
+                        "body-md": ["Noto Sans SC"],
+                        "admin-table": ["Noto Sans SC"],
+                        "headline-md": ["Noto Serif SC"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "admin-table": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container h-full w-60 fixed left-0 top-0 flex flex-col h-screen py-6 border-r border-mist-border z-40">
+<!-- Header -->
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant flex-shrink-0 border border-mist-border shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A close up portrait of a professional system administrator in a well-lit office environment. The lighting is bright and modern, creating a clear and trustworthy mood. The aesthetic is clean and corporate, utilizing a color palette of subtle neutrals and soft shadows that fits perfectly within a light-mode administrative dashboard UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhMswGjjx0E_mdP_5PfZr0oV7r3y7JoJGF2iUJApMK7N39T80_Q6pE1VwhLrBeMtkmNKk-nQLoSeRPCFCyLb31tEz7mkDE26dwdVz7JLi1OemO-z8jH5fjEa88I-aQbZCftZMjJLxHMSEyrHMH35WSC6aO2mxs3yinmyz9xRh8OW_aomvzFw-lNMSvOqSQO5YCF2ljptEXaHdwz5I1hPQovLB0K45ZKfVbVBEalbYDGO5nknPWlmBqSK8U6zpinuTd5MyEh9GcIA"/>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">文脉管理后台</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">系统管理员</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-4 mb-6">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-full hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                发布新内容
+            </button>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 overflow-y-auto font-label-md text-label-md">
+<!-- Inactive Tab -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 rounded-lg transition-all hover:bg-secondary-container" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                数据概览
+            </a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 rounded-lg transition-all hover:bg-secondary-container" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+                内容管理
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg mx-2 my-1 shadow-sm" href="#">
+<span class="material-symbols-outlined">comment</span>
+                评论审核
+            </a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 rounded-lg transition-all hover:bg-secondary-container" href="#">
+<span class="material-symbols-outlined">security</span>
+                权限设置
+            </a>
+</div>
+<!-- Footer Navigation -->
+<div class="mt-auto pt-4 border-t border-mist-border font-label-md text-label-md">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 rounded-lg transition-all hover:bg-secondary-container" href="#">
+<span class="material-symbols-outlined">settings</span>
+                个人设置
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/50 mx-2 my-1 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+                安全退出
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-60 flex-1 p-8 md:p-12 w-full max-w-[1400px]">
+<!-- Page Header -->
+<header class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">评论审核</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">管理和审核用户在文章下的评论内容。</p>
+</div>
+<div class="text-sm font-label-md text-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">home</span> / 评论审核
+            </div>
+</header>
+<!-- Toolbar (Search & Filter) -->
+<div class="bg-white-card rounded-xl p-5 shadow-[0_2px_10px_rgba(31,37,34,0.03)] border border-mist-border mb-6 flex flex-col sm:flex-row gap-4 justify-between items-center">
+<!-- Search -->
+<div class="relative w-full sm:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface rounded-lg border border-mist-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none font-body-md text-body-md text-on-surface transition-colors" placeholder="搜索评论内容、文章标题或用户..." type="text"/>
+</div>
+<!-- Filters & Actions -->
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">filter_list</span>
+<select class="pl-9 pr-8 py-2.5 bg-surface rounded-lg border border-mist-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none font-label-md text-label-md text-on-surface appearance-none cursor-pointer">
+<option value="all">所有状态</option>
+<option value="pending">待审核</option>
+<option value="approved">已通过</option>
+<option value="hidden">已隐藏</option>
+</select>
+</div>
+<button class="bg-surface border border-mist-border text-on-surface px-4 py-2.5 rounded-lg font-label-md text-label-md hover:border-secondary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                    刷新
+                </button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-white-card rounded-xl shadow-[0_2px_15px_rgba(31,37,34,0.04)] border border-mist-border overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-variant border-b border-mist-border">
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-medium whitespace-nowrap">ID</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-medium min-w-[150px]">文章标题</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-medium whitespace-nowrap">用户</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-medium min-w-[300px]">评论内容</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-medium whitespace-nowrap">提交时间</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-medium whitespace-nowrap">状态</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-medium whitespace-nowrap text-right">操作</th>
+</tr>
+</thead>
+<tbody class="font-admin-table text-admin-table text-on-surface divide-y divide-mist-border">
+<!-- Row 1: Pending -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6 text-on-surface-variant">#C1042</td>
+<td class="py-4 px-6 text-primary hover:underline cursor-pointer truncate max-w-[200px]">唐代金银器的工艺美学</td>
+<td class="py-4 px-6 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs font-bold">李</div>
+<span>李白不饮酒</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant line-clamp-2 max-w-[400px]">
+                                这篇文章分析得很透彻！特别是关于鎏金工艺的细节描述，让我对那些博物馆里的展品有了全新的认识。希望能多出一些这类的深度好文。
+                            </td>
+<td class="py-4 px-6 text-on-surface-variant whitespace-nowrap">2024-05-20 14:32</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary-container/50 text-on-secondary-container border border-secondary/20">
+                                    待审核
+                                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-success hover:text-success/80 flex items-center gap-1 transition-colors" title="通过">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors flex items-center gap-1" title="查看/编辑">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error transition-colors flex items-center gap-1" title="隐藏">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+</button>
+<button class="text-error hover:text-error/80 transition-colors flex items-center gap-1" title="删除">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Approved -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6 text-on-surface-variant">#C1041</td>
+<td class="py-4 px-6 text-primary hover:underline cursor-pointer truncate max-w-[200px]">宋代汝窑的色彩密码</td>
+<td class="py-4 px-6 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">王</div>
+<span>青花瓷控</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant line-clamp-2 max-w-[400px]">
+                                雨过天青云破处，这般颜色做将来。宋徽宗的审美确实达到了一个巅峰。现在的仿品很难复现那种温润如玉的质感。
+                            </td>
+<td class="py-4 px-6 text-on-surface-variant whitespace-nowrap">2024-05-20 11:15</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#2E7D32]/10 text-[#2E7D32] border border-[#2E7D32]/20">
+                                    已通过
+                                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-secondary hover:text-primary transition-colors flex items-center gap-1" title="查看">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="text-on-surface-variant hover:text-error transition-colors flex items-center gap-1" title="隐藏">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+</button>
+<button class="text-error hover:text-error/80 transition-colors flex items-center gap-1" title="删除">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Hidden -->
+<tr class="hover:bg-surface-bright transition-colors group bg-surface-container-low/50">
+<td class="py-4 px-6 text-on-surface-variant">#C1039</td>
+<td class="py-4 px-6 text-primary hover:underline cursor-pointer truncate max-w-[200px]">敦煌壁画修复纪实</td>
+<td class="py-4 px-6 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant text-xs font-bold">匿</div>
+<span class="text-on-surface-variant">匿名用户882</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant/60 line-clamp-2 max-w-[400px] italic">
+                                [内容因含有不当言论已被隐藏] 修复个什么劲，浪费钱，不如建几个商场。
+                            </td>
+<td class="py-4 px-6 text-on-surface-variant whitespace-nowrap">2024-05-19 22:40</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant border border-mist-border">
+                                    已隐藏
+                                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-secondary hover:text-primary transition-colors flex items-center gap-1" title="查看详情">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="text-success hover:text-success/80 transition-colors flex items-center gap-1" title="恢复显示">
+<span class="material-symbols-outlined text-[18px]">restore</span>
+</button>
+<button class="text-error hover:text-error/80 transition-colors flex items-center gap-1" title="彻底删除">
+<span class="material-symbols-outlined text-[18px]">delete_forever</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Approved -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6 text-on-surface-variant">#C1038</td>
+<td class="py-4 px-6 text-primary hover:underline cursor-pointer truncate max-w-[200px]">明清家具的榫卯智慧</td>
+<td class="py-4 px-6 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container text-xs font-bold">木</div>
+<span>木作匠人</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant line-clamp-2 max-w-[400px]">
+                                古人的智慧令人叹服，不用一根钉子就能做到如此坚固耐用，这不仅是技艺，更是哲学。
+                            </td>
+<td class="py-4 px-6 text-on-surface-variant whitespace-nowrap">2024-05-19 16:05</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#2E7D32]/10 text-[#2E7D32] border border-[#2E7D32]/20">
+                                    已通过
+                                </span>
+</td>
+<td class="py-4 px-6 text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-secondary hover:text-primary transition-colors flex items-center gap-1" title="查看">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="text-on-surface-variant hover:text-error transition-colors flex items-center gap-1" title="隐藏">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+</button>
+<button class="text-error hover:text-error/80 transition-colors flex items-center gap-1" title="删除">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-mist-border bg-surface-container-lowest flex items-center justify-between">
+<span class="font-admin-table text-admin-table text-on-surface-variant">
+                    显示 1 至 4 项，共 128 项
+                </span>
+<div class="flex items-center gap-1 font-label-md text-label-md">
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center font-bold shadow-sm">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-variant text-on-surface flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-variant text-on-surface flex items-center justify-center transition-colors">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-on-surface-variant">...</span>
+<button class="w-8 h-8 rounded hover:bg-surface-variant text-on-surface flex items-center justify-center transition-colors">12</button>
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

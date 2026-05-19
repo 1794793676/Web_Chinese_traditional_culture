@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户注册 - 华夏文脉</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card">
+      <aside class="auth-aside">
+        <a class="brand" href="../index.html">华夏文脉</a>
+        <h1>创建账号，<br>进入华夏文脉数字展馆</h1>
+        <p>传承华夏文明，赓续历史文脉。</p>
+      </aside>
+      <div class="auth-form">
+        <div>
+          <h2>用户注册</h2>
+          <p>请填写以下信息以创建您的账号。本阶段仅展示表单界面，不连接数据库。</p>
+        </div>
+        <form class="form">
+          <div class="field"><label for="username">用户名</label><input id="username" type="text" placeholder="请输入用户名"></div>
+          <div class="field"><label for="email">邮箱</label><input id="email" type="email" placeholder="your@email.com"></div>
+          <div class="field"><label for="password">密码</label><input id="password" type="password" placeholder="设置密码"></div>
+          <div class="field"><label for="confirm-password">确认密码</label><input id="confirm-password" type="password" placeholder="再次输入密码"></div>
+          <label class="hint"><input type="checkbox"> 我已阅读并同意服务协议和隐私政策</label>
+          <button class="btn btn--primary" type="button">注册</button>
+          <a class="btn btn--outline" href="login.html">已有账号？去登录</a>
+        </form>
+        <p class="guest-state" data-auth-state>游客状态</p>
+      </div>
+    </section>
+  </main>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/auth-placeholder.js"></script>
+</body>
+</html>

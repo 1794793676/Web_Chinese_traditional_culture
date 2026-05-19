@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>评论审核 - 华夏文脉</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div>
+        <a class="brand" href="../index.html">文脉管理后台</a>
+        <div class="admin-user"><span class="avatar">管</span><span>系统管理员</span></div>
+      </div>
+      <nav class="admin-nav" aria-label="后台导航">
+        <a href="dashboard.html"><span class="material-symbols-outlined">dashboard</span>数据总览</a>
+        <a href="../pages/category.html"><span class="material-symbols-outlined">menu_book</span>内容管理</a>
+        <a class="is-active" href="comments.html"><span class="material-symbols-outlined">comment</span>评论审核</a>
+        <a href="interactions.html"><span class="material-symbols-outlined">query_stats</span>互动统计</a>
+        <a href="../index.html"><span class="material-symbols-outlined">home</span>返回首页</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>评论审核</h1>
+          <p>保留 Stitch 评论管理页的审核场景，本阶段仅做静态展示。</p>
+        </div>
+        <a class="btn btn--primary" href="dashboard.html">返回总览</a>
+      </header>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>用户</th><th>评论内容</th><th>关联文章</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td>李慕白</td><td>这篇关于民本思想的分析很清晰，适合课堂展示。</td><td>民为邦本</td><td><span class="status status--pending">待审核</span></td><td>通过 / 拒绝</td></tr>
+            <tr><td>Wang123</td><td>希望后续能增加更多非遗图片和互动说明。</td><td>榫卯结构</td><td><span class="status status--success">已通过</span></td><td>查看</td></tr>
+            <tr><td>张文化</td><td>时间轴如果能补充朝代节点会更完整。</td><td>文脉纪元</td><td><span class="status status--pending">待审核</span></td><td>通过 / 拒绝</td></tr>
+            <tr><td>游客A</td><td>这条评论包含无关内容，建议删除。</td><td>书法之美</td><td><span class="status status--danger">已拒绝</span></td><td>查看</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互动数据统计 - 华夏文脉</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div>
+        <a class="brand" href="../index.html">文脉管理后台</a>
+        <div class="admin-user"><span class="avatar">管</span><span>系统管理员</span></div>
+      </div>
+      <nav class="admin-nav" aria-label="后台导航">
+        <a href="dashboard.html"><span class="material-symbols-outlined">dashboard</span>数据总览</a>
+        <a href="../pages/category.html"><span class="material-symbols-outlined">menu_book</span>内容管理</a>
+        <a href="comments.html"><span class="material-symbols-outlined">comment</span>评论审核</a>
+        <a class="is-active" href="interactions.html"><span class="material-symbols-outlined">query_stats</span>互动统计</a>
+        <a href="../index.html"><span class="material-symbols-outlined">home</span>返回首页</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>互动数据统计</h1>
+          <p>展示点赞、评论、收藏与分享等前端模拟数据。</p>
+        </div>
+        <span class="status status--success">静态统计</span>
+      </header>
+
+      <section class="grid grid--2">
+        <div class="chart-card">
+          <h3>近七日互动趋势</h3>
+          <div class="bars">
+            <div class="bar" style="--h:44%">周一</div>
+            <div class="bar" style="--h:68%">周二</div>
+            <div class="bar" style="--h:58%">周三</div>
+            <div class="bar" style="--h:83%">周四</div>
+            <div class="bar" style="--h:72%">周五</div>
+            <div class="bar" style="--h:94%">周六</div>
+            <div class="bar" style="--h:76%">周日</div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>互动类型占比</h3>
+          <div class="kpi-grid" style="margin-top:20px;">
+            <div class="kpi-card"><span>点赞</span><strong>52%</strong></div>
+            <div class="kpi-card"><span>评论</span><strong>18%</strong></div>
+            <div class="kpi-card"><span>收藏</span><strong>21%</strong></div>
+            <div class="kpi-card"><span>分享</span><strong>9%</strong></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

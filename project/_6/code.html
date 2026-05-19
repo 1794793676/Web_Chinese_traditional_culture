@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>文脉管理后台 - 数据总览</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&amp;family=Noto+Serif+SC:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#333029",
+                      "white-card": "#FFFCF6",
+                      "surface-tint": "#a93630",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#ffdad6",
+                      "on-surface-variant": "#58413f",
+                      "surface-dim": "#dfd9cf",
+                      "mist-border": "#E9E1D1",
+                      "secondary-fixed-dim": "#e9c174",
+                      "on-secondary-fixed": "#261900",
+                      "primary": "#690409",
+                      "on-surface": "#1d1c15",
+                      "success": "#2E7D32",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#f3ede2",
+                      "on-tertiary-fixed": "#002019",
+                      "surface-bright": "#fff9ee",
+                      "on-primary-container": "#ff9c93",
+                      "on-secondary-container": "#785a17",
+                      "on-primary-fixed-variant": "#881e1c",
+                      "surface-container-low": "#f9f3e8",
+                      "secondary": "#775a16",
+                      "error-container": "#ffdad6",
+                      "error": "#B42318",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#ffb4ac",
+                      "on-secondary-fixed-variant": "#5c4200",
+                      "surface-container-high": "#ede8dd",
+                      "surface-variant": "#e8e2d7",
+                      "tertiary-fixed": "#aef0da",
+                      "on-background": "#1d1c15",
+                      "on-primary-fixed": "#410003",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#ffdea3",
+                      "background": "#fff9ee",
+                      "tertiary-container": "#075242",
+                      "surface-container-highest": "#e8e2d7",
+                      "outline-variant": "#dfbfbc",
+                      "tertiary": "#00392d",
+                      "outline": "#8b716e",
+                      "surface": "#fff9ee",
+                      "primary-container": "#8a1f1d",
+                      "secondary-container": "#fdd485",
+                      "on-tertiary-container": "#84c4af",
+                      "ink-text": "#1F2522",
+                      "tertiary-fixed-dim": "#93d3bf",
+                      "inverse-on-surface": "#f6f0e5",
+                      "on-tertiary-fixed-variant": "#055141",
+                      "on-primary": "#ffffff",
+                      "primary-fixed-dim": "#ffb4ac"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "container-max": "1200px",
+                      "margin-tablet": "40px",
+                      "margin-desktop": "80px",
+                      "section-gap": "120px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Noto Serif SC"
+                      ],
+                      "display-lg-mobile": [
+                              "Noto Serif SC"
+                      ],
+                      "label-md": [
+                              "Noto Sans SC"
+                      ],
+                      "headline-sm": [
+                              "Noto Serif SC"
+                      ],
+                      "body-lg": [
+                              "Noto Sans SC"
+                      ],
+                      "body-md": [
+                              "Noto Sans SC"
+                      ],
+                      "admin-table": [
+                              "Noto Sans SC"
+                      ],
+                      "headline-md": [
+                              "Noto Serif SC"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "admin-table": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="bg-surface-container dark:bg-inverse-surface h-full w-60 fixed left-0 top-0 shadow-md flex flex-col py-6 border-r border-mist-border dark:border-outline-variant z-40">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm text-primary dark:text-inverse-primary mb-2">文脉管理后台</h1>
+<div class="flex items-center gap-3">
+<img alt="管理员头像" class="w-10 h-10 rounded-full object-cover border border-mist-border" data-alt="A small circular portrait of a professional individual in a scholarly setting, serving as an admin avatar. The lighting is soft and neutral, conveying competence and calm. The style is a clean, modern digital photograph suitable for a sophisticated dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvBzAXIh_UW_yAIWpCMlVCmfp1x4F6tZc9aOdmQu9biDs0qV_xEXCjiBblWR1Jj6_Y6D2S3XBNbbAh1SLP6zz5QcG06Igv8QSYIz_Ya1mQ1ENexInMgigxbcG0AOu54EHTjZHo9eM1Gqx1RgwLVI2j_MQDhT6my6jzvFnfpal7rL1XBMZmyIUPQBBvrVXv3_dwfpf2-0cKL8mtxKWkKgIK2NZgMAWQMC6eNHZZ8Du1HQCBs_MjeZmuHAlrLPGT603HN2xZAIG6lw"/>
+<span class="font-label-md text-label-md text-on-surface-variant">系统管理员</span>
+</div>
+</div>
+<button class="mx-6 mb-6 bg-primary text-on-primary rounded-full py-2 px-4 font-label-md text-label-md shadow-sm hover:bg-primary-container hover:text-on-primary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            发布新内容
+        </button>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto px-2">
+<!-- Active Tab -->
+<a class="bg-primary text-on-primary rounded-lg mx-2 my-1 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">数据总览</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">内容管理</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all" href="#">
+<span class="material-symbols-outlined">comment</span>
+<span class="font-label-md text-label-md">评论审核</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 px-4 py-3 rounded-lg flex items-center gap-3 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md text-label-md">权限设置</span>
+</a>
+</nav>
+<div class="mt-auto px-2 border-t border-mist-border pt-4">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 px-4 py-2 rounded-lg flex items-center gap-3 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-md text-label-md">个人设置</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 mx-2 my-1 px-4 py-2 rounded-lg flex items-center gap-3 hover:bg-secondary-container dark:hover:bg-secondary-fixed-variant transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-label-md text-label-md">安全退出</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-60 flex-1 p-8 lg:p-12 overflow-x-hidden bg-background min-h-screen">
+<header class="mb-10 flex justify-between items-end border-b border-mist-border pb-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">数据总览</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">实时监控平台运行状况及用户互动数据</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-mist-border">上次更新: 刚刚</span>
+<button class="p-2 rounded-full border border-mist-border text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+</header>
+<!-- Top KPI Cards (Bento style) -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+<!-- Card 1 -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">总文章数</span>
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-2 rounded-lg">article</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-ink-text">1,284</span>
+<span class="font-label-md text-label-md text-success flex items-center">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> 12%
+                    </span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">总用户数</span>
+<span class="material-symbols-outlined text-secondary bg-secondary-container/30 p-2 rounded-lg">group</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-ink-text">45.2k</span>
+<span class="font-label-md text-label-md text-success flex items-center">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> 5.3%
+                    </span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">总点赞数</span>
+<span class="material-symbols-outlined text-tertiary bg-tertiary-container/10 p-2 rounded-lg">thumb_up</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-ink-text">389k</span>
+<span class="font-label-md text-label-md text-success flex items-center">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> 8%
+                    </span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">总评论数</span>
+<span class="material-symbols-outlined text-primary bg-primary-fixed/30 p-2 rounded-lg">forum</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-ink-text">12.5k</span>
+<span class="font-label-md text-label-md text-error flex items-center">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span> 2.1%
+                    </span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">总分享数</span>
+<span class="material-symbols-outlined text-secondary bg-secondary-container/30 p-2 rounded-lg">share</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-ink-text">8.4k</span>
+<span class="font-label-md text-label-md text-success flex items-center">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> 15%
+                    </span>
+</div>
+</div>
+</div>
+<!-- Charts Section (Mocked visually) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+<!-- Bar Chart Container -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-ink-text">各分类互动量 (近30天)</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Mock Bar Chart -->
+<div class="h-64 flex items-end justify-around gap-2 pb-8 border-b border-mist-border relative">
+<!-- Y Axis Labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[12px] text-on-surface-variant opacity-50 pb-8">
+<span>10k</span>
+<span>7.5k</span>
+<span>5k</span>
+<span>2.5k</span>
+<span>0</span>
+</div>
+<div class="w-1/6 bg-primary/20 hover:bg-primary/40 transition-colors rounded-t-sm h-[80%] relative group">
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 font-label-md text-label-md text-on-surface-variant whitespace-nowrap">玉器</span>
+</div>
+<div class="w-1/6 bg-primary/30 hover:bg-primary/50 transition-colors rounded-t-sm h-[60%] relative group">
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 font-label-md text-label-md text-on-surface-variant whitespace-nowrap">青铜</span>
+</div>
+<div class="w-1/6 bg-primary hover:bg-primary-container transition-colors rounded-t-sm h-[95%] relative group shadow-sm">
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 font-label-md text-label-md text-on-surface-variant whitespace-nowrap">书画</span>
+</div>
+<div class="w-1/6 bg-primary/40 hover:bg-primary/60 transition-colors rounded-t-sm h-[40%] relative group">
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 font-label-md text-label-md text-on-surface-variant whitespace-nowrap">陶瓷</span>
+</div>
+<div class="w-1/6 bg-primary/20 hover:bg-primary/40 transition-colors rounded-t-sm h-[55%] relative group">
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 font-label-md text-label-md text-on-surface-variant whitespace-nowrap">建筑</span>
+</div>
+</div>
+</div>
+<!-- Line Chart Container -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-ink-text">评论趋势 (近7天)</h3>
+<select class="bg-surface-container border-mist-border rounded-md font-label-md text-label-md text-on-surface-variant py-1 pl-3 pr-8 focus:border-secondary focus:ring-secondary">
+<option>本周</option>
+<option>本月</option>
+</select>
+</div>
+<!-- Mock Line Chart (SVG) -->
+<div class="h-64 relative border-b border-mist-border pb-8">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pb-8">
+<div class="w-full border-t border-mist-border/50"></div>
+<div class="w-full border-t border-mist-border/50"></div>
+<div class="w-full border-t border-mist-border/50"></div>
+<div class="w-full border-t border-mist-border/50"></div>
+</div>
+<svg class="w-full h-full preserve-3d" preserveaspectratio="none" viewbox="0 0 100 50">
+<defs>
+<lineargradient id="gradientLine" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="var(--tw-colors-secondary)" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="var(--tw-colors-secondary)" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,50 L0,30 Q10,10 20,25 T40,15 T60,35 T80,10 T100,20 L100,50 Z" fill="url(#gradientLine)"></path>
+<path class="text-secondary" d="M0,30 Q10,10 20,25 T40,15 T60,35 T80,10 T100,20" fill="none" stroke="currentColor" stroke-width="2"></path>
+<!-- Data Points -->
+<circle class="fill-white-card stroke-secondary" cx="20" cy="25" r="1.5" stroke-width="1"></circle>
+<circle class="fill-white-card stroke-secondary" cx="40" cy="15" r="1.5" stroke-width="1"></circle>
+<circle class="fill-white-card stroke-secondary" cx="60" cy="35" r="1.5" stroke-width="1"></circle>
+<circle class="fill-white-card stroke-secondary" cx="80" cy="10" r="1.5" stroke-width="1"></circle>
+</svg>
+<!-- X Axis Labels -->
+<div class="absolute bottom-0 w-full flex justify-between text-[12px] text-on-surface-variant pt-2">
+<span>周一</span>
+<span>周二</span>
+<span>周三</span>
+<span>周四</span>
+<span>周五</span>
+<span>周六</span>
+<span>周日</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tables Section -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<!-- Popular Content Table -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border overflow-x-auto">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-ink-text">热门内容 Top 5</h3>
+<a class="font-label-md text-label-md text-secondary hover:underline" href="#">查看全部</a>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b-2 border-mist-border">
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium">排名</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium">标题</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium">分类</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium text-right">综合热度</th>
+</tr>
+</thead>
+<tbody class="font-admin-table text-admin-table">
+<tr class="border-b border-mist-border hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-on-primary font-bold text-xs">1</span>
+</td>
+<td class="py-3 px-2 text-ink-text font-medium truncate max-w-[200px]">《千里江山图》的高清细节解析</td>
+<td class="py-3 px-2"><span class="bg-surface-dim px-2 py-1 rounded text-xs text-on-surface-variant">书画</span></td>
+<td class="py-3 px-2 text-right font-medium">98,245</td>
+</tr>
+<tr class="border-b border-mist-border hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-secondary text-on-secondary font-bold text-xs">2</span>
+</td>
+<td class="py-3 px-2 text-ink-text font-medium truncate max-w-[200px]">宋代汝窑的天青色密码</td>
+<td class="py-3 px-2"><span class="bg-surface-dim px-2 py-1 rounded text-xs text-on-surface-variant">陶瓷</span></td>
+<td class="py-3 px-2 text-right font-medium">85,112</td>
+</tr>
+<tr class="border-b border-mist-border hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs">3</span>
+</td>
+<td class="py-3 px-2 text-ink-text font-medium truncate max-w-[200px]">紫禁城营造法式初探</td>
+<td class="py-3 px-2"><span class="bg-surface-dim px-2 py-1 rounded text-xs text-on-surface-variant">建筑</span></td>
+<td class="py-3 px-2 text-right font-medium">76,890</td>
+</tr>
+<tr class="border-b border-mist-border hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant text-xs">4</span>
+</td>
+<td class="py-3 px-2 text-ink-text font-medium truncate max-w-[200px]">三星堆新出土青铜面具赏析</td>
+<td class="py-3 px-2"><span class="bg-surface-dim px-2 py-1 rounded text-xs text-on-surface-variant">青铜</span></td>
+<td class="py-3 px-2 text-right font-medium">62,450</td>
+</tr>
+<tr class="hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant text-xs">5</span>
+</td>
+<td class="py-3 px-2 text-ink-text font-medium truncate max-w-[200px]">红山文化玉猪龙的象征意义</td>
+<td class="py-3 px-2"><span class="bg-surface-dim px-2 py-1 rounded text-xs text-on-surface-variant">玉器</span></td>
+<td class="py-3 px-2 text-right font-medium">58,901</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Latest Comments Table -->
+<div class="bg-white-card rounded-xl p-6 shadow-[0_2px_10px_rgba(31,37,34,0.05)] border border-mist-border overflow-x-auto">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-ink-text">最新评论待审核</h3>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-1.5 rounded-full hover:bg-primary-container transition-colors text-sm">
+                        批量通过
+                    </button>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b-2 border-mist-border">
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium">用户</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium">内容摘录</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium">时间</th>
+<th class="py-3 px-2 font-label-md text-label-md text-on-surface-variant font-medium text-right">操作</th>
+</tr>
+</thead>
+<tbody class="font-admin-table text-admin-table">
+<tr class="border-b border-mist-border hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold text-xs">李</div>
+<span class="text-ink-text">李慕白</span>
+</div>
+</td>
+<td class="py-3 px-2 text-on-surface-variant italic truncate max-w-[200px]">"这篇关于汝窑的分析太透彻了，尤其是釉色部分的讲解..."</td>
+<td class="py-3 px-2 text-on-surface-variant text-xs">10分钟前</td>
+<td class="py-3 px-2 text-right">
+<div class="flex justify-end gap-2">
+<button class="text-success hover:bg-success/10 p-1 rounded transition-colors" title="通过">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+<button class="text-error hover:bg-error/10 p-1 rounded transition-colors" title="拒绝">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-mist-border hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold text-xs">W</div>
+<span class="text-ink-text">Wang123</span>
+</div>
+</td>
+<td class="py-3 px-2 text-on-surface-variant italic truncate max-w-[200px]">"文章里提到的故宫特展什么时候开始啊？求告知！"</td>
+<td class="py-3 px-2 text-on-surface-variant text-xs">半小时前</td>
+<td class="py-3 px-2 text-right">
+<div class="flex justify-end gap-2">
+<button class="text-success hover:bg-success/10 p-1 rounded transition-colors" title="通过">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+<button class="text-error hover:bg-error/10 p-1 rounded transition-colors" title="拒绝">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-mist-border hover:bg-surface-container/30 transition-colors">
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold text-xs">张</div>
+<span class="text-ink-text">张文化</span>
+</div>
+</td>
+<td class="py-3 px-2 text-on-surface-variant italic truncate max-w-[200px]">"有些历史细节可能有误，建议核对一下《史记》原版..."</td>
+<td class="py-3 px-2 text-on-surface-variant text-xs">2小时前</td>
+<td class="py-3 px-2 text-right">
+<div class="flex justify-end gap-2">
+<button class="text-success hover:bg-success/10 p-1 rounded transition-colors" title="通过">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+<button class="text-error hover:bg-error/10 p-1 rounded transition-colors" title="拒绝">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>无访问权限 - 华夏文脉</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Noto+Serif+SC:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#333029",
+                    "white-card": "#FFFCF6",
+                    "surface-tint": "#a93630",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#ffdad6",
+                    "on-surface-variant": "#58413f",
+                    "surface-dim": "#dfd9cf",
+                    "mist-border": "#E9E1D1",
+                    "secondary-fixed-dim": "#e9c174",
+                    "on-secondary-fixed": "#261900",
+                    "primary": "#690409",
+                    "on-surface": "#1d1c15",
+                    "success": "#2E7D32",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f3ede2",
+                    "on-tertiary-fixed": "#002019",
+                    "surface-bright": "#fff9ee",
+                    "on-primary-container": "#ff9c93",
+                    "on-secondary-container": "#785a17",
+                    "on-primary-fixed-variant": "#881e1c",
+                    "surface-container-low": "#f9f3e8",
+                    "secondary": "#775a16",
+                    "error-container": "#ffdad6",
+                    "error": "#B42318",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#ffb4ac",
+                    "on-secondary-fixed-variant": "#5c4200",
+                    "surface-container-high": "#ede8dd",
+                    "surface-variant": "#e8e2d7",
+                    "tertiary-fixed": "#aef0da",
+                    "on-background": "#1d1c15",
+                    "on-primary-fixed": "#410003",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffdea3",
+                    "background": "#fff9ee",
+                    "tertiary-container": "#075242",
+                    "surface-container-highest": "#e8e2d7",
+                    "outline-variant": "#dfbfbc",
+                    "tertiary": "#00392d",
+                    "outline": "#8b716e",
+                    "surface": "#fff9ee",
+                    "primary-container": "#8a1f1d",
+                    "secondary-container": "#fdd485",
+                    "on-tertiary-container": "#84c4af",
+                    "ink-text": "#1F2522",
+                    "tertiary-fixed-dim": "#93d3bf",
+                    "inverse-on-surface": "#f6f0e5",
+                    "on-tertiary-fixed-variant": "#055141",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#ffb4ac"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "container-max": "1200px",
+                    "margin-tablet": "40px",
+                    "margin-desktop": "80px",
+                    "section-gap": "120px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": [
+                            "Noto Serif SC"
+                    ],
+                    "display-lg-mobile": [
+                            "Noto Serif SC"
+                    ],
+                    "label-md": [
+                            "Noto Sans SC"
+                    ],
+                    "headline-sm": [
+                            "Noto Serif SC"
+                    ],
+                    "body-lg": [
+                            "Noto Sans SC"
+                    ],
+                    "body-md": [
+                            "Noto Sans SC"
+                    ],
+                    "admin-table": [
+                            "Noto Sans SC"
+                    ],
+                    "headline-md": [
+                            "Noto Serif SC"
+                    ]
+            },
+            "fontSize": {
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "display-lg-mobile": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-sm": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "admin-table": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .seal-ornament {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center p-6 sm:p-margin-mobile md:p-margin-tablet font-sans antialiased">
+<!-- Canvas Wrapper for Dead-End State (Nav Suppressed) -->
+<main class="w-full max-w-md">
+<!-- Centered Paper Card -->
+<div class="bg-white-card rounded-xl border border-mist-border shadow-[0_4px_24px_rgba(31,37,34,0.06)] relative overflow-hidden flex flex-col items-center px-8 py-12 text-center">
+<!-- Subtle Decorative Background Element -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 rounded-bl-full pointer-events-none"></div>
+<!-- Icon & Seal Ornament Container -->
+<div class="relative mb-8">
+<!-- Seal Ornament (Abstract representation) -->
+<div class="absolute -top-2 -right-4 w-8 h-8 border border-primary/20 flex items-center justify-center rotate-12 opacity-80 z-0">
+<span class="font-display-lg text-[10px] text-primary seal-ornament font-bold tracking-widest">禁</span>
+</div>
+<!-- Main Lock Icon -->
+<div class="relative z-10 w-20 h-20 rounded-full border-2 border-secondary/20 bg-surface flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 0;">
+                        lock
+                    </span>
+</div>
+</div>
+<!-- Typography & Content -->
+<h1 class="font-headline-sm text-headline-sm text-ink-text mb-3">
+                你当前以游客身份访问
+            </h1>
+<!-- Gold Divider -->
+<div class="w-10 h-0.5 bg-secondary/40 mx-auto mb-5 rounded-full"></div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10 max-w-[280px]">
+                请登录后进入完整数字展馆，浏览文化专题并参与点赞、评论与转发.
+            </p>
+<!-- Actions -->
+<div class="flex flex-col w-full gap-4">
+<button class="w-full bg-primary text-on-primary rounded-full py-3.5 px-6 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors duration-300 shadow-sm flex items-center justify-center gap-2" type="button">
+                    去登录
+                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+<button class="w-full bg-transparent border border-secondary text-ink-text rounded-full py-3.5 px-6 font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-300" type="button">
+                    返回首页
+                </button>
+</div>
+</div>
+<!-- Subtle Footer for context if needed, kept minimal -->
+<div class="mt-8 text-center">
+<p class="font-label-md text-label-md text-on-surface-variant/60">
+                © 2024 华夏文脉 数字博物馆
+            </p>
+</div>
+</main>
+</body></html>

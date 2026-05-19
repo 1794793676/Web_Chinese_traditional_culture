@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>思想理念 - 华夏文脉</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Noto+Serif+SC:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#333029",
+                        "white-card": "#FFFCF6",
+                        "surface-tint": "#a93630",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad6",
+                        "on-surface-variant": "#58413f",
+                        "surface-dim": "#dfd9cf",
+                        "mist-border": "#E9E1D1",
+                        "secondary-fixed-dim": "#e9c174",
+                        "on-secondary-fixed": "#261900",
+                        "primary": "#690409",
+                        "on-surface": "#1d1c15",
+                        "success": "#2E7D32",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f3ede2",
+                        "on-tertiary-fixed": "#002019",
+                        "surface-bright": "#fff9ee",
+                        "on-primary-container": "#ff9c93",
+                        "on-secondary-container": "#785a17",
+                        "on-primary-fixed-variant": "#881e1c",
+                        "surface-container-low": "#f9f3e8",
+                        "secondary": "#775a16",
+                        "error-container": "#ffdad6",
+                        "error": "#B42318",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb4ac",
+                        "on-secondary-fixed-variant": "#5c4200",
+                        "surface-container-high": "#ede8dd",
+                        "surface-variant": "#e8e2d7",
+                        "tertiary-fixed": "#aef0da",
+                        "on-background": "#1d1c15",
+                        "on-primary-fixed": "#410003",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdea3",
+                        "background": "#fff9ee",
+                        "tertiary-container": "#075242",
+                        "surface-container-highest": "#e8e2d7",
+                        "outline-variant": "#dfbfbc",
+                        "tertiary": "#00392d",
+                        "outline": "#8b716e",
+                        "surface": "#fff9ee",
+                        "primary-container": "#8a1f1d",
+                        "secondary-container": "#fdd485",
+                        "on-tertiary-container": "#84c4af",
+                        "ink-text": "#1F2522",
+                        "tertiary-fixed-dim": "#93d3bf",
+                        "inverse-on-surface": "#f6f0e5",
+                        "on-tertiary-fixed-variant": "#055141",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ac"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "container-max": "1200px",
+                        "margin-tablet": "40px",
+                        "margin-desktop": "80px",
+                        "section-gap": "120px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Noto Serif SC"],
+                        "display-lg-mobile": ["Noto Serif SC"],
+                        "label-md": ["Noto Sans SC"],
+                        "headline-sm": ["Noto Serif SC"],
+                        "body-lg": ["Noto Sans SC"],
+                        "body-md": ["Noto Sans SC"],
+                        "admin-table": ["Noto Sans SC"],
+                        "headline-md": ["Noto Serif SC"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "admin-table": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopNavBar (Hidden on Mobile, Flex on MD+) -->
+<nav class="hidden md:flex sticky bg-surface/80 backdrop-blur-md border-b border-mist-border shadow-sm top-0 z-50 full-width">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<div class="font-display-lg text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">museum</span>
+                华夏文脉
+            </div>
+<!-- Navigation Links -->
+<ul class="flex items-center gap-8">
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">典藏精品</a></li>
+<!-- Active Link: 文化专题 -->
+<li><a class="font-label-md text-label-md text-primary font-bold border-b-2 border-secondary pb-1 hover:text-secondary transition-colors duration-300" href="#">文化专题</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">文脉社区</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">关于我们</a></li>
+</ul>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-6">
+<div class="flex gap-4 text-on-surface-variant">
+<button class="hover:text-secondary transition-colors"><span class="material-symbols-outlined">search</span></button>
+<button class="text-primary hover:text-secondary transition-colors"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span></button>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded-full hover:bg-primary-container shadow-sm transition-all hidden">登录</button> <!-- Hidden as user is logged in -->
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-16">
+<!-- Hero Section -->
+<header class="text-center mb-section-gap pt-8 md:pt-16">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-ink-text mb-6 tracking-wide">
+                思想理念
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                从民为邦本、革故鼎新、任人唯贤中理解传统中国的治理智慧。
+            </p>
+<div class="w-16 h-[2px] bg-secondary mx-auto mt-8 opacity-60"></div>
+</header>
+<!-- Search & Filter Bar -->
+<section class="mb-12 bg-white-card p-4 md:p-6 rounded-xl border border-mist-border shadow-[0_2px_10px_rgba(31,37,34,0.03)] flex flex-col md:flex-row gap-4 items-center justify-between">
+<div class="relative w-full md:w-1/3">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border border-mist-border rounded-lg font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none" placeholder="搜索文化内容" type="text"/>
+</div>
+<div class="flex flex-wrap gap-3 w-full md:w-auto">
+<select class="px-4 py-3 bg-surface-container-low border border-mist-border rounded-lg font-label-md text-label-md text-on-surface focus:border-secondary focus:outline-none appearance-none cursor-pointer">
+<option>全部标签</option>
+<option>治国理政</option>
+<option>哲学思想</option>
+<option>伦理道德</option>
+</select>
+<select class="px-4 py-3 bg-surface-container-low border border-mist-border rounded-lg font-label-md text-label-md text-on-surface focus:border-secondary focus:outline-none appearance-none cursor-pointer">
+<option>按热度排序</option>
+<option>最多阅读</option>
+<option>最多点赞</option>
+</select>
+<select class="px-4 py-3 bg-surface-container-low border border-mist-border rounded-lg font-label-md text-label-md text-on-surface focus:border-secondary focus:outline-none appearance-none cursor-pointer">
+<option>按时间排序</option>
+<option>最新发布</option>
+<option>最早发布</option>
+</select>
+</div>
+</section>
+<!-- Article Grid (3 Columns) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-section-gap">
+<!-- Card 1 -->
+<article class="bg-white-card rounded-xl border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.04)] overflow-hidden group hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-shadow duration-300 flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<img alt="Image representing ancient text" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A macro shot of weathered, ancient Chinese bamboo slips bound together with faded twine. The bamboo displays rich, warm tones of amber and pale yellow, etched with elegant, faded black calligraphy. The lighting is soft and natural, casting delicate shadows that emphasize the texture of the wood and the historical weight of the artifact. Set against a clean, minimalist paper-white background to evoke a museum archive setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZfgNZoICEsHd3ChS-DapvJZyZOwU0bopgZLkUVn-ricNlZFy_534956TbqhStEwlI7LDvt5afJ-7tVkfRRi1lQ-kZdIEX-ZO_HIyxFHhWTssgWjAzADfIOPlL9cu7MMrD7gHqoqmSYmUk6tcWLGg9RCLDKfcIsYYK98dU08C757pMczLG8r0wANx6fs3onL5bFJm25IJ3QqnoOUYiatPM9KzYO52DAIFLyKITFB9lV_C17Fnq5P60TYND8tdWpGMwPNirb99X9A"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded text-xs font-label-md tracking-wider shadow-sm">
+                        民为邦本
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 line-clamp-2 group-hover:text-primary transition-colors">论《尚书》中的民本思想及其当代启示</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                        “民惟邦本，本固邦宁。”本文深入解析先秦时期的民本理念，探讨其在古代国家治理中的核心地位，以及这一古老智慧如何跨越千年，对现代社会治理产生深远影响。
+                    </p>
+<div class="flex items-center justify-between mt-auto border-t border-mist-border pt-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">favorite</span><span class="text-xs font-label-md">1.2k</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">chat_bubble</span><span class="text-xs font-label-md">342</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+<button class="text-secondary border border-secondary px-4 py-1.5 rounded-full text-sm font-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all">阅读全文</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-white-card rounded-xl border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.04)] overflow-hidden group hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-shadow duration-300 flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<img alt="Traditional Chinese architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="An expansive view of sweeping, traditional Chinese palace rooftops featuring intricate, dark gray ceramic tiles. The eaves curl upwards gracefully against a pale, cloudy sky. A solitary, vibrant red lantern hangs from the corner edge, providing a stark color contrast. The scene is imbued with a sense of historical grandeur and structural permanence, bathed in cool, diffused daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1v-BMB-aJpuJBP7H-8TGt6lWg9JtxRh7RS2z8G63cTKr7NFfh0a5kYg7rUWF-Ll12afYMxT9Lo5FnQzA1DECn3WIQUzKo_NEGFfHijaBAadj271kWboJ9B7i3UrUxCQDHCX7bNXODO8z-SRSx7XvuIgCTdG4oY-NrwkBSr2kK131cWPd81QXLa1egwfZSPubW43c9I-tXhpDgJRdTcz2ISRVaZmsxzytuQN44DfR-aod8RQTNQuUrXYksrG3gpgG3H6_BH5ml5Q"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded text-xs font-label-md tracking-wider shadow-sm">
+                        革故鼎新
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 line-clamp-2 group-hover:text-primary transition-colors">王安石变法与宋代制度创新的历史反思</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                        周虽旧邦，其命维新。从“熙宁变法”的宏大叙事中，剖析传统中国在面临内部危机时的制度自我修复能力，以及“革故鼎新”精神在历史长河中的演进。
+                    </p>
+<div class="flex items-center justify-between mt-auto border-t border-mist-border pt-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">favorite</span><span class="text-xs font-label-md">895</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">chat_bubble</span><span class="text-xs font-label-md">128</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+<button class="text-secondary border border-secondary px-4 py-1.5 rounded-full text-sm font-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all">阅读全文</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-white-card rounded-xl border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.04)] overflow-hidden group hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-shadow duration-300 flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<img alt="Abstract art of a scholar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A stylized, modern artistic depiction of a classical Chinese scholar sitting in quiet contemplation. The artwork utilizes a minimal palette of warm off-whites, deep ink blacks, and subtle touches of cinnabar red. The lines are fluid and elegant, reminiscent of traditional brush painting but with a contemporary, digital crispness. The background is mostly empty, emphasizing the concept of 'paper space' and focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSWE9PWH0MRqj-dEZ5uDb-CFyRdWTmW12CGHqGAvt642NeFl5YeI0b6n41zXFZisKmf-AuTrLahEsN9JHb8o8_kZCkYumYv97sWGDwyly9nYPTrLttbR9bMK9vHf0eeiRGhQcO7qNSPPQt095m5PrbOIMraP400kBgTF3_ONHvx6U8d7XVgb6rDgsbsXgGlfCkI45g2gIg_vvR9zmlNHszBJSNIpxixKeCa7GxNPe6tcseyOD8GiNzWJFu3-uojuaVaEYa-_zRlA"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded text-xs font-label-md tracking-wider shadow-sm">
+                        任人唯贤
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 line-clamp-2 group-hover:text-primary transition-colors">科举制度与古代官员选拔的公平性探究</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                        “唯才是举，任人唯贤。”科举制作为古代中国最重要的人才选拔机制，其背后的哲学逻辑不仅打破了门第之见，更为帝国体系的长期稳定提供了官僚智力支撑。
+                    </p>
+<div class="flex items-center justify-between mt-auto border-t border-mist-border pt-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">favorite</span><span class="text-xs font-label-md">2.1k</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">chat_bubble</span><span class="text-xs font-label-md">456</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+<button class="text-secondary border border-secondary px-4 py-1.5 rounded-full text-sm font-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all">阅读全文</button>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-white-card rounded-xl border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.04)] overflow-hidden group hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-shadow duration-300 flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<img alt="Chinese tea ceremony setting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A close-up shot of a traditional Chinese tea ceremony setup resting on a polished, dark wooden table. A celadon green ceramic teapot sits next to a delicate, matching teacup from which steam gently rises. The lighting is warm and directional, casting a soft glow that highlights the smooth texture of the ceramics against a softly blurred, neutral background. The mood is tranquil, embodying the philosophy of harmony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALPbgJK_XRlaf08OwgY5bsBerJ2jYG7wp9RUWwf51y5NfKLx_nsqNfuS9ylJZ35a2T81D-Leet7fEXeGlB3n6qXeCIrpTMmRkjHPgyx9cBsvFKf3zMci6wWkQrmYH2RdCDkZFzE8XclMMUOLjr_1j0HuoxzfJ04NQdvOUY1wjm6UiCTYEDK89Gt8p0eydd31aomZbEjsdj_PbUMwYLmkBStO4YBZyjTi1j02jR1uZQHuaVDH8V5NbWCQUTGNGF5VJjdDleZsh8lA"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded text-xs font-label-md tracking-wider shadow-sm">
+                        和而不同
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 line-clamp-2 group-hover:text-primary transition-colors">先秦儒家“和而不同”的包容性政治智慧</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                        君子和而不同，小人同而不和。探讨传统政治文化中如何在多元利益诉求中寻求共识，以“和”的理念构建稳定的社会秩序与外交准则。
+                    </p>
+<div class="flex items-center justify-between mt-auto border-t border-mist-border pt-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">favorite</span><span class="text-xs font-label-md">1.5k</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">chat_bubble</span><span class="text-xs font-label-md">210</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+<button class="text-secondary border border-secondary px-4 py-1.5 rounded-full text-sm font-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all">阅读全文</button>
+</div>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="bg-white-card rounded-xl border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.04)] overflow-hidden group hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-shadow duration-300 flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<img alt="Traditional pattern" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="An abstract, high-resolution rendering of a traditional Chinese fretwork pattern, common in wooden window frames. The geometric design is intricately detailed, created in a crisp, monochromatic gold tone that contrasts subtly against a pale, parchment-colored background. The image has a clean, vector-like quality suited for a modern UI, avoiding clutter while conveying a sense of order and structural discipline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-tViC-NHAHr6dDJNxbkGIzkz2ftELjgi6hfwkbNiI4Wft0xIzbxcpZGfyKYJIdbmK6RdU7eVJownVp-ny045Q-lksibiuS1GbU6bGB7YUA9mGwNRxyfTfWLziAHL3JnmKhmVYulyTsnwOpBegrhzM35GV_NsDLBPQMmHJ2vmgqeDLwCLz9fgnSAOtaTwz6lFDoxw9TuvcPPrlfSEEaC9HDBOZRojGC9Jnxz_xQGPNOktmaN1WnzDBpUnTIbhGbFTUlCR4_ay9Wg"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded text-xs font-label-md tracking-wider shadow-sm">
+                        礼法合一
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 line-clamp-2 group-hover:text-primary transition-colors">汉唐法律体系中的“礼法合治”思想演变</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                        以礼入法，德主刑辅。深度解析古代法律是如何将道德规范内化为法律准则的，这种刚柔并济的治理模式对维系庞大帝国的运行至关重要。
+                    </p>
+<div class="flex items-center justify-between mt-auto border-t border-mist-border pt-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">favorite</span><span class="text-xs font-label-md">920</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">chat_bubble</span><span class="text-xs font-label-md">115</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+<button class="text-secondary border border-secondary px-4 py-1.5 rounded-full text-sm font-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all">阅读全文</button>
+</div>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="bg-white-card rounded-xl border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.04)] overflow-hidden group hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-shadow duration-300 flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<img alt="Flowing river landscape" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A serene, minimalist photograph of a wide, gently flowing river flanked by misty mountains in the distance. The color palette is muted and ethereal, dominated by soft grays, whites, and pale blues, evoking a sense of calm and the passage of time. The scene illustrates the Taoist philosophy of 'wu wei' (non-action) and natural flow. The composition is balanced and spacious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcXLeRgF-2J2FxqnyShjN_JD3NE1JcqObHhe3Ue3URm-TGxPfjC7Gze_lpYZqUbmBZWKRPj9Iip-737yuHCPH7NJ-2Xnru-7wVmA9JgG7iADVPwXUdsr2hPQmsx34258rESJ5bPKnePMPBtpKnq4wZej_sOtv1X2FWwRhQfHSdpYWXwoBzVzz4uTuL4BsXLuovWM9eQEh3Y3_s7CnU-IPPdlBR5b1E6eU4tD9kTEmbTuiRk-vaOLiCL1JBiYBkEnCeC7aMEv21vw"/>
+<div class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-3 py-1 rounded text-xs font-label-md tracking-wider shadow-sm">
+                        无为而治
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 line-clamp-2 group-hover:text-primary transition-colors">老庄哲学中的“无为而治”与休养生息政策</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                        治大国若烹小鲜。剖析道家“无为”并非不作为，而是顺应自然规律、减少对民生过度干预的宏观调控智慧，及其在汉初的成功实践。
+                    </p>
+<div class="flex items-center justify-between mt-auto border-t border-mist-border pt-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="flex items-center gap-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">favorite</span><span class="text-xs font-label-md">1.8k</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">chat_bubble</span><span class="text-xs font-label-md">289</span></button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+<button class="text-secondary border border-secondary px-4 py-1.5 rounded-full text-sm font-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all">阅读全文</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 mt-8">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant border border-mist-border hover:bg-surface-variant transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-md shadow-sm">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-variant border border-transparent transition-colors font-label-md">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-variant border border-transparent transition-colors font-label-md">3</button>
+<span class="text-on-surface-variant px-2">...</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-variant border border-transparent transition-colors font-label-md">8</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant border border-mist-border hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full py-section-gap border-t border-mist-border dark:border-outline-variant mt-auto">
+<div class="flex flex-col items-center gap-6 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-md text-primary dark:text-inverse-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">museum</span>
+                华夏文脉
+            </div>
+<ul class="flex flex-wrap justify-center gap-6 md:gap-8">
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">隐私政策</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">服务协议</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">内容举报</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">联系我们</a></li>
+</ul>
+<p class="font-body-md text-body-md text-on-surface-variant text-center mt-4 opacity-80">
+                © 2024 华夏文脉 数字博物馆. 传承华夏文明，赓续历史文脉.
+            </p>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface/90 backdrop-blur-lg border-t border-mist-border shadow-[0_-2px_10px_rgba(31,37,34,0.05)] pb-safe pt-2">
+<div class="flex justify-around items-center px-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform w-16 py-1" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]">home</span>
+<span class="font-label-md text-[10px]">首页</span>
+</a>
+<!-- Active Tab: 文库 (Library/Archive, fits category pages) -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container/30 rounded-xl px-4 py-1 active:scale-95 transition-transform w-20" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-label-md text-[10px] font-bold">文库</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform w-16 py-1" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]">groups</span>
+<span class="font-label-md text-[10px]">社区</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform w-16 py-1" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]">person</span>
+<span class="font-label-md text-[10px]">我的</span>
+</a>
+</div>
+</nav>
+</body></html>

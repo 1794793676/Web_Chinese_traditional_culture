@@ -1,0 +1,197 @@
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .section {
+    padding: 76px 0;
+  }
+
+  .grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .content-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .admin-main {
+    padding: 28px;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 21px;
+  }
+
+  .container,
+  .site-header__inner {
+    width: min(100% - 32px, var(--container));
+  }
+
+  .site-header__inner {
+    min-height: 64px;
+  }
+
+  .brand {
+    font-size: 22px;
+  }
+
+  .nav-toggle {
+    display: inline-grid;
+  }
+
+  .site-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 64px;
+    display: none;
+    padding: 18px 20px 24px;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(255, 249, 238, 0.98);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .site-nav.is-open {
+    display: grid;
+    gap: 14px;
+  }
+
+  .site-nav .nav-link {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .site-actions {
+    gap: 8px;
+  }
+
+  .site-actions .btn {
+    display: none;
+  }
+
+  .hero {
+    min-height: 610px;
+    padding: 56px 0;
+  }
+
+  .hero__content {
+    gap: 18px;
+  }
+
+  .hero__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .section {
+    padding: 58px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 32px;
+  }
+
+  .grid,
+  .grid--2,
+  .grid--3 {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    padding: 22px;
+  }
+
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .timeline::before {
+    top: 44px;
+    bottom: 44px;
+    left: 50%;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .auth-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .auth-aside {
+    min-height: 260px;
+    padding: 28px;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .auth-form {
+    padding: 28px;
+  }
+
+  .admin-layout {
+    display: block;
+  }
+
+  .admin-sidebar {
+    position: static;
+    height: auto;
+  }
+
+  .admin-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-main {
+    padding: 22px 16px;
+  }
+
+  .admin-header {
+    display: grid;
+    align-items: start;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .access-panel {
+    margin: 44px auto;
+    padding: 28px;
+  }
+}

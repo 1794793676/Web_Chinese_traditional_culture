@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>华夏文脉 - 中华优秀传统文化数字展馆</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&amp;family=Noto+Sans+SC:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#333029",
+                      "white-card": "#FFFCF6",
+                      "surface-tint": "#a93630",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#ffdad6",
+                      "on-surface-variant": "#58413f",
+                      "surface-dim": "#dfd9cf",
+                      "mist-border": "#E9E1D1",
+                      "secondary-fixed-dim": "#e9c174",
+                      "on-secondary-fixed": "#261900",
+                      "primary": "#690409",
+                      "on-surface": "#1d1c15",
+                      "success": "#2E7D32",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#f3ede2",
+                      "on-tertiary-fixed": "#002019",
+                      "surface-bright": "#fff9ee",
+                      "on-primary-container": "#ff9c93",
+                      "on-secondary-container": "#785a17",
+                      "on-primary-fixed-variant": "#881e1c",
+                      "surface-container-low": "#f9f3e8",
+                      "secondary": "#775a16",
+                      "error-container": "#ffdad6",
+                      "error": "#B42318",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#ffb4ac",
+                      "on-secondary-fixed-variant": "#5c4200",
+                      "surface-container-high": "#ede8dd",
+                      "surface-variant": "#e8e2d7",
+                      "tertiary-fixed": "#aef0da",
+                      "on-background": "#1d1c15",
+                      "on-primary-fixed": "#410003",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#ffdea3",
+                      "background": "#fff9ee",
+                      "tertiary-container": "#075242",
+                      "surface-container-highest": "#e8e2d7",
+                      "outline-variant": "#dfbfbc",
+                      "tertiary": "#00392d",
+                      "outline": "#8b716e",
+                      "surface": "#fff9ee",
+                      "primary-container": "#8a1f1d",
+                      "secondary-container": "#fdd485",
+                      "on-tertiary-container": "#84c4af",
+                      "ink-text": "#1F2522",
+                      "tertiary-fixed-dim": "#93d3bf",
+                      "inverse-on-surface": "#f6f0e5",
+                      "on-tertiary-fixed-variant": "#055141",
+                      "on-primary": "#ffffff",
+                      "primary-fixed-dim": "#ffb4ac"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "container-max": "1200px",
+                      "margin-tablet": "40px",
+                      "margin-desktop": "80px",
+                      "section-gap": "120px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Noto Serif SC"
+                      ],
+                      "display-lg-mobile": [
+                              "Noto Serif SC"
+                      ],
+                      "label-md": [
+                              "Noto Sans SC"
+                      ],
+                      "headline-sm": [
+                              "Noto Serif SC"
+                      ],
+                      "body-lg": [
+                              "Noto Sans SC"
+                      ],
+                      "body-md": [
+                              "Noto Sans SC"
+                      ],
+                      "admin-table": [
+                              "Noto Sans SC"
+                      ],
+                      "headline-md": [
+                              "Noto Serif SC"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "admin-table": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .paper-texture {
+            background-color: #F6F0E5;
+            background-image: radial-gradient(#E9E1D1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface/80 backdrop-blur-md dark:bg-inverse-surface/80 docked full-width top-0 z-50 border-b border-mist-border dark:border-outline-variant shadow-sm sticky">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="text-headline-md font-display-lg text-primary dark:text-inverse-primary">华夏文脉</span>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-secondary font-label-md text-label-md" href="#">首页</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300 font-label-md text-label-md" href="#">文化专题</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300 font-label-md text-label-md" href="#">典藏精品</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300 font-label-md text-label-md" href="#">关于我们</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">search</span>
+</button>
+<a class="font-label-md text-label-md px-4 py-2 text-primary border border-primary rounded-full hover:bg-primary hover:text-on-primary transition-colors" href="#">登录</a>
+<a class="font-label-md text-label-md px-4 py-2 bg-primary text-on-primary rounded-full hover:bg-primary-container transition-colors" href="#">注册</a>
+</div>
+</div>
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="paper-texture relative py-section-gap flex items-center justify-center overflow-hidden min-h-[716px]">
+<div class="absolute inset-0 opacity-20 pointer-events-none" data-alt="A subtle, faded traditional Chinese landscape painting, depicting misty mountains and tranquil waters using ink wash techniques. The colors are muted, blending seamlessly into the warm paper background, creating a serene and scholarly atmosphere suitable for a digital museum context." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjrPsnZRioM96Sp-L-fYk_HfJoRt-3UTFgmYewZOUtqDidbRWKRmzEhEIWsSaePyD-fdCI42qxYHXh3h7f2AA2Zl7Ntosqr-v3Bnzs0Z9GwRjpqKbxbzarSSjrpZY9gP5sCNfzKYR6A1z_oan-2eLUWU9QvTG_J7ZdMLhpIIszpOUEKlxX-xIoa_UjZD5gvFB2Wf4clQRZYOd-OhXHf-Q3GiUqN5_YXDwj9opKaDCKP2-ClNGneD60iW5M7rY1mkOZgf-lWtwczw'); background-size: cover; background-position: center;"></div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center flex flex-col items-center gap-8">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-ink-text max-w-4xl mx-auto leading-tight">
+                    华夏文脉 · 中华优秀传统文化数字展馆
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    在现代网页中重读传统文化的思想、器物与精神
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 mt-8">
+<button class="px-8 py-3 bg-primary text-on-primary font-label-md text-label-md rounded-full hover:bg-primary-container transition-all shadow-md flex items-center gap-2">
+<span>进入展馆</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="px-8 py-3 border border-secondary text-ink-text font-label-md text-label-md rounded-full hover:bg-surface-variant transition-all flex items-center gap-2 bg-transparent">
+<span>注册体验</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="py-section-gap bg-surface max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-ink-text mb-4">文化专题</h2>
+<div class="w-16 h-[2px] bg-secondary mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Category Card 1 -->
+<div class="bg-white-card rounded-lg p-8 border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.03)] hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-all group relative overflow-hidden flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink-text">思想理念</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+                        探索天人合一、中庸之道等塑造中华民族性格的深层哲学思想与道德观念。
+                    </p>
+<div class="mt-auto pt-6 border-t border-mist-border flex justify-between items-center">
+<span class="font-label-md text-label-md text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+                            登录后查看完整内容
+                        </span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Category Card 2 -->
+<div class="bg-white-card rounded-lg p-8 border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.03)] hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-all group relative overflow-hidden flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink-text">精神品格</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+                        感受自强不息、厚德载物、精忠报国等历代传颂的高尚品格。
+                    </p>
+<div class="mt-auto pt-6 border-t border-mist-border flex justify-between items-center">
+<span class="font-label-md text-label-md text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+                            登录后查看完整内容
+                        </span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Category Card 3 -->
+<div class="bg-white-card rounded-lg p-8 border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.03)] hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-all group relative overflow-hidden flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink-text">器物与非遗</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+                        赏析青铜陶瓷、丝绸刺绣及非物质文化遗产中的卓越技艺与审美。
+                    </p>
+<div class="mt-auto pt-6 border-t border-mist-border flex justify-between items-center">
+<span class="font-label-md text-label-md text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+                            登录后查看完整内容
+                        </span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Category Card 4 -->
+<div class="bg-white-card rounded-lg p-8 border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.03)] hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-all group relative overflow-hidden flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">festival</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink-text">节日民俗</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+                        体验春节、中秋、端午等传统节日的丰富内涵与民间习俗演变。
+                    </p>
+<div class="mt-auto pt-6 border-t border-mist-border flex justify-between items-center">
+<span class="font-label-md text-label-md text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+                            登录后查看完整内容
+                        </span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Category Card 5 -->
+<div class="bg-white-card rounded-lg p-8 border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.03)] hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-all group relative overflow-hidden flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">science</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink-text">科学技艺</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+                        致敬古代中国在天文、历法、医学、农学等领域的伟大科学成就。
+                    </p>
+<div class="mt-auto pt-6 border-t border-mist-border flex justify-between items-center">
+<span class="font-label-md text-label-md text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+                            登录后查看完整内容
+                        </span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Category Card 6 -->
+<div class="bg-white-card rounded-lg p-8 border border-mist-border shadow-[0_4px_20px_rgba(31,37,34,0.03)] hover:shadow-[0_8px_30px_rgba(31,37,34,0.08)] transition-all group relative overflow-hidden flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink-text">生态智慧</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+                        领悟古人顺应自然、取之有度、人水和谐的古典生态观与可持续智慧。
+                    </p>
+<div class="mt-auto pt-6 border-t border-mist-border flex justify-between items-center">
+<span class="font-label-md text-label-md text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">lock</span>
+                            登录后查看完整内容
+                        </span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Articles Section -->
+<section class="py-section-gap bg-surface-container-lowest max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-ink-text mb-4">典藏精品</h2>
+<div class="w-16 h-[2px] bg-secondary mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Article Card 1 -->
+<div class="bg-white-card rounded-lg border border-mist-border overflow-hidden shadow-[0_4px_10px_rgba(31,37,34,0.02)] flex flex-col h-full group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Ancient Chinese script" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up photography of ancient Chinese calligraphy written on old, textured bamboo slips. The lighting is warm and directional, emphasizing the texture of the bamboo and the depth of the dark ink. The aesthetic is scholarly, historical, and deeply connected to traditional Chinese culture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7EWIdXugevY8VTw82ALcWNW21zMAhs-C4mamGwvVXqIQdifj9Hf7mvXBjYwqZoKw3bGdhgHT_tabXNjnHtEghS10LUXb4kSbKupQs2PCgp0PeBhKBquRuC1HYoZgvpMv_nwoWDE49Hp0eiEgDNvUMgSfnjv6jawXhL5Jx_fYfH_DMIicZGZOqBKPk3CkMOIQvUAs93KbvicVujrRdZo2NujTsP4r5H1V1CgX5hd4L9rA1ioGw--R608FSpgZf9hXDlMbFLv0oRw"/>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-md text-label-md text-xs backdrop-blur-sm bg-opacity-90">
+                            思想理念
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-ink-text mb-2 line-clamp-2">民为邦本：古代中国的民本思想探源</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                            "民惟邦本，本固邦宁"。《尚书》中的这句经典，奠定了中国古代政治哲学的基石，探讨其历史演变及现代理想。
+                        </p>
+<div class="flex justify-between items-center text-on-surface-variant border-t border-mist-border pt-4">
+<div class="flex gap-4">
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="font-label-md text-xs">342</span>
+</button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+<span class="font-label-md text-xs">56</span>
+</button>
+</div>
+<button class="hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Article Card 2 -->
+<div class="bg-white-card rounded-lg border border-mist-border overflow-hidden shadow-[0_4px_10px_rgba(31,37,34,0.02)] flex flex-col h-full group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Traditional architecture details" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Macro photography focusing on intricate wooden mortise and tenon joints in traditional Chinese architecture. The wood grain is beautifully highlighted by soft, natural light, showcasing the craftsmanship and precision without the use of nails. The overall tone is warm, earthy, and reverent of ancient building techniques." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACB-2QhpLorkX52sdEoSmFalNrRdx8IIhQIaYIqRAtJnqaIWwPjqE-gYBohmrKwO63pT58TCemV1hEAgYgCeit_I1pbCsqQv9F_QJ2lKuJfzZ3scRE8VG38fyaPvuzumWazX38uo-yK2_Qo5XVb3_KhM7cj9qiTiuwg6ocmOCd7NvxeJZ008lVZM6j2ElkXEKihpruASx7KsIGn4PwqltXuoAZPY8WGTD1qEWU_Xs7fSZqIx2HLeN4G6UT1S9h6wgAQJgNiQokfw"/>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-md text-label-md text-xs backdrop-blur-sm bg-opacity-90">
+                            器物与非遗
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-ink-text mb-2 line-clamp-2">榫卯结构：不著一钉的千年智慧</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                            无需钉铆，凭借木构件本身的凹凸嵌合便能屹立千年。解析中国古建筑与家具中榫卯结构的科学性与哲学意味。
+                        </p>
+<div class="flex justify-between items-center text-on-surface-variant border-t border-mist-border pt-4">
+<div class="flex gap-4">
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="font-label-md text-xs">891</span>
+</button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+<span class="font-label-md text-xs">124</span>
+</button>
+</div>
+<button class="hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Article Card 3 -->
+<div class="bg-white-card rounded-lg border border-mist-border overflow-hidden shadow-[0_4px_10px_rgba(31,37,34,0.02)] flex flex-col h-full group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Tea ceremony" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A tranquil scene of a traditional Chinese tea ceremony. A celadon teapot and small cups rest on a dark wooden tray, with faint steam rising. Soft, diffused lighting creates a calm, meditative mood. The color palette emphasizes natural greens, warm browns, and the soft white of the paper-like background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYyoP9H3gv-1RC680W7EY6000wQQw4tTc7rMgL9R43FlvfILwZdegsB29DbEVTkTbwGaJrvIUPOMoiFiWcZwE0U4a-8SjKohuMFNMffnpKWXa3T0iX89_FwzLr1vfXjgcPPfPIZoRPt74CGyK4_2jpCIhZ7SKAQ_hWAVbRK5p-mr4aQtybgdWSGmpPnQRedTyEF-wDcWqt15HxLGJrPDTJvfQu5Pnkhvkgw6v7cmRON7HfTE28JHfkaQ3NCIAjtEGAdiZqoQZ28w"/>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-md text-label-md text-xs backdrop-blur-sm bg-opacity-90">
+                            生态智慧
+                        </div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-ink-text mb-2 line-clamp-2">茶禅一味：片叶之中的自然之道</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3 flex-grow">
+                            从神农尝百草到唐宋茶道大兴，茶不仅是饮品，更是连接人与自然、修身养性的重要媒介。
+                        </p>
+<div class="flex justify-between items-center text-on-surface-variant border-t border-mist-border pt-4">
+<div class="flex gap-4">
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="font-label-md text-xs">512</span>
+</button>
+<button class="flex items-center gap-1 hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+<span class="font-label-md text-xs">88</span>
+</button>
+</div>
+<button class="hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="py-section-gap bg-surface max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<div class="text-center mb-16 relative z-10">
+<h2 class="font-headline-md text-headline-md text-ink-text mb-4">文脉纪元</h2>
+<div class="w-16 h-[2px] bg-secondary mx-auto"></div>
+</div>
+<div class="relative w-full max-w-4xl mx-auto py-12">
+<!-- Horizontal Line -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-mist-border -translate-y-1/2 hidden md:block"></div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0 relative z-10">
+<!-- Point 1 -->
+<div class="flex flex-col items-center group">
+<div class="w-4 h-4 rounded-full bg-primary mb-4 shadow-[0_0_0_4px_rgba(105,4,9,0.1)] group-hover:scale-125 transition-transform duration-300"></div>
+<span class="font-headline-sm text-lg text-ink-text">先秦思想</span>
+</div>
+<span class="material-symbols-outlined text-secondary md:hidden">arrow_downward</span>
+<!-- Point 2 -->
+<div class="flex flex-col items-center group">
+<div class="w-4 h-4 rounded-full bg-secondary mb-4 shadow-[0_0_0_4px_rgba(119,90,22,0.1)] group-hover:scale-125 transition-transform duration-300"></div>
+<span class="font-headline-sm text-lg text-ink-text">汉唐气象</span>
+</div>
+<span class="material-symbols-outlined text-secondary md:hidden">arrow_downward</span>
+<!-- Point 3 -->
+<div class="flex flex-col items-center group">
+<div class="w-4 h-4 rounded-full bg-tertiary-container mb-4 shadow-[0_0_0_4px_rgba(7,82,66,0.1)] group-hover:scale-125 transition-transform duration-300"></div>
+<span class="font-headline-sm text-lg text-ink-text">宋元审美</span>
+</div>
+<span class="material-symbols-outlined text-secondary md:hidden">arrow_downward</span>
+<!-- Point 4 -->
+<div class="flex flex-col items-center group">
+<div class="w-4 h-4 rounded-full bg-on-surface-variant mb-4 shadow-[0_0_0_4px_rgba(88,65,63,0.1)] group-hover:scale-125 transition-transform duration-300"></div>
+<span class="font-headline-sm text-lg text-ink-text">明清技艺</span>
+</div>
+<span class="material-symbols-outlined text-secondary md:hidden">arrow_downward</span>
+<!-- Point 5 -->
+<div class="flex flex-col items-center group">
+<div class="w-4 h-4 rounded-full bg-primary mb-4 shadow-[0_0_0_4px_rgba(105,4,9,0.1)] group-hover:scale-125 transition-transform duration-300"></div>
+<span class="font-headline-sm text-lg text-primary font-bold">当代表达</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full py-section-gap border-t border-mist-border dark:border-outline-variant flat no shadows">
+<div class="flex flex-col items-center gap-6 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<span class="font-display-lg text-headline-md text-primary dark:text-inverse-primary">华夏文脉</span>
+<div class="flex gap-6 font-label-md text-label-md">
+<a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">课程设计作品</a>
+<span class="text-mist-border">|</span>
+<a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">素材来源说明</a>
+<span class="text-mist-border">|</span>
+<span class="text-on-surface-variant">中华优秀传统文化数字展示</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant/70 mt-4 text-center">
+                © 2024 华夏文脉 数字博物馆. 传承华夏文明，赓续历史文脉.
+            </p>
+</div>
+</footer>
+</body></html>

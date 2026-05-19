@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文脉管理后台 - 数据总览</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div>
+        <a class="brand" href="../index.html">文脉管理后台</a>
+        <div class="admin-user"><span class="avatar">管</span><span>系统管理员</span></div>
+      </div>
+      <a class="btn btn--primary" href="dashboard.html"><span class="material-symbols-outlined">add</span>发布新内容</a>
+      <nav class="admin-nav" aria-label="后台导航">
+        <a class="is-active" href="dashboard.html"><span class="material-symbols-outlined">dashboard</span>数据总览</a>
+        <a href="../pages/category.html"><span class="material-symbols-outlined">menu_book</span>内容管理</a>
+        <a href="comments.html"><span class="material-symbols-outlined">comment</span>评论审核</a>
+        <a href="interactions.html"><span class="material-symbols-outlined">query_stats</span>互动统计</a>
+        <a href="../index.html"><span class="material-symbols-outlined">home</span>返回首页</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>数据总览</h1>
+          <p>实时监控平台运行状况及用户互动数据。</p>
+        </div>
+        <span class="status status--success">上次更新：刚刚</span>
+      </header>
+
+      <section class="kpi-grid">
+        <div class="kpi-card"><span>总文章数</span><strong>1,284</strong><p>较上月 +12%</p></div>
+        <div class="kpi-card"><span>总用户数</span><strong>45.2k</strong><p>较上月 +5.3%</p></div>
+        <div class="kpi-card"><span>总点赞数</span><strong>389k</strong><p>较上月 +8%</p></div>
+        <div class="kpi-card"><span>待审评论</span><strong>128</strong><p>需要管理员处理</p></div>
+      </section>
+
+      <section class="section">
+        <div class="grid grid--2">
+          <div class="chart-card">
+            <h3>各分类互动量</h3>
+            <div class="bars">
+              <div class="bar" style="--h:80%">思想</div>
+              <div class="bar" style="--h:60%">非遗</div>
+              <div class="bar" style="--h:95%">书画</div>
+              <div class="bar" style="--h:45%">民俗</div>
+              <div class="bar" style="--h:70%">生态</div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>排名</th><th>标题</th><th>分类</th><th>综合热度</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>民为邦本：传统政治智慧中的人民观</td><td>思想理念</td><td>98,245</td></tr>
+                <tr><td>2</td><td>榫卯结构：不用一钉一铆的东方技艺</td><td>器物与非遗</td><td>85,112</td></tr>
+                <tr><td>3</td><td>二十四节气：顺时而作的生态智慧</td><td>生态智慧</td><td>76,890</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

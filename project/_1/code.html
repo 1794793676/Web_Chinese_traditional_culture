@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>用户注册 - 华夏文脉</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Noto+Serif+SC:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#333029",
+                        "white-card": "#FFFCF6",
+                        "surface-tint": "#a93630",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad6",
+                        "on-surface-variant": "#58413f",
+                        "surface-dim": "#dfd9cf",
+                        "mist-border": "#E9E1D1",
+                        "secondary-fixed-dim": "#e9c174",
+                        "on-secondary-fixed": "#261900",
+                        "primary": "#690409",
+                        "on-surface": "#1d1c15",
+                        "success": "#2E7D32",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f3ede2",
+                        "on-tertiary-fixed": "#002019",
+                        "surface-bright": "#fff9ee",
+                        "on-primary-container": "#ff9c93",
+                        "on-secondary-container": "#785a17",
+                        "on-primary-fixed-variant": "#881e1c",
+                        "surface-container-low": "#f9f3e8",
+                        "secondary": "#775a16",
+                        "error-container": "#ffdad6",
+                        "error": "#B42318",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb4ac",
+                        "on-secondary-fixed-variant": "#5c4200",
+                        "surface-container-high": "#ede8dd",
+                        "surface-variant": "#e8e2d7",
+                        "tertiary-fixed": "#aef0da",
+                        "on-background": "#1d1c15",
+                        "on-primary-fixed": "#410003",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdea3",
+                        "background": "#fff9ee",
+                        "tertiary-container": "#075242",
+                        "surface-container-highest": "#e8e2d7",
+                        "outline-variant": "#dfbfbc",
+                        "tertiary": "#00392d",
+                        "outline": "#8b716e",
+                        "surface": "#fff9ee",
+                        "primary-container": "#8a1f1d",
+                        "secondary-container": "#fdd485",
+                        "on-tertiary-container": "#84c4af",
+                        "ink-text": "#1F2522",
+                        "tertiary-fixed-dim": "#93d3bf",
+                        "inverse-on-surface": "#f6f0e5",
+                        "on-tertiary-fixed-variant": "#055141",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ac"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "container-max": "1200px",
+                        "margin-tablet": "40px",
+                        "margin-desktop": "80px",
+                        "section-gap": "120px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Noto Serif SC"],
+                        "display-lg-mobile": ["Noto Serif SC"],
+                        "label-md": ["Noto Sans SC"],
+                        "headline-sm": ["Noto Serif SC"],
+                        "body-lg": ["Noto Sans SC"],
+                        "body-md": ["Noto Sans SC"],
+                        "admin-table": ["Noto Sans SC"],
+                        "headline-md": ["Noto Serif SC"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "admin-table": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .paper-texture {
+            background-color: #F6F0E5;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-inverse-on-surface text-on-surface antialiased min-h-screen flex items-center justify-center p-4 md:p-8">
+<div class="max-w-[1000px] w-full bg-white-card rounded-xl shadow-[0_4px_24px_rgba(31,37,34,0.08)] overflow-hidden flex flex-col md:flex-row min-h-[600px] border border-mist-border">
+<!-- Left Panel: Illustration -->
+<div class="hidden md:flex w-1/2 paper-texture relative flex-col justify-between p-12 border-r border-mist-border">
+<div class="relative z-10">
+<span class="font-display-lg text-headline-md text-primary mb-6 block">华夏文脉</span>
+<h1 class="font-headline-sm text-headline-sm text-ink-text leading-snug">
+                    创建账号，<br/>进入华夏文脉数字展馆
+                </h1>
+</div>
+<div class="absolute inset-0 z-0 flex items-center justify-center opacity-80 mix-blend-multiply">
+<img alt="" class="w-full h-full object-cover grayscale opacity-30" data-alt="An elegant, minimalist illustration of ancient Chinese architecture seamlessly blending with modern digital data streams. The composition features traditional tiled roofs and subtle mountain silhouettes fading into a pristine, paper-textured background. The color palette emphasizes deep ink blacks and sophisticated gold line art, with a solitary, vibrant cinnabar red seal anchoring the visual hierarchy. The overall mood is scholarly, calm, and culturally resonant, perfectly suited for a high-end digital museum platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADCuvBMXdhLfOoipR7ZEoDPfy2rwpnT8VLemFD29O2JTe_YH-EAGsf1XYby9fCUodogx8f-g0ZWn8tRV18q6xVMA-ISJnatSgagLRK1yewKJf038_YwyCS2IkpO4MEwdyrUpEtWw07A4Id1TiWukZ6s_v7HdJnx4qjyTz94IGZE32e2HT4WLbwy5rGVgo5W-9RHuzb4BqGyFEjF1te3tiBtvYLxWIrgeIIs-TzGtnrk_1632nVOSIrf7WGzaQ3a3FcmjeGusaqYw"/>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-inverse-on-surface/80"></div>
+</div>
+<div class="relative z-10 text-on-surface-variant font-body-md text-body-md">
+<p>传承华夏文明，赓续历史文脉。</p>
+</div>
+</div>
+<!-- Right Panel: Form -->
+<div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white-card relative">
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-ink-text mb-2">用户注册</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">请填写以下信息以创建您的账号。</p>
+</div>
+<form class="space-y-5">
+<div>
+<label class="block font-label-md text-label-md text-ink-text mb-1.5" for="username">用户名</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-mist-border rounded-lg focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors font-body-md text-body-md text-ink-text placeholder-outline-variant" id="username" placeholder="请输入用户名" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-ink-text mb-1.5" for="email">邮箱</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-mist-border rounded-lg focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors font-body-md text-body-md text-ink-text placeholder-outline-variant" id="email" placeholder="your@email.com" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-ink-text mb-1.5" for="password">密码</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-mist-border rounded-lg focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors font-body-md text-body-md text-ink-text placeholder-outline-variant" id="password" placeholder="设置密码（至少8位）" type="password"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-ink-text mb-1.5" for="confirm_password">确认密码</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-mist-border rounded-lg focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors font-body-md text-body-md text-ink-text placeholder-outline-variant" id="confirm_password" placeholder="再次输入密码" type="password"/>
+</div>
+</div>
+<div class="flex items-center mt-6">
+<input class="w-4 h-4 text-primary bg-surface-container-lowest border-mist-border rounded focus:ring-primary focus:ring-2" id="terms" type="checkbox"/>
+<label class="ml-2 font-body-md text-admin-table text-on-surface-variant" for="terms">
+                        我已阅读并同意 <a class="text-secondary hover:text-primary transition-colors underline decoration-mist-border underline-offset-4" href="#">服务协议</a> 和 <a class="text-secondary hover:text-primary transition-colors underline decoration-mist-border underline-offset-4" href="#">隐私政策</a>
+</label>
+</div>
+<div class="pt-4 space-y-4">
+<button class="w-full py-3 px-4 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex justify-center items-center gap-2" type="button">
+<span>注册</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<a class="w-full py-3 px-4 bg-transparent border border-secondary text-ink-text rounded-full font-label-md text-label-md hover:bg-secondary-container/20 transition-colors flex justify-center items-center text-center block" href="/login">
+                        已有账号？去登录
+                    </a>
+</div>
+</form>
+<div class="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-20">
+<svg class="w-full h-full text-secondary fill-current" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,0 L100,0 L100,100 Z" opacity="0.1"></path>
+</svg>
+</div>
+</div>
+</div>
+</body></html>

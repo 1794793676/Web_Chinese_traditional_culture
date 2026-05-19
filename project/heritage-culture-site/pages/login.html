@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 - 华夏文脉 数字展馆</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card">
+      <aside class="auth-aside">
+        <a class="brand" href="../index.html">华夏文脉</a>
+        <h1>登录数字展馆</h1>
+        <p>在现代网页中重读传统文化的思想、器物与精神。</p>
+      </aside>
+      <div class="auth-form">
+        <div>
+          <h2>用户登录</h2>
+          <p>本阶段保留登录页面外观，只提供 localStorage 游客状态占位。</p>
+        </div>
+        <form class="form">
+          <div class="field"><label for="account">账号</label><input id="account" type="text" placeholder="用户名或邮箱"></div>
+          <div class="field"><label for="login-password">密码</label><input id="login-password" type="password" placeholder="请输入密码"></div>
+          <label class="hint"><input type="checkbox"> 记住我</label>
+          <button class="btn btn--primary" type="button">登录</button>
+          <a class="btn btn--outline" href="register.html">没有账号？去注册</a>
+          <a class="hint" href="../index.html">返回首页</a>
+        </form>
+        <p class="guest-state" data-auth-state>游客状态</p>
+      </div>
+    </section>
+  </main>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/auth-placeholder.js"></script>
+</body>
+</html>

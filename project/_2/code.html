@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>登录 - 华夏文脉 数字展馆</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&amp;family=Noto+Serif+SC:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-surface": "#333029",
+                "white-card": "#FFFCF6",
+                "surface-tint": "#a93630",
+                "on-secondary": "#ffffff",
+                "primary-fixed": "#ffdad6",
+                "on-surface-variant": "#58413f",
+                "surface-dim": "#dfd9cf",
+                "mist-border": "#E9E1D1",
+                "secondary-fixed-dim": "#e9c174",
+                "on-secondary-fixed": "#261900",
+                "primary": "#690409",
+                "on-surface": "#1d1c15",
+                "success": "#2E7D32",
+                "surface-container-lowest": "#ffffff",
+                "surface-container": "#f3ede2",
+                "on-tertiary-fixed": "#002019",
+                "surface-bright": "#fff9ee",
+                "on-primary-container": "#ff9c93",
+                "on-secondary-container": "#785a17",
+                "on-primary-fixed-variant": "#881e1c",
+                "surface-container-low": "#f9f3e8",
+                "secondary": "#775a16",
+                "error-container": "#ffdad6",
+                "error": "#B42318",
+                "on-error": "#ffffff",
+                "inverse-primary": "#ffb4ac",
+                "on-secondary-fixed-variant": "#5c4200",
+                "surface-container-high": "#ede8dd",
+                "surface-variant": "#e8e2d7",
+                "tertiary-fixed": "#aef0da",
+                "on-background": "#1d1c15",
+                "on-primary-fixed": "#410003",
+                "on-error-container": "#93000a",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed": "#ffdea3",
+                "background": "#fff9ee",
+                "tertiary-container": "#075242",
+                "surface-container-highest": "#e8e2d7",
+                "outline-variant": "#dfbfbc",
+                "tertiary": "#00392d",
+                "outline": "#8b716e",
+                "surface": "#fff9ee",
+                "primary-container": "#8a1f1d",
+                "secondary-container": "#fdd485",
+                "on-tertiary-container": "#84c4af",
+                "ink-text": "#1F2522",
+                "tertiary-fixed-dim": "#93d3bf",
+                "inverse-on-surface": "#f6f0e5",
+                "on-tertiary-fixed-variant": "#055141",
+                "on-primary": "#ffffff",
+                "primary-fixed-dim": "#ffb4ac"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "margin-mobile": "20px",
+                "container-max": "1200px",
+                "margin-tablet": "40px",
+                "margin-desktop": "80px",
+                "section-gap": "120px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "display-lg": [
+                        "Noto Serif SC"
+                ],
+                "display-lg-mobile": [
+                        "Noto Serif SC"
+                ],
+                "label-md": [
+                        "Noto Sans SC"
+                ],
+                "headline-sm": [
+                        "Noto Serif SC"
+                ],
+                "body-lg": [
+                        "Noto Sans SC"
+                ],
+                "body-md": [
+                        "Noto Sans SC"
+                ],
+                "admin-table": [
+                        "Noto Sans SC"
+                ],
+                "headline-md": [
+                        "Noto Serif SC"
+                ]
+        },
+        "fontSize": {
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-sm": [
+                        "24px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "admin-table": [
+                        "14px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: theme('colors.inverse-on-surface'); /* Paper Background */
+  }
+</style>
+</head>
+<body class="min-h-screen flex text-on-surface font-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Left Side: Exhibition Visual (Hidden on Mobile) -->
+<div class="hidden lg:block lg:w-1/2 relative bg-surface-container overflow-hidden">
+<!-- Main Background Image -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A majestic, subtly lit traditional Chinese museum or exhibition hall interior. The space features dark wooden architectural elements, soft golden ambient lighting, and glass display cases containing ancient scrolls and pottery. The atmosphere is quiet, scholarly, and culturally profound, utilizing a palette of deep wood tones, warm golds, and soft paper-whites." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnoCWaqCXrsrPXJOO3DAtaVbqWrPvjVl6ZvQ3fy-Ekjur-hwiR8mCWvKSdt7wTc1VRdD8CLuD96NP_2D69BJi2UV2O6xq8-T__EJejMbIZRHGlIimqO7F6gE1SKqB-m6vWnQdDTC9OR2knkULj_Ca8Wz-HtmnKjVTBf8riRcKpKt8P8uIdUjnfFO42zXv4gK2S74w9wmyPMC7W0xezfRClE766s8ld62XjclBYFCkAs_nQXI3-EA1KYzNMvRn9c3_AkYYMY9C8Pg');">
+</div>
+<!-- Gradient Overlay for Depth -->
+<div class="absolute inset-0 bg-gradient-to-r from-inverse-surface/80 via-inverse-surface/40 to-transparent"></div>
+<!-- Decorative Branding Overlay -->
+<div class="absolute bottom-margin-desktop left-margin-desktop text-white-card max-w-md">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-sm bg-primary flex items-center justify-center transform rotate-45 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary transform -rotate-45" style="font-variation-settings: 'FILL' 1;">museum</span>
+</div>
+<span class="font-headline-sm text-headline-sm tracking-widest">华夏文脉</span>
+</div>
+<p class="font-body-lg text-body-lg text-surface-variant leading-relaxed">
+        传承华夏文明，赓续历史文脉。<br/>
+        探索数字化的古代艺术瑰宝与文化遗迹。
+      </p>
+</div>
+</div>
+<!-- Right Side: Login Form Canvas -->
+<div class="w-full lg:w-1/2 flex items-center justify-center p-margin-mobile md:p-margin-desktop relative">
+<!-- Subtle Background Elements for Paper Canvas -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden opacity-50">
+<svg class="absolute top-0 right-0 w-64 h-64 text-surface-container-highest" fill="currentColor" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,0 Q50,50 100,0 L100,100 Q50,50 0,100 Z" opacity="0.1"></path>
+</svg>
+</div>
+<!-- Login Card -->
+<div class="w-full max-w-md bg-white-card rounded-xl p-8 md:p-10 shadow-[0_8px_30px_rgba(31,37,34,0.06)] border border-mist-border relative z-10">
+<!-- Card Header -->
+<div class="text-center mb-8">
+<!-- Mobile Logo (shown only on small screens) -->
+<div class="lg:hidden flex items-center justify-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">museum</span>
+<span class="font-headline-sm text-headline-sm tracking-widest text-primary">华夏文脉</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">登录数字展馆</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">请验证您的身份以继续访问</p>
+</div>
+<!-- Global Error Message Example -->
+<div class="mb-6 bg-error-container/40 border border-error/20 rounded-lg p-4 flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-0.5" style="font-variation-settings: 'FILL' 1;">error</span>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-error-container">登录失败</h3>
+<p class="font-body-md text-body-md text-on-error-container/80 mt-1">用户名或密码错误，请检查后重试。</p>
+</div>
+</div>
+<!-- Login Form -->
+<form class="space-y-6">
+<!-- Username/Email Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="username">用户名 / 邮箱</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant/60">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 border-mist-border rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:ring-1 focus:ring-secondary focus:border-secondary transition-colors placeholder:text-on-surface-variant/40 shadow-sm shadow-ink-text/5" id="username" name="username" placeholder="请输入用户名或邮箱" type="text" value="scholar_li"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="password">密码</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant/60">lock</span>
+</div>
+<input class="block w-full pl-10 pr-10 py-3 border-mist-border rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:ring-1 focus:ring-secondary focus:border-secondary transition-colors placeholder:text-on-surface-variant/40 shadow-sm shadow-ink-text/5" id="password" name="password" placeholder="请输入密码" type="password" value="wrongpassword"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-secondary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Captcha Field (Error State Example) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2" for="captcha">验证码</label>
+<div class="flex gap-4 items-start">
+<!-- Input part -->
+<div class="flex-1 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-error/60">shield</span>
+</div>
+<!-- Applied error border classes -->
+<input class="block w-full pl-10 pr-3 py-3 border-error focus:ring-1 focus:ring-error focus:border-error rounded-lg bg-error-container/10 text-on-surface font-body-md text-body-md transition-colors placeholder:text-on-surface-variant/40 shadow-sm shadow-ink-text/5" id="captcha" name="captcha" placeholder="输入右侧字符" type="text" value="abcd"/>
+</div>
+<!-- Image Block Part -->
+<div class="relative w-32 h-[50px] rounded-lg bg-surface-variant overflow-hidden cursor-pointer group flex-shrink-0 border border-mist-border shadow-sm shadow-ink-text/5">
+<!-- Ink wash background texture -->
+<div class="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-60" data-alt="A close-up abstract texture resembling traditional Chinese ink wash painting. The paper is an aged, warm off-white color with fluid, soft brushstrokes of grey and black ink blending gently into the background. The aesthetic is organic, scholarly, and minimalist, evoking the feeling of an ancient scroll." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChNbrEDi-Rfd6b7mXVFddNHqrJboQotYlJQ0vZvrXg-XS5aFU1S24iU2TQL6GFePutbYdX_jOobeo53FGQezEIr84kUAD3kuVGCUdCNNcJ92J4dWhc07kBp70sHB0anQ8OZrW2lFj4ZkV-3stXAgIuwp46xCGAt7U7NxKn307pBX-wPX3Tsvfs5wbxkhCfZflAcCPTquh39myPvMvOpg4zuggJm-k7BS50-Uvbx03LCDTUzJFsCl7_ZqjAvuCgyC-IMWK7M9E9Yg');"></div>
+<!-- Captcha Text Overlay (Simulated) -->
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="font-headline-sm text-headline-sm text-ink-text tracking-[0.2em] font-bold mix-blend-color-burn select-none italic" style="transform: skewX(-10deg);">W9X2</span>
+</div>
+<!-- Refresh Icon Overlay (Visible on Hover) -->
+<div class="absolute inset-0 bg-inverse-surface/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-sm">
+<span class="material-symbols-outlined text-white-card" style="font-variation-settings: 'FILL' 1;">refresh</span>
+</div>
+</div>
+</div>
+<!-- Helper Text & Inline Error -->
+<div class="mt-2 flex justify-between items-start">
+<p class="text-error font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">error</span> 验证码错误
+            </p>
+<p class="text-on-surface-variant font-label-md text-label-md flex items-center gap-1 opacity-70">
+<span class="material-symbols-outlined text-[16px]">touch_app</span> 点击图片刷新验证码
+            </p>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="pt-4 space-y-4">
+<button class="w-full flex items-center justify-center py-3.5 px-4 bg-primary text-on-primary rounded-full font-label-md text-label-md tracking-wider hover:bg-primary-container hover:text-on-primary-container active:scale-[0.98] transition-all shadow-[0_4px_14px_rgba(105,4,9,0.3)]" type="button">
+            登录
+          </button>
+<div class="flex items-center justify-center gap-2 font-body-md text-body-md">
+<span class="text-on-surface-variant">没有账号？</span>
+<a class="text-secondary font-label-md text-label-md hover:text-primary transition-colors flex items-center group relative" href="#">
+              立即注册
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300"></span>
+</a>
+</div>
+</div>
+</form>
+</div>
+</div>
+</body></html>
