@@ -13,6 +13,16 @@ Spring Boot 3.5.14, Java 17, Gradle, MySQL 8, JdbcTemplate, Bean Validation, BCr
 ## MySQL 配置
 修改 `backform/src/main/resources/application.properties` 中的 `spring.datasource.*`。
 
+推荐使用环境变量覆盖（避免把密码写入仓库）：
+- `DB_USERNAME`（默认 `root`）
+- `DB_PASSWORD`（默认空）
+
+例如（Windows PowerShell）：
+```powershell
+$env:DB_USERNAME="root"
+$env:DB_PASSWORD="你的MySQL密码"
+```
+
 ## 启动
 ```bash
 cd backform
