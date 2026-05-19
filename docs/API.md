@@ -75,8 +75,18 @@ PATCH 请求体：
 ```
 
 ## curl 示例
+
+### Linux / macOS (bash)
 ```bash
 curl "http://localhost:8080/api/auth/captcha?purpose=login"
 curl -X POST "http://localhost:8080/api/auth/register" -H "Content-Type: application/json" -d '{"username":"u1","email":"u1@test.com","password":"12345678","confirmPassword":"12345678","nickname":"u1","captchaKey":"xxx","captchaCode":"1234"}'
 curl -X POST "http://localhost:8080/api/auth/login" -H "Content-Type: application/json" -d '{"username":"demo","password":"demo123456","captchaKey":"xxx","captchaCode":"1234"}'
+```
+
+### Windows CMD
+> Windows CMD 不支持单引号包裹 JSON，请使用双引号并转义内部双引号。
+```bat
+curl "http://localhost:8080/api/auth/captcha?purpose=login"
+curl -X POST "http://localhost:8080/api/auth/register" -H "Content-Type: application/json" -d "{\"username\":\"u1\",\"email\":\"u1@test.com\",\"password\":\"12345678\",\"confirmPassword\":\"12345678\",\"nickname\":\"u1\",\"captchaKey\":\"xxx\",\"captchaCode\":\"1234\"}"
+curl -X POST "http://localhost:8080/api/auth/login" -H "Content-Type: application/json" -d "{\"username\":\"demo\",\"password\":\"demo123456\",\"captchaKey\":\"xxx\",\"captchaCode\":\"1234\"}"
 ```
