@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backform.mapper.CategoryMapper">
+<select id="findPublishedCategories" resultType="map">
+select id,name,slug,description,cover_image as coverImage,sort_order as sortOrder from categories where status='published' order by sort_order asc
+</select>
+</mapper>
