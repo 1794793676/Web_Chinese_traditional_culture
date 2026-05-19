@@ -1,6 +1,5 @@
 package com.example.backform.mapper;
 
-import com.example.backform.auth.CurrentUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,6 +11,7 @@ public interface UserMapper {
     int countByUsername(@Param("username") String username);
     int countByEmail(@Param("email") String email);
     int insertUser(@Param("username") String username, @Param("email") String email, @Param("passwordHash") String passwordHash, @Param("nickname") String nickname);
-    CurrentUser findCurrentUserById(@Param("id") Long id);
+    Map<String, Object> findProfileById(@Param("id") Long id);
     int updateLastLogin(@Param("id") Long id);
+    int updatePasswordHashByUsername(@Param("username") String username, @Param("passwordHash") String passwordHash);
 }
