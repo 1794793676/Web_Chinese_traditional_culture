@@ -6,7 +6,7 @@ public record UserProfileResponse(
         String nickname,
         String email,
         String role,
-        String avatar,
+        String avatarUrl,
         String createdAt,
         String lastLoginAt
 ) {

@@ -1,10 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.backform.mapper.AdminMapper">
-<select id="dashboardStats" resultType="map">select (select count(*) from users) as totalUsers,(select count(*) from articles) as totalArticles,(select count(*) from article_likes) as totalLikes,(select count(*) from comments) as totalComments,(select count(*) from article_shares) as totalShares</select>
-<select id="topArticles" resultType="map">select article_id as articleId,title,category_name as categoryName,like_count as likeCount,comment_count as commentCount,share_count as shareCount,view_count as viewCount,(like_count*3+comment_count*4+share_count*2+view_count*0.1) as totalScore from v_article_stats order by totalScore desc limit #{limit}</select>
-<select id="latestComments" resultType="map">select * from v_latest_comments limit #{limit}</select>
-<select id="totalViews" resultType="long">select count(*) from page_views</select>
-<select id="interactionRanking" resultType="map">select article_id as articleId,title,category_name as categoryName,like_count as likeCount,comment_count as commentCount,share_count as shareCount,view_count as viewCount,(like_count*3+comment_count*4+share_count*2+view_count*0.1) as totalScore from v_article_stats order by totalScore desc limit #{limit}</select>
-<insert id="insertAdminLog">insert into admin_logs(admin_id,action,target_type,target_id,detail) values(#{adminId},#{action},#{targetType},#{targetId},#{detail})</insert>
+
+    <select id="dashboardStats" resultType="map">
+        SELECT
+            (SELECT COUNT(*) FROM users) AS totalUsers,
+            (SELECT COUNT(*) FROM articles) AS totalArticles,
+            (SELECT COUNT(*) FROM article_likes) AS totalLikes,
+            (SELECT COUNT(*) FROM comments) AS totalComments,
+            (SELECT COUNT(*) FROM article_shares) AS totalShares
+    </select>
+
+    <select id="topArticles" resultType="map">
+        SELECT
+            article_id AS articleId,
+            title,
+            category_name AS categoryName,
+            like_count AS likeCount,
+            comment_count AS commentCount,
+            share_count AS shareCount,
+            view_count AS viewCount,
+            (like_count * 3 + comment_count * 4 + share_count * 2 + view_count * 0.1) AS totalScore
+        FROM v_article_stats
+        ORDER BY totalScore DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="latestComments" resultType="map">
+        SELECT
+            id,
+            article_id AS articleId,
+            article_title AS articleTitle,
+            user_id AS userId,
+            user_nickname AS userNickname,
+            content,
+            status,
+            admin_note AS adminNote,
+            created_at AS createdAt
+        FROM v_latest_comments
+        LIMIT #{limit}
+    </select>
+
+    <select id="totalViews" resultType="long">
+        SELECT COUNT(*)
+        FROM page_views
+    </select>
+
+    <select id="interactionRanking" resultType="map">
+        SELECT
+            article_id AS articleId,
+            title,
+            category_name AS categoryName,
+            like_count AS likeCount,
+            comment_count AS commentCount,
+            share_count AS shareCount,
+            view_count AS viewCount,
+            (like_count * 3 + comment_count * 4 + share_count * 2 + view_count * 0.1) AS totalScore
+        FROM v_article_stats
+        ORDER BY totalScore DESC
+        LIMIT #{limit}
+    </select>
+
+    <insert id="insertAdminLog">
+        INSERT INTO admin_logs (admin_id, action, target_type, target_id, detail)
+        VALUES (#{adminId}, #{action}, #{targetType}, #{targetId}, #{detail})
+    </insert>
 </mapper>

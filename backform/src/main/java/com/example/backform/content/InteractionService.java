@@ -20,31 +20,87 @@ public class InteractionService {
     private final CommentMapper commentMapper;
     private final ShareMapper shareMapper;
     private final ArticleMapper articleMapper;
-    public InteractionService(LikeMapper likeMapper, CommentMapper commentMapper, ShareMapper shareMapper, ArticleMapper articleMapper) {
+
+    public InteractionService(
+            LikeMapper likeMapper,
+            CommentMapper commentMapper,
+            ShareMapper shareMapper,
+            ArticleMapper articleMapper
+    ) {
         this.likeMapper = likeMapper;
         this.commentMapper = commentMapper;
         this.shareMapper = shareMapper;
         this.articleMapper = articleMapper;
     }
+
     public InteractionCountResponse like(Long articleId, CurrentUser currentUser) {
-        if (likeMapper.existsLike(articleId, currentUser.id()) == 0) {
+        long existingLikeCount = likeMapper.existsLike(articleId, currentUser.id());
+        if (existingLikeCount == 0) {
             likeMapper.insertLike(articleId, currentUser.id());
         }
-        return new InteractionCountResponse(articleId, articleMapper.countLikes(articleId), articleMapper.countComments(articleId), articleMapper.countShares(articleId), articleMapper.currentViewCount(articleId), true);
+        return buildInteractionCount(articleId, true);
     }
+
     public InteractionCountResponse unlike(Long articleId, CurrentUser currentUser) {
         likeMapper.deleteLike(articleId, currentUser.id());
-        return new InteractionCountResponse(articleId, articleMapper.countLikes(articleId), articleMapper.countComments(articleId), articleMapper.countShares(articleId), articleMapper.currentViewCount(articleId), false);
+        return buildInteractionCount(articleId, false);
     }
-    public long countComments(Long articleId) { return commentMapper.countVisibleByArticleId(articleId); }
-    public List<CommentResponse> listComments(Long articleId, int size, int offset) { return commentMapper.findVisibleByArticleId(articleId, size, offset).stream().map(this::toComment).toList(); }
-    public InteractionCountResponse createComment(Long articleId, CurrentUser currentUser, CommentCreateRequest request) {
-        commentMapper.insertComment(articleId, currentUser.id(), request.getContent().trim(), "visible");
-        return new InteractionCountResponse(articleId, articleMapper.countLikes(articleId), articleMapper.countComments(articleId), articleMapper.countShares(articleId), articleMapper.currentViewCount(articleId), true);
+
+    public long countComments(Long articleId) {
+        return commentMapper.countVisibleByArticleId(articleId);
     }
-    public InteractionCountResponse share(Long articleId, CurrentUser currentUser, ShareCreateRequest request) {
-        shareMapper.insertShare(articleId, currentUser.id(), request.getChannel());
-        return new InteractionCountResponse(articleId, articleMapper.countLikes(articleId), articleMapper.countComments(articleId), articleMapper.countShares(articleId), articleMapper.currentViewCount(articleId), null);
+
+    public List<CommentResponse> listComments(Long articleId, int size, int offset) {
+        List<Map<String, Object>> rows = commentMapper.findVisibleByArticleId(articleId, size, offset);
+        return rows.stream().map(this::toComment).toList();
     }
-    private CommentResponse toComment(Map<String, Object> row) { return new CommentResponse(((Number) row.get("id")).longValue(), ((Number) row.get("articleId")).longValue(), ((Number) row.get("userId")).longValue(), String.valueOf(row.get("nickname")), String.valueOf(row.get("username")), String.valueOf(row.get("content")), String.valueOf(row.get("status")), String.valueOf(row.get("createdAt"))); }
+
+    public InteractionCountResponse createComment(
+            Long articleId,
+            CurrentUser currentUser,
+            CommentCreateRequest request
+    ) {
+        String content = request.getContent().trim();
+        commentMapper.insertComment(articleId, currentUser.id(), content, "visible");
+        return buildInteractionCount(articleId, true);
+    }
+
+    public InteractionCountResponse share(
+            Long articleId,
+            CurrentUser currentUser,
+            ShareCreateRequest request
+    ) {
+        String channel = request.getChannel();
+        shareMapper.insertShare(articleId, currentUser.id(), channel);
+        return buildInteractionCount(articleId, null);
+    }
+
+    private InteractionCountResponse buildInteractionCount(Long articleId, Boolean likedByCurrentUser) {
+        Long likeCount = articleMapper.countLikes(articleId);
+        Long commentCount = articleMapper.countComments(articleId);
+        Long shareCount = articleMapper.countShares(articleId);
+        Long viewCount = articleMapper.currentViewCount(articleId);
+
+        return new InteractionCountResponse(
+                articleId,
+                likeCount,
+                commentCount,
+                shareCount,
+                viewCount,
+                likedByCurrentUser
+        );
+    }
+
+    private CommentResponse toComment(Map<String, Object> row) {
+        Long id = ((Number) row.get("id")).longValue();
+        Long articleId = ((Number) row.get("articleId")).longValue();
+        Long userId = ((Number) row.get("userId")).longValue();
+        String nickname = String.valueOf(row.get("nickname"));
+        String username = String.valueOf(row.get("username"));
+        String content = String.valueOf(row.get("content"));
+        String status = String.valueOf(row.get("status"));
+        String createdAt = String.valueOf(row.get("createdAt"));
+
+        return new CommentResponse(id, articleId, userId, nickname, username, content, status, createdAt);
+    }
 }

@@ -12,14 +12,26 @@ import java.util.Map;
 @Service
 public class UserService {
     private final UserMapper userMapper;
-    public UserService(UserMapper userMapper) { this.userMapper = userMapper; }
+
+    public UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
     public UserProfileResponse getProfile(CurrentUser currentUser) {
         Map<String, Object> profile = userMapper.findProfileById(currentUser.id());
         if (profile == null) {
             throw new BusinessException(404, "用户不存在", HttpStatus.NOT_FOUND);
         }
-        return new UserProfileResponse(currentUser.id(), String.valueOf(profile.get("username")), String.valueOf(profile.get("nickname")),
-                String.valueOf(profile.get("email")), String.valueOf(profile.get("role")), String.valueOf(profile.get("avatar_url")),
-                String.valueOf(profile.get("created_at")), String.valueOf(profile.get("last_login_at")));
+
+        return new UserProfileResponse(
+                currentUser.id(),
+                String.valueOf(profile.get("username")),
+                String.valueOf(profile.get("nickname")),
+                String.valueOf(profile.get("email")),
+                String.valueOf(profile.get("role")),
+                String.valueOf(profile.get("avatarUrl")),
+                String.valueOf(profile.get("createdAt")),
+                String.valueOf(profile.get("lastLoginAt"))
+        );
     }
 }

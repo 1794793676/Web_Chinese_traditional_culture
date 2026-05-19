@@ -1,11 +1,9 @@
 package com.example.backform.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
-@Mapper
 public interface UserMapper {
     Map<String, Object> findByAccount(@Param("account") String account);
     int countByUsername(@Param("username") String username);
