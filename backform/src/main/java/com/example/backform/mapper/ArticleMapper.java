@@ -1,12 +1,10 @@
 package com.example.backform.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-@Mapper
 public interface ArticleMapper {
     List<Map<String, Object>> findFeatured(@Param("limit") int limit);
     long countByCategorySlug(@Param("slug") String slug);

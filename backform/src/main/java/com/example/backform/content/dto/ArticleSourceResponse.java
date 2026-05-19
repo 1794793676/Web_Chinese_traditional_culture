@@ -1,2 +1,10 @@
 package com.example.backform.content.dto;
-public record ArticleSourceResponse(String sourceName,String sourceUrl,String sourceType,String licenseNote){}
+
+public record ArticleSourceResponse(
+        Long id,
+        Long articleId,
+        String sourceTitle,
+        String sourceUrl,
+        String sourceType
+) {
+}

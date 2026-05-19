@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.backform.mapper.ArticleMapper">
-<select id="findFeatured" resultType="map">select a.id,a.slug,a.title,a.summary,a.cover_image as coverUrl,c.name as categoryName,ifnull(v.like_count,0) as likeCount,ifnull(v.comment_count,0) as commentCount,ifnull(v.share_count,0) as shareCount,ifnull(v.view_count,0) as viewCount from articles a join categories c on c.id=a.category_id left join v_article_stats v on v.article_id=a.id where a.status='published' and c.status='published' order by a.published_at desc limit #{limit}</select>
-<select id="countByCategorySlug" resultType="long">select count(*) from articles a join categories c on c.id=a.category_id where a.status='published' and c.status='published' and c.slug=#{slug}</select>
-<select id="findByCategorySlug" resultType="map">select a.id,a.slug,a.title,a.summary,a.published_at as publishedAt from articles a join categories c on c.id=a.category_id where a.status='published' and c.status='published' and c.slug=#{slug} order by a.published_at desc limit #{size} offset #{offset}</select>
-<select id="findDetailBySlug" resultType="map">select a.id,a.slug,a.title,a.summary,a.content,a.cover_image as coverUrl,c.id as categoryId,c.name as categoryName,c.slug as categorySlug,ifnull(v.like_count,0) as likeCount,ifnull(v.comment_count,0) as commentCount,ifnull(v.share_count,0) as shareCount,a.view_count as viewCount from articles a join categories c on c.id=a.category_id left join v_article_stats v on v.article_id=a.id where a.slug=#{slug} and a.status='published' and c.status='published' limit 1</select>
-<select id="findSourcesByArticleId" resultType="map">select source_name as sourceName,source_url as sourceUrl,source_type as sourceType,license_note as licenseNote from article_sources where article_id=#{articleId}</select>
-<update id="incrementViewCount">update articles set view_count=view_count+1 where id=#{articleId}</update>
-<select id="countLikes" resultType="long">select count(*) from article_likes where article_id=#{articleId}</select>
-<select id="countComments" resultType="long">select count(*) from comments where article_id=#{articleId} and status='visible'</select>
-<select id="countShares" resultType="long">select count(*) from article_shares where article_id=#{articleId}</select>
-<select id="currentViewCount" resultType="long">select view_count from articles where id=#{articleId}</select>
+
+    <select id="findFeatured" resultType="map">
+        SELECT
+            a.id,
+            a.slug,
+            a.title,
+            a.summary,
+            a.published_at AS publishedAt,
+            a.cover_image AS coverUrl,
+            c.name AS categoryName,
+            IFNULL(v.like_count, 0) AS likeCount,
+            IFNULL(v.comment_count, 0) AS commentCount,
+            IFNULL(v.share_count, 0) AS shareCount,
+            IFNULL(v.view_count, 0) AS viewCount
+        FROM articles a
+            JOIN categories c ON c.id = a.category_id
+            LEFT JOIN v_article_stats v ON v.article_id = a.id
+        WHERE a.status = 'published'
+          AND c.status = 'published'
+        ORDER BY a.published_at DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="countByCategorySlug" resultType="long">
+        SELECT COUNT(*)
+        FROM articles a
+            JOIN categories c ON c.id = a.category_id
+        WHERE a.status = 'published'
+          AND c.status = 'published'
+          AND c.slug = #{slug}
+    </select>
+
+    <select id="findByCategorySlug" resultType="map">
+        SELECT
+            a.id,
+            a.slug,
+            a.title,
+            a.summary,
+            a.published_at AS publishedAt,
+            a.cover_image AS coverUrl,
+            c.name AS categoryName,
+            IFNULL(v.like_count, 0) AS likeCount,
+            IFNULL(v.comment_count, 0) AS commentCount,
+            IFNULL(v.share_count, 0) AS shareCount,
+            IFNULL(v.view_count, 0) AS viewCount
+        FROM articles a
+            JOIN categories c ON c.id = a.category_id
+            LEFT JOIN v_article_stats v ON v.article_id = a.id
+        WHERE a.status = 'published'
+          AND c.status = 'published'
+          AND c.slug = #{slug}
+        ORDER BY a.published_at DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="findDetailBySlug" resultType="map">
+        SELECT
+            a.id,
+            a.slug,
+            a.title,
+            a.summary,
+            a.content,
+            a.cover_image AS coverUrl,
+            c.id AS categoryId,
+            c.name AS categoryName,
+            c.slug AS categorySlug,
+            IFNULL(v.like_count, 0) AS likeCount,
+            IFNULL(v.comment_count, 0) AS commentCount,
+            IFNULL(v.share_count, 0) AS shareCount,
+            a.view_count AS viewCount
+        FROM articles a
+            JOIN categories c ON c.id = a.category_id
+            LEFT JOIN v_article_stats v ON v.article_id = a.id
+        WHERE a.slug = #{slug}
+          AND a.status = 'published'
+          AND c.status = 'published'
+        LIMIT 1
+    </select>
+
+    <select id="findSourcesByArticleId" resultType="map">
+        SELECT
+            id,
+            article_id AS articleId,
+            source_name AS sourceTitle,
+            source_url AS sourceUrl,
+            source_type AS sourceType
+        FROM article_sources
+        WHERE article_id = #{articleId}
+    </select>
+
+    <update id="incrementViewCount">
+        UPDATE articles
+        SET view_count = view_count + 1
+        WHERE id = #{articleId}
+    </update>
+
+    <select id="countLikes" resultType="long">
+        SELECT COUNT(*)
+        FROM article_likes
+        WHERE article_id = #{articleId}
+    </select>
+
+    <select id="countComments" resultType="long">
+        SELECT COUNT(*)
+        FROM comments
+        WHERE article_id = #{articleId}
+          AND status = 'visible'
+    </select>
+
+    <select id="countShares" resultType="long">
+        SELECT COUNT(*)
+        FROM article_shares
+        WHERE article_id = #{articleId}
+    </select>
+
+    <select id="currentViewCount" resultType="long">
+        SELECT view_count
+        FROM articles
+        WHERE id = #{articleId}
+    </select>
 </mapper>

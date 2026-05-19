@@ -1,12 +1,10 @@
 package com.example.backform.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-@Mapper
 public interface AdminMapper {
     Map<String, Object> dashboardStats();
     List<Map<String, Object>> topArticles(@Param("limit") int limit);

@@ -1,12 +1,10 @@
 package com.example.backform.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
-@Mapper
 public interface CommentMapper {
     long countVisibleByArticleId(@Param("articleId") Long articleId);
     List<Map<String, Object>> findVisibleByArticleId(@Param("articleId") Long articleId, @Param("size") int size, @Param("offset") int offset);

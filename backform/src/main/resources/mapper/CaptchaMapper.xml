@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.backform.mapper.CaptchaMapper">
-  <insert id="insertCaptcha">insert into captcha_codes(captcha_key,captcha_code,purpose,expires_at) values(#{captchaKey},#{captchaCode},#{purpose},date_add(now(), interval #{expireMinutes} minute))</insert>
-  <select id="findValidCaptcha" resultType="map">select * from captcha_codes where captcha_key=#{captchaKey} and purpose=#{purpose} and used=0 and expires_at&gt;now() limit 1</select>
-  <update id="markUsed">update captcha_codes set used=1 where captcha_key=#{captchaKey}</update>
+
+    <insert id="insertCaptcha">
+        INSERT INTO captcha_codes (captcha_key, captcha_code, purpose, expires_at)
+        VALUES (
+            #{captchaKey},
+            #{captchaCode},
+            #{purpose},
+            DATE_ADD(NOW(), INTERVAL #{expireMinutes} MINUTE)
+        )
+    </insert>
+
+    <select id="findValidCaptcha" resultType="map">
+        SELECT
+            id,
+            captcha_key,
+            captcha_code,
+            purpose,
+            used,
+            expires_at,
+            created_at
+        FROM captcha_codes
+        WHERE captcha_key = #{captchaKey}
+          AND purpose = #{purpose}
+          AND used = 0
+          AND expires_at &gt; NOW()
+        LIMIT 1
+    </select>
+
+    <update id="markUsed">
+        UPDATE captcha_codes
+        SET used = 1
+        WHERE captcha_key = #{captchaKey}
+    </update>
 </mapper>
