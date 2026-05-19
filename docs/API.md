@@ -1,58 +1,82 @@
-# API 文档（冻结版）
-统一返回：`{"code":200,"message":"success","data":...}`。
-鉴权头：`Authorization: Bearer <token>`。
+# API 文档
 
-## 认证
-- GET `/api/auth/captcha?purpose=login|register`（免登录）
-- POST `/api/auth/register`（免登录）
-- POST `/api/auth/login`（免登录）
-- POST `/api/auth/logout`（需登录）
-- GET `/api/user/profile`（需登录）
-
-### curl 示例
-```bash
-curl "http://localhost:8080/api/auth/captcha?purpose=login"
-curl -X POST http://localhost:8080/api/auth/register -H "Content-Type: application/json" -d '{"username":"u1","email":"u1@test.com","password":"12345678","confirmPassword":"12345678","nickname":"u1","captchaKey":"xxx","captchaCode":"1234"}'
-curl -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d '{"account":"demo","password":"demo123456","captchaKey":"xxx","captchaCode":"1234"}'
+## 统一响应结构
+```json
+{"code":200,"message":"success","data":{}}
 ```
 
-## 内容
-- GET `/api/categories`（免登录）
-- GET `/api/articles/featured?limit=6`（免登录）
-- GET `/api/articles?category=thought&page=1&size=10`（需登录）
-- GET `/api/articles/{slug}`（需登录）
-- POST `/api/articles/{id}/view`（可免登录）
-- POST `/api/articles/{id}/like`（需登录）
-- DELETE `/api/articles/{id}/like`（需登录）
-- GET `/api/articles/{id}/comments?page=1&size=10`（需登录）
-- POST `/api/articles/{id}/comments`（需登录，默认 visible）
-- POST `/api/articles/{id}/share`（需登录）
+## 错误码与 HTTP 状态
+- 400 参数错误
+- 401 未登录/Token 无效/验证码错误
+- 403 权限不足
+- 404 资源不存在
+- 409 数据冲突
+- 500 服务器错误
 
-### 请求体示例
+## Token
+请求头：`Authorization: Bearer <token>`
+
+## 认证接口
+### GET /api/auth/captcha?purpose=login
+- 权限：免登录
+- 示例响应：
+```json
+{"code":200,"message":"success","data":{"captchaKey":"xxx","captchaImage":"data:image/svg+xml;base64,...","expireAt":"2026-05-19T10:00:00"}}
+```
+
+### POST /api/auth/register
+- 权限：免登录
+- 请求体字段：username,email,password,confirmPassword,nickname,captchaKey,captchaCode
+- 示例请求：
+```json
+{"username":"demo","password":"demo123456","captchaKey":"xxx","captchaCode":"1234","confirmPassword":"demo123456","email":"demo@test.com","nickname":"demo"}
+```
+
+### POST /api/auth/login
+- 权限：免登录
+- 请求体字段：username,password,captchaKey,captchaCode
+
+### POST /api/auth/logout
+- 权限：需登录
+
+### GET /api/user/profile
+- 权限：需登录
+
+## 内容接口
+- GET /api/categories（免登录）
+- GET /api/articles/featured（免登录）
+- GET /api/articles?category=slug&page=1&size=10（需登录）
+- GET /api/articles/{slug}（需登录）
+- POST /api/articles/{id}/view（免登录）
+- POST /api/articles/{id}/like（需登录，幂等）
+- DELETE /api/articles/{id}/like（需登录，幂等）
+- GET /api/articles/{id}/comments（需登录）
+- POST /api/articles/{id}/comments（需登录）
+- POST /api/articles/{id}/share（需登录）
+
+评论请求体：
 ```json
 {"content":"写得很好"}
 ```
+分享请求体：
 ```json
 {"channel":"link"}
 ```
 
-### 错误说明
-- 400 参数错误
-- 401 未登录/验证码错误
-- 403 无权限
-- 404 资源不存在
-- 409 冲突（如重复键）
-- 500 服务器错误
+## 后台接口（均需 admin）
+- GET /api/admin/dashboard
+- GET /api/admin/comments
+- PATCH /api/admin/comments/{id}/status
+- GET /api/admin/interactions
 
-## 后台（均需登录+admin）
-- GET `/api/admin/dashboard`
-- GET `/api/admin/comments?status=&page=1&size=10`
-- PATCH `/api/admin/comments/{id}/status`
-- GET `/api/admin/interactions?period=30d&limit=20`
-
-```bash
-curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/admin/dashboard
-curl -X PATCH http://localhost:8080/api/admin/comments/1/status -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"status":"hidden","adminNote":"违规"}'
+PATCH 请求体：
+```json
+{"status":"hidden","adminNote":"违规"}
 ```
 
-> 默认测试账号：`admin/admin123456`、`demo/demo123456`。
+## curl 示例
+```bash
+curl "http://localhost:8080/api/auth/captcha?purpose=login"
+curl -X POST "http://localhost:8080/api/auth/register" -H "Content-Type: application/json" -d '{"username":"u1","email":"u1@test.com","password":"12345678","confirmPassword":"12345678","nickname":"u1","captchaKey":"xxx","captchaCode":"1234"}'
+curl -X POST "http://localhost:8080/api/auth/login" -H "Content-Type: application/json" -d '{"username":"demo","password":"demo123456","captchaKey":"xxx","captchaCode":"1234"}'
+```

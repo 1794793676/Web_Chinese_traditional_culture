@@ -1,23 +1,54 @@
 package com.example.backform.content;
+
 import com.example.backform.auth.CurrentUser;
-import com.example.backform.common.*;
-import com.example.backform.mapper.*;
+import com.example.backform.common.ApiResponse;
+import com.example.backform.common.PageResponse;
+import com.example.backform.content.dto.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class ContentController {
- private final CategoryMapper categoryMapper; private final ArticleMapper articleMapper; private final LikeMapper likeMapper; private final CommentMapper commentMapper; private final ShareMapper shareMapper; private final ViewMapper viewMapper;
- public ContentController(CategoryMapper categoryMapper, ArticleMapper articleMapper, LikeMapper likeMapper, CommentMapper commentMapper, ShareMapper shareMapper, ViewMapper viewMapper){this.categoryMapper=categoryMapper;this.articleMapper=articleMapper;this.likeMapper=likeMapper;this.commentMapper=commentMapper;this.shareMapper=shareMapper;this.viewMapper=viewMapper;}
- @GetMapping("/categories") public ApiResponse<List<Map<String,Object>>> categories(){ return ApiResponse.ok(categoryMapper.findPublishedCategories()); }
- @GetMapping("/articles/featured") public ApiResponse<List<Map<String,Object>>> featured(@RequestParam(defaultValue="6") int limit){ return ApiResponse.ok(articleMapper.findFeatured(limit)); }
- @GetMapping("/articles") public ApiResponse<PageResponse<Map<String,Object>>> list(@RequestParam String category,@RequestParam(defaultValue="1") int page,@RequestParam(defaultValue="10") int size){ int off=(page-1)*size; Long total=articleMapper.countByCategorySlug(category); var items=articleMapper.findByCategorySlug(category,size,off); return ApiResponse.ok(new PageResponse<>(items,page,size,total)); }
- @GetMapping("/articles/{slug}") public ApiResponse<Map<String,Object>> detail(@PathVariable String slug,HttpServletRequest req){ var row=articleMapper.findDetailBySlug(slug); if(row==null) throw new BusinessException(404,"文章不存在"); Long articleId=((Number)row.get("id")).longValue(); CurrentUser u=(CurrentUser)req.getAttribute("currentUser"); boolean liked=u!=null&&likeMapper.existsLike(articleId,u.id())>0; row.put("sources",articleMapper.findSourcesByArticleId(articleId)); row.put("category",Map.of("id",row.get("categoryId"),"name",row.get("categoryName"),"slug",row.get("categorySlug"))); row.put("likedByCurrentUser",liked); return ApiResponse.ok(row); }
- @PostMapping("/articles/{id}/view") public ApiResponse<Map<String,Object>> view(@PathVariable Long id,HttpServletRequest req){ CurrentUser u=(CurrentUser)req.getAttribute("currentUser"); viewMapper.insertView(id,u==null?null:u.id(),req.getRequestURI(),req.getRemoteAddr(),req.getHeader("User-Agent")); articleMapper.incrementViewCount(id); return ApiResponse.ok(Map.of("articleId",id,"viewCount",articleMapper.currentViewCount(id))); }
- @PostMapping("/articles/{id}/like") public ApiResponse<Map<String,Object>> like(@PathVariable Long id,HttpServletRequest req){ CurrentUser u=(CurrentUser)req.getAttribute("currentUser"); if(likeMapper.existsLike(id,u.id())==0) likeMapper.insertLike(id,u.id()); return ApiResponse.ok(Map.of("articleId",id,"likeCount",articleMapper.countLikes(id),"likedByCurrentUser",true)); }
- @DeleteMapping("/articles/{id}/like") public ApiResponse<Map<String,Object>> unlike(@PathVariable Long id,HttpServletRequest req){ CurrentUser u=(CurrentUser)req.getAttribute("currentUser"); likeMapper.deleteLike(id,u.id()); return ApiResponse.ok(Map.of("articleId",id,"likeCount",articleMapper.countLikes(id),"likedByCurrentUser",false)); }
- @GetMapping("/articles/{id}/comments") public ApiResponse<PageResponse<Map<String,Object>>> comments(@PathVariable Long id,@RequestParam(defaultValue="1") int page,@RequestParam(defaultValue="10") int size){ int off=(page-1)*size; long total=commentMapper.countVisibleByArticleId(id); var items=commentMapper.findVisibleByArticleId(id,size,off); return ApiResponse.ok(new PageResponse<>(items,page,size,total)); }
- @PostMapping("/articles/{id}/comments") public ApiResponse<Map<String,Object>> addComment(@PathVariable Long id,@RequestBody Map<String,String> req,HttpServletRequest http){ String content=req.getOrDefault("content","").trim(); if(content.isEmpty()) throw new BusinessException(400,"评论内容不能为空"); CurrentUser u=(CurrentUser)http.getAttribute("currentUser"); commentMapper.insertComment(id,u.id(),content,"visible"); return ApiResponse.ok(Map.of("articleId",id,"commentCount",articleMapper.countComments(id),"latest",commentMapper.findVisibleByArticleId(id,1,0))); }
- @PostMapping("/articles/{id}/share") public ApiResponse<Map<String,Object>> share(@PathVariable Long id,@RequestBody Map<String,String> req,HttpServletRequest http){ String ch=req.getOrDefault("channel","link"); if(!Set.of("link","wechat","qq","weibo","other").contains(ch)) throw new BusinessException(400,"非法分享渠道"); CurrentUser u=(CurrentUser)http.getAttribute("currentUser"); shareMapper.insertShare(id,u.id(),ch); return ApiResponse.ok(Map.of("articleId",id,"shareCount",articleMapper.countShares(id))); }
+    private final CategoryService categoryService;
+    private final ArticleService articleService;
+    private final InteractionService interactionService;
+    public ContentController(CategoryService categoryService, ArticleService articleService, InteractionService interactionService) {
+        this.categoryService = categoryService;
+        this.articleService = articleService;
+        this.interactionService = interactionService;
+    }
+    @GetMapping("/categories")
+    public ApiResponse<List<CategoryResponse>> categories() { return ApiResponse.ok(categoryService.listPublishedCategories()); }
+    @GetMapping("/articles/featured")
+    public ApiResponse<List<ArticleCardResponse>> featured(@RequestParam(defaultValue = "6") int limit) { return ApiResponse.ok(articleService.featured(limit)); }
+    @GetMapping("/articles")
+    public ApiResponse<PageResponse<ArticleCardResponse>> list(@RequestParam String category, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+        int offset = (page - 1) * size;
+        return ApiResponse.ok(new PageResponse<>(articleService.listByCategory(category, size, offset), page, size, articleService.countByCategory(category)));
+    }
+    @GetMapping("/articles/{slug}")
+    public ApiResponse<ArticleDetailResponse> detail(@PathVariable String slug, HttpServletRequest request) { return ApiResponse.ok(articleService.detail(slug, (CurrentUser) request.getAttribute("currentUser"))); }
+    @PostMapping("/articles/{id}/view")
+    public ApiResponse<InteractionCountResponse> view(@PathVariable Long id, HttpServletRequest request) { return ApiResponse.ok(articleService.addView(id, (CurrentUser) request.getAttribute("currentUser"), request)); }
+    @PostMapping("/articles/{id}/like")
+    public ApiResponse<InteractionCountResponse> like(@PathVariable Long id, HttpServletRequest request) { return ApiResponse.ok(interactionService.like(id, (CurrentUser) request.getAttribute("currentUser"))); }
+    @DeleteMapping("/articles/{id}/like")
+    public ApiResponse<InteractionCountResponse> unlike(@PathVariable Long id, HttpServletRequest request) { return ApiResponse.ok(interactionService.unlike(id, (CurrentUser) request.getAttribute("currentUser"))); }
+    @GetMapping("/articles/{id}/comments")
+    public ApiResponse<PageResponse<CommentResponse>> comments(@PathVariable Long id, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+        int offset = (page - 1) * size;
+        return ApiResponse.ok(new PageResponse<>(interactionService.listComments(id, size, offset), page, size, interactionService.countComments(id)));
+    }
+    @PostMapping("/articles/{id}/comments")
+    public ApiResponse<InteractionCountResponse> addComment(@PathVariable Long id, @Valid @RequestBody CommentCreateRequest request, HttpServletRequest httpRequest) {
+        return ApiResponse.ok(interactionService.createComment(id, (CurrentUser) httpRequest.getAttribute("currentUser"), request));
+    }
+    @PostMapping("/articles/{id}/share")
+    public ApiResponse<InteractionCountResponse> share(@PathVariable Long id, @Valid @RequestBody ShareCreateRequest request, HttpServletRequest httpRequest) {
+        return ApiResponse.ok(interactionService.share(id, (CurrentUser) httpRequest.getAttribute("currentUser"), request));
+    }
 }
