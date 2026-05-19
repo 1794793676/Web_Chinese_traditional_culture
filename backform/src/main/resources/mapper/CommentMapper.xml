@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backform.mapper.CommentMapper">
+<select id="countVisibleByArticleId" resultType="long">select count(*) from comments where article_id=#{articleId} and status='visible'</select>
+<select id="findVisibleByArticleId" resultType="map">select c.id,c.article_id as articleId,c.user_id as userId,u.nickname,u.username,c.content,c.status,c.created_at as createdAt from comments c join users u on u.id=c.user_id where c.article_id=#{articleId} and c.status='visible' order by c.created_at desc limit #{size} offset #{offset}</select>
+<insert id="insertComment">insert into comments(article_id,user_id,content,status) values(#{articleId},#{userId},#{content},#{status})</insert>
+<select id="findById" resultType="map">select c.id,c.article_id as articleId,c.user_id as userId,u.nickname,u.username,c.content,c.status,c.admin_note as adminNote,c.created_at as createdAt from comments c join users u on u.id=c.user_id where c.id=#{id}</select>
+<select id="countAdminComments" resultType="long">select count(*) from comments <where><if test="status!=null and status!=''">status=#{status}</if></where></select>
+<select id="findAdminComments" resultType="map">select c.id,c.article_id as articleId,a.title as articleTitle,c.user_id as userId,coalesce(u.nickname,u.username) as userNickname,c.content,c.status,c.admin_note as adminNote,c.created_at as createdAt from comments c join articles a on a.id=c.article_id join users u on u.id=c.user_id <where><if test="status!=null and status!=''">c.status=#{status}</if></where> order by c.created_at desc limit #{size} offset #{offset}</select>
+<update id="updateStatus">update comments set status=#{status},admin_note=#{adminNote},updated_at=now() where id=#{id}</update>
+</mapper>

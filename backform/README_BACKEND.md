@@ -1,59 +1,42 @@
-# README_BACKEND
+# Backform 后端说明
 
 ## 技术栈
-Spring Boot 3.5.14, Java 17, Gradle, MySQL 8, JdbcTemplate, Bean Validation, BCrypt。
+- Spring Boot 3
+- MyBatis（XML Mapper）
+- MySQL 8
+- BCrypt
 
-## 数据库脚本顺序
+## 数据库初始化顺序
 1. db/db/01_create_database.sql
 2. db/db/02_schema.sql
 3. db/db/03_seed.sql
 4. db/db/04_views.sql
 5. db/db/05_queries.sql
+6. db/db/06_mybatis_adjustments.sql
 
-## MySQL 配置
-修改 `backform/src/main/resources/application.properties` 中的 `spring.datasource.*`。
-
-推荐使用环境变量覆盖（避免把密码写入仓库）：
-- `DB_USERNAME`（默认 `root`）
-- `DB_PASSWORD`（默认空）
-
-例如（Windows PowerShell）：
-```powershell
-$env:DB_USERNAME="root"
-$env:DB_PASSWORD="你的MySQL密码"
-```
+## 环境变量
+- DB_USERNAME
+- DB_PASSWORD
 
 ## 启动
-```bash
-cd backform
-./gradlew bootRun
-```
-Windows:
-```bat
-cd backform
-gradlew.bat bootRun
-```
+- Windows: `gradlew.bat bootRun`
+- Linux/macOS: `./gradlew bootRun`
 
-## 演示账号
-管理员：admin / admin123456
-普通用户：demo / demo123456
+## 默认测试账号
+- admin / admin123456
+- demo / demo123456
 
-## 主要接口
-- /api/auth/captcha
-- /api/auth/register
-- /api/auth/login
-- /api/auth/logout
-- /api/user/profile
-- /api/categories
-- /api/articles/featured
-- /api/articles
-- /api/admin/dashboard
+## API 文档
+- `docs/API.md`
 
 ## curl 示例
 ```bash
 curl "http://localhost:8080/api/auth/captcha?purpose=login"
-
-curl -X POST "http://localhost:8080/api/auth/login" \
-  -H "Content-Type: application/json" \
-  -d '{"account":"demo","password":"demo123456","captchaKey":"替换为验证码key","captchaCode":"替换为验证码"}'
 ```
+
+## 常见问题
+- MySQL 密码错误：检查 DB_USERNAME/DB_PASSWORD。
+- 端口占用：修改 `server.port`。
+- CORS：确保前端开发地址为 `http://localhost:5173`。
+- 验证码错误：先请求新验证码再登录。
+- 401/403：检查 token 或管理员角色。

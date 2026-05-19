@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backform.mapper.UserMapper">
+  <select id="findByAccount" resultType="map">
+    select * from users where username=#{account} or email=#{account} limit 1
+  </select>
+  <select id="countByUsername" resultType="int">select count(*) from users where username=#{username}</select>
+  <select id="countByEmail" resultType="int">select count(*) from users where email=#{email}</select>
+  <insert id="insertUser">insert into users(username,email,password_hash,nickname,role,status) values(#{username},#{email},#{passwordHash},#{nickname},'user','active')</insert>
+  <select id="findCurrentUserById" resultType="com.example.backform.auth.CurrentUser">select id,username,nickname,email,role,avatar_url from users where id=#{id}</select>
+  <update id="updateLastLogin">update users set last_login_at=now() where id=#{id}</update>
+</mapper>
