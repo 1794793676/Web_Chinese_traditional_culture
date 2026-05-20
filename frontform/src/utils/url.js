@@ -1,10 +1,34 @@
 const API_ORIGIN = import.meta.env.VITE_API_ORIGIN || 'http://localhost:8080'
 
+const normalizeApiAssetToFrontendAsset = (url) => {
+  if (!/^https?:\/\//i.test(url)) return url
+  try {
+    const parsed = new URL(url)
+    const apiOrigin = new URL(API_ORIGIN)
+    if (parsed.origin === apiOrigin.origin && parsed.pathname.startsWith('/assets/')) {
+      return `${parsed.pathname}${parsed.search}${parsed.hash}`
+    }
+  } catch {
+    return url
+  }
+  return url
+}
+
 export const resolveMediaUrl = (url) => {
   if (!url) return ''
-  if (/^https?:\/\//i.test(url) || url.startsWith('data:') || url.startsWith('blob:')) return url
-  if (url.startsWith('/api/')) return url
-  if (url.startsWith('/assets/')) return url
-  if (url.startsWith('/')) return `${API_ORIGIN}${url}`
-  return `${API_ORIGIN}/${url}`
+
+  const normalizedUrl = normalizeApiAssetToFrontendAsset(url)
+
+  if (
+    /^https?:\/\//i.test(normalizedUrl) ||
+    normalizedUrl.startsWith('data:') ||
+    normalizedUrl.startsWith('blob:')
+  ) {
+    return normalizedUrl
+  }
+
+  if (normalizedUrl.startsWith('/api/')) return normalizedUrl
+  if (normalizedUrl.startsWith('/assets/')) return normalizedUrl
+  if (normalizedUrl.startsWith('/')) return `${API_ORIGIN}${normalizedUrl}`
+  return `${API_ORIGIN}/${normalizedUrl}`
 }
