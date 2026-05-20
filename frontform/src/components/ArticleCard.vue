@@ -1,8 +1,8 @@
 <template>
   <article class="card article-card" @click="openArticle">
     <div v-if="article.coverUrl" class="article-card__image">
-      <img v-if="!coverFailed" :src="article.coverUrl" :alt="article.title" @error="coverFailed = true" />
-      <div v-else class="image-fallback">华夏文脉</div>
+      <img :src="article.coverUrl" :alt="article.title" :style="{ display: coverFailed ? 'none' : 'block' }" @error="coverFailed = true" />
+      <div v-if="coverFailed" class="image-fallback">华夏文脉</div>
     </div>
     <div class="article-card__body">
       <span class="tag">{{ article.categoryName || '传统文化' }}</span>
