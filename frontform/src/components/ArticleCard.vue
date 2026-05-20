@@ -1,0 +1,2 @@
+<template><article class="card" @click="$router.push(`/article/${article.slug}`)"><img v-if="article.coverUrl" :src="article.coverUrl" class="card-cover"/><h3>{{article.title}}</h3><p>{{article.summary}}</p><p>{{article.categoryName}}</p><small>浏览{{article.viewCount||0}} 点赞{{article.likeCount||0}} 评论{{article.commentCount||0}} 转发{{article.shareCount||0}}</small></article></template>
+<script setup>defineProps({article:{type:Object,required:true}})</script>
