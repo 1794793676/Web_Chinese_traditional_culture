@@ -58,3 +58,18 @@ Vite 已配置 `/api -> http://localhost:8080`。
 - 验证码不显示：检查后端 captcha 接口与图片字段。
 - 后端未启动：前端会报网络错误。
 - CORS/proxy：确认 `vite.config.js` 代理与后端跨域配置。
+
+
+## 15. 图片资源加载说明
+- 课程展示图片统一放在 `frontform/public/assets/images/`，前端直接通过 `/assets/images/...` 访问。
+- `src/utils/url.js` 会对 `/assets/` 路径原样返回，不再拼接后端地址。
+- 首页与登录页背景图使用本地 SVG：`hero-heritage.svg`、`auth-heritage.svg`，不依赖外链。
+
+## 16. 已初始化数据库的修复步骤
+如果数据库已经执行过旧版本 seed（包含 `.jpg/.png` 路径），请额外执行：
+
+```bash
+mysql -u <user> -p heritage_culture_site < db/db/06_fix_image_paths.sql
+```
+
+该脚本仅更新图片路径，不会修改用户、文章正文、评论、点赞、转发等业务数据。
