@@ -4,11 +4,11 @@
 
     <select id="dashboardStats" resultType="map">
         SELECT
-            (SELECT COUNT(*) FROM users) AS totalUsers,
-            (SELECT COUNT(*) FROM articles) AS totalArticles,
-            (SELECT COUNT(*) FROM article_likes) AS totalLikes,
-            (SELECT COUNT(*) FROM comments) AS totalComments,
-            (SELECT COUNT(*) FROM article_shares) AS totalShares
+            (SELECT COALESCE(COUNT(*), 0) FROM users) AS totalUsers,
+            (SELECT COALESCE(COUNT(*), 0) FROM articles) AS totalArticles,
+            (SELECT COALESCE(COUNT(*), 0) FROM article_likes) AS totalLikes,
+            (SELECT COALESCE(COUNT(*), 0) FROM comments) AS totalComments,
+            (SELECT COALESCE(COUNT(*), 0) FROM article_shares) AS totalShares
     </select>
 
     <select id="topArticles" resultType="map">
@@ -28,21 +28,24 @@
 
     <select id="latestComments" resultType="map">
         SELECT
-            id,
-            article_id AS articleId,
-            article_title AS articleTitle,
-            user_id AS userId,
-            user_nickname AS userNickname,
-            content,
-            status,
-            admin_note AS adminNote,
-            created_at AS createdAt
-        FROM v_latest_comments
+            cm.id AS id,
+            cm.article_id AS articleId,
+            a.title AS articleTitle,
+            cm.user_id AS userId,
+            COALESCE(u.nickname, u.username, '匿名用户') AS userNickname,
+            cm.content AS content,
+            cm.status AS status,
+            COALESCE(cm.admin_note, '') AS adminNote,
+            cm.created_at AS createdAt
+        FROM comments cm
+        LEFT JOIN articles a ON a.id = cm.article_id
+        LEFT JOIN users u ON u.id = cm.user_id
+        ORDER BY cm.created_at DESC
         LIMIT #{limit}
     </select>
 
     <select id="totalViews" resultType="long">
-        SELECT COUNT(*)
+        SELECT COALESCE(COUNT(*), 0)
         FROM page_views
     </select>
 
