@@ -195,3 +195,12 @@
     padding: 28px;
   }
 }
+
+@media (max-width: 900px){
+  .auth-card{grid-template-columns:1fr!important}
+  .content-layout{grid-template-columns:1fr!important}
+}
+@media (max-width: 768px){
+  .table-wrap{overflow-x:auto}
+  .site-header__inner{flex-wrap:wrap;gap:10px}
+}

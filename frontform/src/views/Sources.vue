@@ -1,1 +1,27 @@
-<template><section class="container"><h2>素材来源说明</h2><p>本页需登录后访问。图片与文字来源以文章详情页 sources 字段为准，请在引用时标注来源链接与出处。</p><button @click="$router.push('/')">返回首页</button></section></template>
+<template>
+  <section class="page-hero">
+    <div class="container">
+      <h1>素材来源说明</h1>
+      <p>本页登录后可访问，用于集中说明素材来源和引用规范。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card">
+        <h3>文字来源说明</h3>
+        <p>文章正文与摘要以课程数据源为准，引用时请标注来源。</p>
+        <h3>图片来源说明</h3>
+        <p>文章封面及配图来源详见对应文章详情页的 sources 字段。</p>
+        <h3>图标/字体来源说明</h3>
+        <p>页面图标与字体资源用于课程教学展示，不用于商业传播。</p>
+        <h3>sources 字段说明</h3>
+        <p>详情页 sources 提供 sourceTitle/sourceUrl/sourceType，作为最终引用依据。</p>
+      </div>
+      <div class="page-actions">
+        <router-link class="btn btn--outline" to="/">返回首页</router-link>
+        <button class="btn btn--primary" type="button" @click="$router.back()">返回上一页</button>
+      </div>
+    </div>
+  </section>
+</template>

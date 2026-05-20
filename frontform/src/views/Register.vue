@@ -1,7 +1,70 @@
-<template><section class="container"><h2>用户注册</h2><form @submit.prevent="submit"><input v-model="form.username" placeholder="用户名"/><input v-model="form.email" placeholder="邮箱"/><input v-model="form.nickname" placeholder="昵称"/><input type="password" v-model="form.password" placeholder="密码"/><input type="password" v-model="form.confirmPassword" placeholder="确认密码"/><input v-model="form.captchaCode" placeholder="验证码"/><CaptchaBox ref="capRef" purpose="register" @update:key="form.captchaKey=$event" @refreshed="form.captchaCode=''"/><button>注册</button></form><p v-if="msg" :class="ok?'form-success':'form-error'">{{msg}}</p></section></template>
+<template>
+  <section class="auth-page">
+    <div class="auth-card">
+      <aside class="auth-aside">
+        <h1>注册展馆账号</h1>
+        <p>创建账号后可访问文化专题、文章详情与素材来源页。</p>
+      </aside>
+      <div class="auth-main">
+        <h2>用户注册</h2>
+        <form class="form" @submit.prevent="submit">
+          <div class="field"><label>用户名</label><input v-model="form.username" /></div>
+          <div class="field"><label>邮箱</label><input v-model="form.email" /></div>
+          <div class="field"><label>昵称</label><input v-model="form.nickname" /></div>
+          <div class="field"><label>密码</label><input v-model="form.password" type="password" /></div>
+          <div class="field"><label>确认密码</label><input v-model="form.confirmPassword" type="password" /></div>
+          <div class="field">
+            <label>验证码</label>
+            <input v-model="form.captchaCode" />
+            <CaptchaBox ref="captchaRef" purpose="register" @update:key="form.captchaKey = $event" @refreshed="form.captchaCode = ''" />
+          </div>
+          <div class="form-actions">
+            <button class="btn btn--primary" type="submit">注册</button>
+            <router-link class="btn btn--outline" to="/login">已有账号？去登录</router-link>
+          </div>
+        </form>
+        <p v-if="message" :class="ok ? 'form-success' : 'form-error'">{{ message }}</p>
+      </div>
+    </div>
+  </section>
+</template>
+
 <script setup>
-import { reactive, ref } from 'vue'; import { useRouter } from 'vue-router'; import { register } from '../api/auth'; import CaptchaBox from '../components/CaptchaBox.vue'
-const router=useRouter(); const capRef=ref(); const msg=ref(''); const ok=ref(false)
-const form=reactive({username:'',email:'',nickname:'',password:'',confirmPassword:'',captchaCode:'',captchaKey:''})
-const submit=async()=>{ok.value=false; if(form.password!==form.confirmPassword){msg.value='两次密码不一致'; return} try{await register(form); ok.value=true; msg.value='注册成功，即将跳转登录'; setTimeout(()=>router.push('/login'),800)}catch(e){msg.value=e.message; capRef.value?.refresh()}}
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { register } from '../api/auth'
+import CaptchaBox from '../components/CaptchaBox.vue'
+
+const router = useRouter()
+const captchaRef = ref(null)
+const ok = ref(false)
+const message = ref('')
+
+const form = reactive({
+  username: '',
+  email: '',
+  nickname: '',
+  password: '',
+  confirmPassword: '',
+  captchaCode: '',
+  captchaKey: ''
+})
+
+const submit = async () => {
+  ok.value = false
+  message.value = ''
+  if (form.password !== form.confirmPassword) {
+    message.value = '两次密码不一致'
+    return
+  }
+  try {
+    await register(form)
+    ok.value = true
+    message.value = '注册成功，正在跳转登录页...'
+    setTimeout(() => router.push('/login'), 800)
+  } catch (err) {
+    message.value = err.message
+    captchaRef.value?.refresh()
+  }
+}
 </script>
