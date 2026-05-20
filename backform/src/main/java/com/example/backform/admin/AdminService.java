@@ -12,6 +12,7 @@ import com.example.backform.mapper.CommentMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,20 +28,31 @@ public class AdminService {
 
     public DashboardResponse dashboard() {
         Map<String, Object> stats = adminMapper.dashboardStats();
+        if (stats == null) {
+            stats = Collections.emptyMap();
+        }
         long totalUsers = toLong(stats.get("totalUsers"));
         long totalArticles = toLong(stats.get("totalArticles"));
         long totalLikes = toLong(stats.get("totalLikes"));
         long totalComments = toLong(stats.get("totalComments"));
         long totalShares = toLong(stats.get("totalShares"));
 
-        List<InteractionRankingResponse> popularArticles = adminMapper
-                .topArticles(10)
+        List<Map<String, Object>> topArticleRows = adminMapper.topArticles(10);
+        if (topArticleRows == null) {
+            topArticleRows = Collections.emptyList();
+        }
+
+        List<InteractionRankingResponse> popularArticles = topArticleRows
                 .stream()
                 .map(this::toRank)
                 .toList();
 
-        List<AdminCommentResponse> latestComments = adminMapper
-                .latestComments(10)
+        List<Map<String, Object>> latestCommentRows = adminMapper.latestComments(10);
+        if (latestCommentRows == null) {
+            latestCommentRows = Collections.emptyList();
+        }
+
+        List<AdminCommentResponse> latestComments = latestCommentRows
                 .stream()
                 .map(this::toAdminComment)
                 .toList();
