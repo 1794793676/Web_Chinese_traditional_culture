@@ -14,7 +14,8 @@
         <div v-else-if="error" class="error">{{ error }}</div>
         <template v-else>
           <div v-if="article.coverUrl" class="cover-frame">
-            <img :src="article.coverUrl" :alt="article.title" />
+            <img :src="article.coverUrl" :alt="article.title" :style="{ display: coverFailed ? 'none' : 'block' }" @error="coverFailed = true" />
+            <div v-if="coverFailed" class="detail-cover-fallback">{{ article.title || "华夏文脉" }}</div>
           </div>
           <div class="article-content" v-html="article.content"></div>
 
@@ -81,10 +82,12 @@ const error = ref('')
 const message = ref('')
 const comment = ref('')
 const article = ref({})
+const coverFailed = ref(false)
 const commentListRef = ref(null)
 
 const refreshDetail = async () => {
   article.value = await getArticleDetail(slug.value)
+  coverFailed.value = false
 }
 
 const loadDetail = async () => {

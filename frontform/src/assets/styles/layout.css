@@ -95,7 +95,7 @@
   opacity: 0.22;
   background:
     linear-gradient(90deg, rgba(246, 240, 229, 0.25), rgba(246, 240, 229, 0.7)),
-    url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjrPsnZRioM96Sp-L-fYk_HfJoRt-3UTFgmYewZOUtqDidbRWKRmzEhEIWsSaePyD-fdCI42qxYHXh3h7f2AA2Zl7Ntosqr-v3Bnzs0Z9GwRjpqKbxbzarSSjrpZY9gP5sCNfzKYR6A1z_oan-2eLUWU9QvTG_J7ZdMLhpIIszpOUEKlxX-xIoa_UjZD5gvFB2Wf4clQRZYOd-OhXHf-Q3GiUqN5_YXDwj9opKaDCKP2-ClNGneD60iW5M7rY1mkOZgf-lWtwczw") center / cover;
+    url("/assets/images/hero-heritage.svg") center / cover;
 }
 
 .hero__content {
@@ -219,7 +219,7 @@
   border-right: 1px solid var(--color-border);
   background:
     linear-gradient(180deg, rgba(246, 240, 229, 0.2), rgba(246, 240, 229, 0.95)),
-    url("https://lh3.googleusercontent.com/aida-public/AB6AXuADCuvBMXdhLfOoipR7ZEoDPfy2rwpnT8VLemFD29O2JTe_YH-EAGsf1XYby9fCUodogx8f-g0ZWn8tRV18q6xVMA-ISJnatSgagLRK1yewKJf038_YwyCS2IkpO4MEwdyrUpEtWw07A4Id1TiWukZ6s_v7HdJnx4qjyTz94IGZE32e2HT4WLbwy5rGVgo5W-9RHuzb4BqGyFEjF1te3tiBtvYLxWIrgeIIs-TzGtnrk_1632nVOSIrf7WGzaQ3a3FcmjeGusaqYw") center / cover;
+    url("/assets/images/auth-heritage.svg") center / cover;
   background-blend-mode: normal, multiply;
 }
 
