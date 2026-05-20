@@ -1,0 +1,11 @@
+import request from './request'
+export const getCategories=()=>request.get('/categories')
+export const getFeaturedArticles=(limit=6)=>request.get('/articles/featured',{params:{limit}})
+export const getArticlesByCategory=(category,page=1,size=10)=>request.get('/articles',{params:{category,page,size}})
+export const getArticleDetail=(slug)=>request.get(`/articles/${slug}`)
+export const recordView=(id)=>request.post(`/articles/${id}/view`)
+export const likeArticle=(id)=>request.post(`/articles/${id}/like`)
+export const unlikeArticle=(id)=>request.delete(`/articles/${id}/like`)
+export const getComments=(id,page=1,size=10)=>request.get(`/articles/${id}/comments`,{params:{page,size}})
+export const createComment=(id,content)=>request.post(`/articles/${id}/comments`,{content})
+export const shareArticle=(id,channel)=>request.post(`/articles/${id}/share`,{channel})
