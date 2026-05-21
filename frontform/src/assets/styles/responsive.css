@@ -204,3 +204,5 @@
   .table-wrap{overflow-x:auto}
   .site-header__inner{flex-wrap:wrap;gap:10px}
 }
+@media (max-width: 1024px){.field--captcha .captcha-row{grid-template-columns:1fr}.auth-main{padding:32px}}
+@media (max-width: 760px){.auth-main{padding:28px}.auth-aside{min-height:220px}.content-layout{grid-template-columns:1fr!important}.sidebar{order:2}.article-detail{order:1}}

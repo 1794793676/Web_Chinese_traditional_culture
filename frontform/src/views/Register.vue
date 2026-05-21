@@ -1,5 +1,5 @@
 <template>
-  <section class="auth-page">
+  <section class="auth-page auth-page--register" :style="{ '--auth-aside-bg': `url(${registerAsideImage})` }">
     <div class="auth-card">
       <aside class="auth-aside">
         <h1>注册展馆账号</h1>
@@ -53,6 +53,7 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { register } from '../api/auth'
 import CaptchaBox from '../components/CaptchaBox.vue'
+import { registerAsideImage } from '../utils/pictureMap'
 
 const router = useRouter()
 const captchaRef = ref(null)

@@ -1,5 +1,5 @@
 <template>
-  <section class="page-hero">
+  <section class="page-hero category-hero" :style="heroStyle">
     <div class="container">
       <span class="tag">文化专题</span>
       <h1>{{ categoryTitle }}</h1>
@@ -44,6 +44,7 @@ import { getArticlesByCategory, getCategories } from '../api/article'
 import ArticleCard from '../components/ArticleCard.vue'
 import { getCategoryName, normalizeCategorySlug } from '../constants/category'
 import { normalizeList } from '../utils/format'
+import { getCategoryHeroImage } from '../utils/pictureMap'
 
 const route = useRoute()
 const router = useRouter()
@@ -60,9 +61,8 @@ const categories = ref([])
 
 const categoryInfo = computed(() => categories.value.find((c) => c.slug === normalizedSlug.value) || {})
 const categoryTitle = computed(() => categoryInfo.value.name || getCategoryName(normalizedSlug.value))
-const categoryDescription = computed(
-  () => categoryInfo.value.description || `${categoryTitle.value}专题文章 / 文化解读 / 登录后可互动`
-)
+const categoryDescription = computed(() => categoryInfo.value.description || `${categoryTitle.value}专题文章 / 文化解读 / 登录后可互动`)
+const heroStyle = computed(() => ({ '--page-hero-bg': `url(${getCategoryHeroImage(normalizedSlug.value)})` }))
 
 const loadList = async () => {
   loading.value = true
