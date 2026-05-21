@@ -51,12 +51,15 @@
     </section>
   </AdminLayout>
 </template>
+
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import AdminLayout from '../../components/AdminLayout.vue'
 import { getDashboard } from '../../api/admin'
 import { dashboardHeroImage } from '../../utils/pictureMap'
 
+const loading = ref(false)
+const error = ref('')
 const data = ref({})
 const loading = ref(false)
 const error = ref('')
