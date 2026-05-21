@@ -1,6 +1,7 @@
 <template>
   <section class="page-hero">
     <div class="container">
+      <p class="muted">首页 / {{ article.categoryName || '文化专题' }} / {{ article.title || '文章详情' }}</p>
       <p><span class="tag">{{ article.categoryName || '传统文化' }}</span></p>
       <h1>{{ article.title }}</h1>
       <p>{{ article.summary }}</p>
@@ -9,28 +10,37 @@
 
   <section class="section section--soft">
     <div class="container content-layout">
-      <div class="article-detail card">
+      <div class="article-detail card article-body">
         <div v-if="loading" class="loading">加载中...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <template v-else>
-          <div v-if="article.coverUrl" class="cover-frame">
-            <img :src="article.coverUrl" :alt="article.title" :style="{ display: coverFailed ? 'none' : 'block' }" @error="coverFailed = true" />
-            <div v-if="coverFailed" class="detail-cover-fallback">{{ article.title || "华夏文脉" }}</div>
+          <div class="cover-frame">
+            <img v-if="!coverFailed" :src="displayCover" :alt="article.title" @error="coverFailed = true" />
+            <div v-else class="detail-cover-fallback">华夏文脉</div>
           </div>
-          <div class="article-content" v-html="article.content"></div>
+
+          <div v-if="isHtml" class="article-content" v-html="article.content" />
+          <div v-else class="article-content">
+            <p v-for="(line, idx) in paragraphLines" :key="idx">{{ line }}</p>
+          </div>
 
           <h3>素材来源</h3>
-          <ul class="source-list">
-            <li v-for="source in article.sources || []" :key="source.id">
-              <a :href="source.sourceUrl" target="_blank" rel="noreferrer">{{ source.sourceTitle }}</a>
+          <ul v-if="article.sources?.length" class="source-list">
+            <li v-for="source in article.sources" :key="source.id">
+              <template v-if="source.sourceUrl && source.sourceUrl !== '#'">
+                <a :href="source.sourceUrl" target="_blank" rel="noreferrer">{{ source.sourceTitle }}</a>
+              </template>
+              <template v-else>{{ source.sourceTitle }}</template>
+              <span class="muted">（{{ source.sourceType || '未标注类型' }}）</span>
             </li>
           </ul>
+          <p v-else class="empty">暂无来源信息</p>
 
           <h3>发表评论</h3>
           <form class="form" @submit.prevent="submitComment">
             <div class="field">
               <label>评论内容</label>
-              <textarea v-model="comment" rows="4" />
+              <textarea v-model="comment" rows="4" maxlength="500" placeholder="请输入你的观点（最多500字）" />
             </div>
             <div class="form-actions">
               <button class="btn btn--primary" type="submit">提交评论</button>
@@ -42,7 +52,7 @@
         </template>
       </div>
 
-      <aside class="sidebar card">
+      <aside class="sidebar card sidebar-box">
         <h3>互动数据</h3>
         <ul class="metric-list">
           <li><span>浏览</span><strong>{{ article.viewCount || 0 }}</strong></li>
@@ -50,11 +60,9 @@
           <li><span>评论</span><strong>{{ article.commentCount || 0 }}</strong></li>
           <li><span>转发</span><strong>{{ article.shareCount || 0 }}</strong></li>
         </ul>
-        <div class="page-actions">
-          <button class="btn btn--primary" type="button" @click="toggleLike">
-            {{ article.likedByCurrentUser ? '取消点赞' : '点赞' }}
-          </button>
-        </div>
+        <button class="btn btn--primary" type="button" @click="toggleLike">
+          {{ article.likedByCurrentUser ? '取消点赞' : '点赞' }}
+        </button>
         <SharePanel :article-id="article.id" @shared="refreshDetail" />
       </aside>
     </div>
@@ -64,19 +72,13 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import {
-  createComment,
-  getArticleDetail,
-  likeArticle,
-  recordView,
-  unlikeArticle
-} from '../api/article'
+import { createComment, getArticleDetail, likeArticle, recordView, unlikeArticle } from '../api/article'
+import { getFallbackCover } from '../utils/format'
 import CommentList from '../components/CommentList.vue'
 import SharePanel from '../components/SharePanel.vue'
 
 const route = useRoute()
 const slug = computed(() => route.params.slug)
-
 const loading = ref(false)
 const error = ref('')
 const message = ref('')
@@ -84,6 +86,10 @@ const comment = ref('')
 const article = ref({})
 const coverFailed = ref(false)
 const commentListRef = ref(null)
+
+const isHtml = computed(() => /<[^>]+>/.test(article.value?.content || ''))
+const paragraphLines = computed(() => String(article.value?.content || '').split('\n').filter(Boolean))
+const displayCover = computed(() => article.value.coverUrl || getFallbackCover(article.value))
 
 const refreshDetail = async () => {
   article.value = await getArticleDetail(slug.value)
@@ -100,7 +106,7 @@ const loadDetail = async () => {
       article.value = { ...article.value, ...counts }
     }
   } catch (err) {
-    error.value = err.message
+    error.value = err.message || '文章加载失败，请稍后重试。'
   } finally {
     loading.value = false
   }
@@ -110,26 +116,25 @@ const toggleLike = async () => {
   try {
     const request = article.value.likedByCurrentUser ? unlikeArticle : likeArticle
     const counts = await request(article.value.id)
-    article.value = {
-      ...article.value,
-      ...counts,
-      likedByCurrentUser: !article.value.likedByCurrentUser
-    }
-  } catch (err) {
-    message.value = err.message
+    article.value = { ...article.value, ...counts, likedByCurrentUser: !article.value.likedByCurrentUser }
+  } catch {
+    message.value = '点赞操作失败，请稍后再试。'
   }
 }
 
 const submitComment = async () => {
-  if (!comment.value.trim()) return
+  if (!comment.value.trim()) {
+    message.value = '评论内容不能为空。'
+    return
+  }
   try {
-    await createComment(article.value.id, comment.value)
+    await createComment(article.value.id, comment.value.trim())
     comment.value = ''
-    message.value = '评论成功'
+    message.value = '评论提交成功。'
     await commentListRef.value?.load()
     await refreshDetail()
-  } catch (err) {
-    message.value = err.message
+  } catch {
+    message.value = '评论提交失败，请稍后再试。'
   }
 }
 

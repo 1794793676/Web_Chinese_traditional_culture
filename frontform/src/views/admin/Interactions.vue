@@ -1,6 +1,26 @@
-<template><AdminLayout><section class="section"><h1>互动统计</h1><div class="grid grid--4"><div class="kpi-card">总浏览量 {{sum.view}}</div><div class="kpi-card">总点赞量 {{sum.like}}</div><div class="kpi-card">总评论数 {{sum.comment}}</div><div class="kpi-card">总转发数 {{sum.share}}</div></div><div class="table-wrap"><table class="data-table"><thead><tr><th>文章ID</th><th>文章标题</th><th>所属分类</th><th>浏览量</th><th>点赞数</th><th>评论数</th><th>转发数</th><th>综合热度</th></tr></thead><tbody><tr v-for="i in items" :key="i.articleId"><td>{{i.articleId}}</td><td>{{i.title}}</td><td>{{i.categoryName}}</td><td>{{i.viewCount}}</td><td>{{i.likeCount}}</td><td>{{i.commentCount}}</td><td>{{i.shareCount}}</td><td><div class="score-bar"><span :style="{width:(i.totalScore/max*100||0)+'%'}"></span>{{i.totalScore}}</div></td></tr></tbody></table></div></section></AdminLayout></template>
+<template>
+  <AdminLayout>
+    <section class="section">
+      <h1>互动统计</h1>
+      <div class="grid grid--4">
+        <div class="kpi-card">总浏览量 {{ summary.view }}</div>
+        <div class="kpi-card">总点赞量 {{ summary.like }}</div>
+        <div class="kpi-card">总评论数 {{ summary.comment }}</div>
+        <div class="kpi-card">总转发数 {{ summary.share }}</div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table"><thead><tr><th>文章ID</th><th>文章标题</th><th>所属分类</th><th>浏览量</th><th>点赞数</th><th>评论数</th><th>转发数</th><th>综合热度</th></tr></thead>
+          <tbody><tr v-for="item in items" :key="item.articleId"><td>{{ item.articleId }}</td><td>{{ item.title }}</td><td>{{ item.categoryName }}</td><td>{{ item.viewCount }}</td><td>{{ item.likeCount }}</td><td>{{ item.commentCount }}</td><td>{{ item.shareCount }}</td><td><div class="score-bar"><span :style="{ width: `${((item.totalScore || 0) / maxScore) * 100}%` }" />{{ item.totalScore || 0 }}</div></td></tr></tbody></table>
+      </div>
+    </section>
+  </AdminLayout>
+</template>
 <script setup>
-import { computed,onMounted,ref } from 'vue';import AdminLayout from '../../components/AdminLayout.vue';import { getInteractions } from '../../api/admin'
-const items=ref([]);const max=computed(()=>Math.max(1,...items.value.map(i=>i.totalScore||0)));const sum=computed(()=>items.value.reduce((a,i)=>({view:a.view+(i.viewCount||0),like:a.like+(i.likeCount||0),comment:a.comment+(i.commentCount||0),share:a.share+(i.shareCount||0)}),{view:0,like:0,comment:0,share:0}))
-onMounted(async()=>{items.value=await getInteractions({limit:20})||[]})
+import { computed, onMounted, ref } from 'vue'
+import AdminLayout from '../../components/AdminLayout.vue'
+import { getInteractions } from '../../api/admin'
+const items = ref([])
+const maxScore = computed(() => Math.max(1, ...items.value.map((i) => i.totalScore || 0)))
+const summary = computed(() => items.value.reduce((acc, cur) => ({ view: acc.view + (cur.viewCount || 0), like: acc.like + (cur.likeCount || 0), comment: acc.comment + (cur.commentCount || 0), share: acc.share + (cur.shareCount || 0) }), { view: 0, like: 0, comment: 0, share: 0 }))
+onMounted(async () => { items.value = (await getInteractions({ limit: 20 })) || [] })
 </script>
