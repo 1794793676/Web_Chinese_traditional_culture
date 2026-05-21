@@ -63,6 +63,22 @@ const displayCoverUrl = computed(() => {
   return props.article?.coverUrl || localCoverUrl.value
 })
 
+const localCoverMap = [
+  { keywords: ['书法'], image: coverCalligraphy },
+  { keywords: ['端午'], image: coverDragonBoat },
+  { keywords: ['革故鼎新'], image: coverInnovation },
+  { keywords: ['二十四节气'], image: coverSolarTerms },
+  { keywords: ['榫卯'], image: coverJoinery },
+  { keywords: ['民为邦本'], image: coverPeopleFirst }
+]
+
+const displayCoverUrl = computed(() => {
+  if (props.article?.coverUrl) return props.article.coverUrl
+  const title = props.article?.title || ''
+  const matched = localCoverMap.find((item) => item.keywords.some((keyword) => title.includes(keyword)))
+  return matched?.image || coverDefault
+})
+
 watch(
   () => [props.article?.id, props.article?.coverUrl, props.article?.title],
   () => {
