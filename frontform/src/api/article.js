@@ -13,9 +13,9 @@ export const getFeaturedArticles = async (limit = 6) => {
 }
 export const getArticlesByCategory = async (category, page = 1, size = 10) => {
   const data = await request.get('/articles', { params: { category, page, size } })
-  const records = (data.records || data.list || []).map(normalizeArticle)
+  const records = (data.items || data.records || data.list || []).map(normalizeArticle)
   if (Array.isArray(data)) return data.map(normalizeArticle)
-  return { ...data, records, list: records }
+  return { ...data, items: records, records, list: records }
 }
 export const getArticleDetail = async (slug) => normalizeArticle(await request.get(`/articles/${slug}`))
 export const recordView = (id) => request.post(`/articles/${id}/view`)
