@@ -1,7 +1,7 @@
 <template>
   <article class="card article-card" @click="openArticle">
-    <div v-if="article.coverUrl" class="article-card__image">
-      <img :src="article.coverUrl" :alt="article.title" :style="{ display: coverFailed ? 'none' : 'block' }" @error="coverFailed = true" />
+    <div v-if="displayCoverUrl" class="article-card__image">
+      <img :src="displayCoverUrl" :alt="article.title" :style="{ display: coverFailed ? 'none' : 'block' }" @error="coverFailed = true" />
       <div v-if="coverFailed" class="image-fallback">华夏文脉</div>
     </div>
     <div class="article-card__body">
@@ -19,6 +19,13 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import coverCalligraphy from '../picture/华夏文脉数字展馆背景图-书法之美.png'
+import coverSolarTerms from '../picture/华夏文脉数字展馆背景图-二十四节气.png'
+import coverPeopleFirst from '../picture/华夏文脉数字展馆背景图-民为邦本.png'
+import coverJoinery from '../picture/华夏文脉数字展馆背景图-榫卯建构.png'
+import coverDragonBoat from '../picture/华夏文脉数字展馆背景图-端午年俗.png'
+import coverInnovation from '../picture/华夏文脉数字展馆背景图-革故鼎新.png'
+import coverDefault from '../picture/华夏文脉数字展馆背景图.png'
 
 const props = defineProps({
   article: {
@@ -35,8 +42,24 @@ const viewCount = computed(() => props.article?.viewCount || 0)
 
 const coverFailed = ref(false)
 
+const localCoverMap = [
+  { keywords: ['书法'], image: coverCalligraphy },
+  { keywords: ['端午'], image: coverDragonBoat },
+  { keywords: ['革故鼎新'], image: coverInnovation },
+  { keywords: ['二十四节气'], image: coverSolarTerms },
+  { keywords: ['榫卯'], image: coverJoinery },
+  { keywords: ['民为邦本'], image: coverPeopleFirst }
+]
+
+const displayCoverUrl = computed(() => {
+  if (props.article?.coverUrl) return props.article.coverUrl
+  const title = props.article?.title || ''
+  const matched = localCoverMap.find((item) => item.keywords.some((keyword) => title.includes(keyword)))
+  return matched?.image || coverDefault
+})
+
 watch(
-  () => props.article?.coverUrl,
+  () => displayCoverUrl.value,
   () => {
     coverFailed.value = false
   },
