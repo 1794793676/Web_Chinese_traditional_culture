@@ -49,7 +49,6 @@
     </section>
   </AdminLayout>
 </template>
-
 <script setup>
 import { onMounted, ref } from 'vue'
 import AdminLayout from '../../components/AdminLayout.vue'

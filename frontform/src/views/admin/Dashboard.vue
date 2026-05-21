@@ -45,7 +45,6 @@
     </section>
   </AdminLayout>
 </template>
-
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import AdminLayout from '../../components/AdminLayout.vue'

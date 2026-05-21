@@ -53,7 +53,6 @@
     </div>
   </section>
 </template>
-
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
