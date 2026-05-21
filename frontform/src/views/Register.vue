@@ -18,6 +18,7 @@
             <input v-model="form.captchaCode" />
             <CaptchaBox ref="captchaRef" purpose="register" @update:key="form.captchaKey = $event" @refreshed="form.captchaCode = ''" />
           </div>
+          <label class="hint"><input v-model="form.agree" type="checkbox" /> 我已阅读并同意用户协议</label>
           <div class="form-actions">
             <button class="btn btn--primary" type="submit">注册</button>
             <router-link class="btn btn--outline" to="/login">已有账号？去登录</router-link>
@@ -41,22 +42,18 @@ const ok = ref(false)
 const message = ref('')
 
 const form = reactive({
-  username: '',
-  email: '',
-  nickname: '',
-  password: '',
-  confirmPassword: '',
-  captchaCode: '',
-  captchaKey: ''
+  username: '', email: '', nickname: '', password: '', confirmPassword: '', captchaCode: '', captchaKey: '', agree: false
 })
 
 const submit = async () => {
   ok.value = false
   message.value = ''
-  if (form.password !== form.confirmPassword) {
-    message.value = '两次密码不一致'
-    return
-  }
+  if (!form.username.trim()) return message.value='用户名不能为空'
+  if (!/^\S+@\S+\.\S+$/.test(form.email)) return message.value='邮箱格式不正确'
+  if ((form.password||'').length<6) return message.value='密码至少 6 位'
+  if (form.password !== form.confirmPassword) return message.value='两次密码不一致'
+  if (!form.agree) return message.value='请先同意用户协议'
+  if (!form.captchaCode.trim()) return message.value='请输入验证码'
   try {
     await register(form)
     ok.value = true

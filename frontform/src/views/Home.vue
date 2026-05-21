@@ -49,13 +49,10 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--soft" id="featured">
     <div class="container">
-      <div class="card source-summary-card">
-        <h3>素材来源摘要</h3>
-        <p>完整素材来源说明需登录后访问，详情页也包含 sources 来源字段。</p>
-        <router-link class="btn btn--outline" to="/sources">查看完整素材来源</router-link>
-      </div>
+      <div class="section-heading"><h2>文脉纪元</h2></div>
+      <div class="card" style="padding:16px;">先秦思想 → 汉唐气象 → 宋元审美 → 明清技艺 → 当代表达</div>
     </div>
   </section>
 </template>
