@@ -23,6 +23,7 @@
 ## 数据库环境变量
 - `DB_USERNAME`
 - `DB_PASSWORD`
+- 请通过环境变量配置数据库账号密码，避免在 `application.properties` 中写死敏感信息。
 
 ## 启动命令
 ### Windows

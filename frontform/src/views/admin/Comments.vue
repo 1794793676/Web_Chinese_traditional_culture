@@ -13,7 +13,10 @@
         </select>
       </div>
 
-      <div class="table-wrap">
+      <div v-if="loading" class="loading">正在加载评论列表...</div>
+      <div v-else-if="error" class="error">{{ error }}</div>
+      <div v-else-if="!items.length" class="empty">暂无评论数据</div>
+      <div v-else class="table-wrap">
         <table class="data-table">
           <thead>
             <tr>
@@ -55,17 +58,31 @@ import AdminLayout from '../../components/AdminLayout.vue'
 import { getAdminComments, updateCommentStatus } from '../../api/admin'
 import { formatStatus, normalizeList } from '../../utils/format'
 
+const loading = ref(false)
+const error = ref('')
 const items = ref([])
 const status = ref('')
 
 const load = async () => {
-  const data = await getAdminComments({ status: status.value, page: 1, size: 20 })
-  items.value = normalizeList(data)
+  loading.value = true
+  error.value = ''
+  try {
+    const data = await getAdminComments({ status: status.value, page: 1, size: 20 })
+    items.value = normalizeList(data)
+  } catch {
+    error.value = '评论列表加载失败，请稍后重试。'
+  } finally {
+    loading.value = false
+  }
 }
 
 const patch = async (item, next, note) => {
-  await updateCommentStatus(item.id, { status: next, adminNote: note })
-  await load()
+  try {
+    await updateCommentStatus(item.id, { status: next, adminNote: note })
+    await load()
+  } catch {
+    error.value = '评论状态更新失败，请稍后重试。'
+  }
 }
 
 onMounted(load)

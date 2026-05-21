@@ -41,7 +41,7 @@
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section id="featured" class="section section--soft">
     <div class="container">
       <div class="section-heading"><h2>典藏精品</h2></div>
       <div v-if="loading" class="loading">加载中...</div>

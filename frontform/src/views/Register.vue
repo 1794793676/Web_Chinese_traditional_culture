@@ -23,7 +23,7 @@
           </div>
           <div class="field">
             <label>密码</label>
-            <input v-model="form.password" type="password" placeholder="至少6位密码" />
+            <input v-model="form.password" type="password" placeholder="至少8位密码" />
           </div>
           <div class="field">
             <label>确认密码</label>
@@ -32,12 +32,7 @@
           <div class="field">
             <label>验证码</label>
             <input v-model="form.captchaCode" placeholder="请输入验证码" />
-            <CaptchaBox
-              ref="captchaRef"
-              purpose="register"
-              @update:key="form.captchaKey = $event"
-              @refreshed="form.captchaCode = ''"
-            />
+            <CaptchaBox ref="captchaRef" purpose="register" @update:key="form.captchaKey = $event" @refreshed="form.captchaCode = ''" />
           </div>
 
           <label class="hint"><input v-model="form.agree" type="checkbox" /> 我已阅读并同意用户协议</label>
@@ -64,16 +59,7 @@ const captchaRef = ref(null)
 const ok = ref(false)
 const message = ref('')
 
-const form = reactive({
-  username: '',
-  email: '',
-  nickname: '',
-  password: '',
-  confirmPassword: '',
-  captchaCode: '',
-  captchaKey: '',
-  agree: false
-})
+const form = reactive({ username: '', email: '', nickname: '', password: '', confirmPassword: '', captchaCode: '', captchaKey: '', agree: false })
 
 const submit = async () => {
   ok.value = false
@@ -81,7 +67,8 @@ const submit = async () => {
 
   if (!form.username.trim()) return (message.value = '用户名不能为空')
   if (!/^\S+@\S+\.\S+$/.test(form.email)) return (message.value = '邮箱格式不正确')
-  if ((form.password || '').length < 6) return (message.value = '密码至少 6 位')
+  if (!form.password) return (message.value = '密码不能为空')
+  if (form.password.length < 8) return (message.value = '密码至少 8 位')
   if (form.password !== form.confirmPassword) return (message.value = '两次密码不一致')
   if (!form.captchaCode.trim()) return (message.value = '请输入验证码')
   if (!form.agree) return (message.value = '请先同意用户协议')
