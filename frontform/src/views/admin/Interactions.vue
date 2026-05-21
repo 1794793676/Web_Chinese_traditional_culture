@@ -51,14 +51,11 @@
     </section>
   </AdminLayout>
 </template>
-
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import AdminLayout from '../../components/AdminLayout.vue'
 import { getInteractions } from '../../api/admin'
 
-const loading = ref(false)
-const error = ref('')
 const items = ref([])
 
 const maxScore = computed(() => Math.max(1, ...items.value.map((i) => i.totalScore || 0)))
@@ -86,5 +83,7 @@ const load = async () => {
   }
 }
 
-onMounted(load)
+onMounted(async () => {
+  items.value = (await getInteractions({ limit: 20 })) || []
+})
 </script>

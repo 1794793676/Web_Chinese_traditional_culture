@@ -13,11 +13,9 @@
     <span v-if="message" class="message-box">{{ message }}</span>
   </div>
 </template>
-
 <script setup>
 import { ref } from 'vue'
 import { shareArticle } from '../api/article'
-
 const props = defineProps({ articleId: Number })
 const emit = defineEmits(['shared'])
 

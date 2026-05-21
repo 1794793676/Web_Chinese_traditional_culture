@@ -12,6 +12,7 @@
             <strong>{{ s.value }}</strong>
           </div>
         </div>
+      </div>
 
         <h3>热门文章排行</h3>
         <div v-if="!popularArticles.length" class="empty">暂无热门文章数据</div>
@@ -50,14 +51,11 @@
     </section>
   </AdminLayout>
 </template>
-
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import AdminLayout from '../../components/AdminLayout.vue'
 import { getDashboard } from '../../api/admin'
 
-const loading = ref(false)
-const error = ref('')
 const data = ref({})
 
 const popularArticles = computed(() => data.value.popularArticles || [])
