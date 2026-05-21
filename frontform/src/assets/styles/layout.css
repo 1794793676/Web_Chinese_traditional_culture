@@ -95,7 +95,7 @@
   opacity: 0.22;
   background:
     linear-gradient(90deg, rgba(246, 240, 229, 0.25), rgba(246, 240, 229, 0.7)),
-    url("/assets/images/hero-heritage.svg") center / cover;
+    url("../../picture/华夏文脉数字展馆背景图.png") center / cover no-repeat;
 }
 
 .hero__content {

@@ -136,6 +136,17 @@
   transform: scale(1.05);
 }
 
+
+.image-fallback {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--color-muted);
+  font-size: 20px;
+  letter-spacing: 2px;
+  background: linear-gradient(120deg, rgba(201, 164, 90, 0.15), rgba(47, 111, 94, 0.12));
+}
+
 .article-card__body {
   flex: 1;
   display: grid;
