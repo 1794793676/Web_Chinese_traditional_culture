@@ -29,9 +29,11 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { getArticlesByCategory, getCategories } from '../api/article'
 import ArticleCard from '../components/ArticleCard.vue'
+import { getCategoryName, normalizeCategorySlug } from '../constants/category'
 
 const route = useRoute()
 const slug = computed(() => route.params.slug)
+const normalizedSlug = computed(() => normalizeCategorySlug(slug.value))
 const loading = ref(false)
 const error = ref('')
 const page = ref(1)
@@ -40,13 +42,16 @@ const hasNext = ref(false)
 const items = ref([])
 const categories = ref([])
 
-const categoryTitle = computed(() => categories.value.find((c) => c.slug === slug.value)?.name || slug.value)
+const categoryTitle = computed(
+  () =>
+    categories.value.find((c) => c.slug === normalizedSlug.value)?.name || getCategoryName(normalizedSlug.value)
+)
 
 const loadList = async () => {
   loading.value = true
   error.value = ''
   try {
-    const data = await getArticlesByCategory(slug.value, page.value, size.value)
+    const data = await getArticlesByCategory(normalizedSlug.value, page.value, size.value)
     items.value = data.records || data.list || []
     hasNext.value = data.totalPages ? page.value < data.totalPages : items.value.length >= size.value
   } catch (err) {

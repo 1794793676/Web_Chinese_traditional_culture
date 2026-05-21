@@ -12,9 +12,9 @@
       <div v-else-if="error" class="error">{{ error }}</div>
       <template v-else>
         <div class="grid grid--3">
-          <div class="kpi-card" v-for="(value, key) in stats" :key="key">
-            <span>{{ key }}</span>
-            <strong>{{ value ?? 0 }}</strong>
+          <div class="kpi-card" v-for="item in stats" :key="item.key">
+            <span>{{ item.label }}</span>
+            <strong>{{ item.value }}</strong>
           </div>
         </div>
 
@@ -48,14 +48,22 @@ const loading = ref(false)
 const error = ref('')
 const data = ref({})
 
-const stats = computed(() => ({
-  userCount: data.value.userCount,
-  articleCount: data.value.articleCount,
-  likeCount: data.value.likeCount,
-  commentCount: data.value.commentCount,
-  shareCount: data.value.shareCount,
-  viewCount: data.value.viewCount
-}))
+const DASHBOARD_STAT_LABELS = {
+  userCount: '用户数量',
+  articleCount: '文章数量',
+  likeCount: '点赞数量',
+  commentCount: '评论数量',
+  shareCount: '分享数量',
+  viewCount: '浏览数量'
+}
+
+const stats = computed(() =>
+  Object.entries(DASHBOARD_STAT_LABELS).map(([key, label]) => ({
+    key,
+    label,
+    value: data.value[key] ?? 0
+  }))
+)
 
 onMounted(async () => {
   loading.value = true
