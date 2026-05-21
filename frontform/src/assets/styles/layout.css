@@ -250,3 +250,6 @@
   margin-bottom: 32px;
   border-bottom: 1px solid var(--color-border);
 }
+
+.kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:16px 0 24px;}
+.kpi-card{padding:16px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-card);display:grid;gap:8px;}

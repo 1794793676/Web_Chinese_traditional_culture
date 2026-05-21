@@ -1,2 +1,13 @@
 /frontform/dist
 /frontform/node_modules
+/frontform/.vite
+/backform/build
+/backform/.gradle
+/backform/out
+/.idea
+/db/.idea
+.vscode
+*.log
+.env
+.env.*
+!.env.example
