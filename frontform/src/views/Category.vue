@@ -52,8 +52,8 @@ const loadList = async () => {
   error.value = ''
   try {
     const data = await getArticlesByCategory(normalizedSlug.value, page.value, size.value)
-    items.value = data.records || data.list || []
-    hasNext.value = data.totalPages ? page.value < data.totalPages : items.value.length >= size.value
+    items.value = data.items || data.records || data.list || []
+    hasNext.value = data.total ? page.value * size.value < data.total : items.value.length >= size.value
   } catch (err) {
     error.value = err.message
   } finally {
