@@ -1,16 +1,32 @@
 <template>
-  <article class="card article-card" @click="openArticle">
-    <div v-if="displayCoverUrl" class="article-card__image">
-      <img :src="displayCoverUrl" :alt="article.title" :style="{ display: coverFailed ? 'none' : 'block' }" @error="handleCoverError" />
-      <div v-if="coverFailed" class="image-fallback">华夏文脉</div>
+  <article
+    class="card article-card"
+    :class="{ 'is-disabled': !hasSlug }"
+    :role="hasSlug ? 'link' : undefined"
+    :tabindex="hasSlug ? 0 : -1"
+    @click="openArticle"
+    @keydown.enter.prevent="openArticle"
+  >
+    <div class="article-card__image">
+      <img :src="displayCover" :alt="safeText(article.title, '传统文化文章')" @error="onImageError" />
     </div>
     <div class="article-card__body">
-      <span class="tag">{{ article.categoryName || '传统文化' }}</span>
-      <h3>{{ article.title }}</h3>
-      <p>{{ article.summary }}</p>
+      <span class="tag">{{ safeText(article.categoryName, '传统文化') }}</span>
+      <h3>{{ safeText(article.title, '未命名文章') }}</h3>
+      <p>{{ safeText(article.summary, '暂无摘要') }}</p>
+      <p v-if="article.sourceTitle" class="article-card__source">来源：{{ article.sourceTitle }}</p>
+
       <div class="article-card__meta">
-        <span>{{ likeCount }} 喜欢 · {{ commentCount }} 评论 · {{ viewCount }} 浏览</span>
-        <button class="btn btn--outline" type="button" @click.stop="openArticle">阅读</button>
+        <span>浏览 {{ formatNumber(article.viewCount) }} · 点赞 {{ formatNumber(article.likeCount) }} · 评论 {{ formatNumber(article.commentCount) }} · 转发 {{ formatNumber(article.shareCount) }}</span>
+        <router-link
+          v-if="hasSlug"
+          class="nav-btn"
+          :to="`/article/${article.slug}`"
+          @click.stop
+        >
+          查看详情 →
+        </router-link>
+        <span v-else class="muted">暂无详情</span>
       </div>
     </div>
   </article>
@@ -19,71 +35,28 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import coverCalligraphy from '../picture/华夏文脉数字展馆背景图-书法之美.png'
-import coverSolarTerms from '../picture/华夏文脉数字展馆背景图-二十四节气.png'
-import coverPeopleFirst from '../picture/华夏文脉数字展馆背景图-民为邦本.png'
-import coverJoinery from '../picture/华夏文脉数字展馆背景图-榫卯建构.png'
-import coverDragonBoat from '../picture/华夏文脉数字展馆背景图-端午年俗.png'
-import coverInnovation from '../picture/华夏文脉数字展馆背景图-革故鼎新.png'
+import { resolveMediaUrl } from '../utils/url'
+import { formatNumber, getFallbackCover, safeText } from '../utils/format'
 
-const coverDefault = coverInnovation
-
-const props = defineProps({
-  article: {
-    type: Object,
-    required: true
-  }
-})
-
+const props = defineProps({ article: { type: Object, required: true } })
 const router = useRouter()
+const imgError = ref(false)
 
-const likeCount = computed(() => props.article?.likeCount || 0)
-const commentCount = computed(() => props.article?.commentCount || 0)
-const viewCount = computed(() => props.article?.viewCount || 0)
+const hasSlug = computed(() => Boolean(props.article?.slug))
 
-const coverFailed = ref(false)
-const useLocalFallback = ref(false)
-
-const localCoverMap = [
-  { keywords: ['书法'], image: coverCalligraphy },
-  { keywords: ['端午'], image: coverDragonBoat },
-  { keywords: ['革故鼎新'], image: coverInnovation },
-  { keywords: ['二十四节气'], image: coverSolarTerms },
-  { keywords: ['榫卯'], image: coverJoinery },
-  { keywords: ['民为邦本'], image: coverPeopleFirst }
-]
-
-const localCoverUrl = computed(() => {
-  const title = props.article?.title || ''
-  const matched = localCoverMap.find((item) => item.keywords.some((keyword) => title.includes(keyword)))
-  return matched?.image || coverDefault
+const displayCover = computed(() => {
+  if (imgError.value || !props.article?.coverUrl) return getFallbackCover(props.article)
+  return resolveMediaUrl(props.article.coverUrl)
 })
 
-const displayCoverUrl = computed(() => {
-  if (useLocalFallback.value) return localCoverUrl.value
-  return props.article?.coverUrl || localCoverUrl.value
-})
+watch(() => [props.article?.id, props.article?.coverUrl], () => (imgError.value = false), { immediate: true })
 
-watch(
-  () => [props.article?.id, props.article?.coverUrl, props.article?.title],
-  () => {
-    useLocalFallback.value = false
-    coverFailed.value = false
-  },
-  { immediate: true }
-)
-
-const handleCoverError = () => {
-  if (!useLocalFallback.value && props.article?.coverUrl) {
-    useLocalFallback.value = true
-    coverFailed.value = false
-    return
-  }
-  coverFailed.value = true
+const onImageError = () => {
+  imgError.value = true
 }
 
 const openArticle = () => {
-  if (!props.article?.slug) return
+  if (!hasSlug.value) return
   router.push(`/article/${props.article.slug}`)
 }
 </script>
