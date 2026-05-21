@@ -1,78 +1,27 @@
 <template>
-  <section class="page-hero admin-page">
-    <div class="container"><h1>评论管理</h1><p>审核与更新评论状态。</p></div>
-  </section>
-  <section class="section admin-page">
-    <div class="container">
+  <AdminLayout>
+    <section class="section">
+      <h1>评论审核</h1>
       <div class="page-actions">
-        <select v-model="status" @change="page = 1; load()">
-          <option value="">all</option><option value="visible">visible</option><option value="hidden">hidden</option><option value="deleted">deleted</option><option value="pending">pending</option>
+        <select v-model="status" @change="load">
+          <option value="">全部</option><option value="visible">已显示</option><option value="pending">待审核</option><option value="hidden">已隐藏</option><option value="deleted">已删除</option>
         </select>
       </div>
-      <div v-if="loading" class="loading">加载中...</div>
-      <div v-else-if="error" class="error">{{ error }}</div>
-      <div v-else class="table-wrap">
-        <table class="data-table">
-          <thead><tr><th>ID</th><th>内容</th><th>状态</th><th>操作</th></tr></thead>
-          <tbody>
-            <tr v-for="item in items" :key="item.id">
-              <td>{{ item.id }}</td>
-              <td>{{ item.content }}</td>
-              <td><span class="status" :class="statusClass(item.status)">{{ item.status }}</span></td>
-              <td>
-                <select v-model="item._next"><option>visible</option><option>hidden</option><option>deleted</option><option>pending</option></select>
-                <button class="btn btn--outline" @click="update(item)">提交</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="table-wrap">
+        <table class="data-table"><thead><tr><th>评论ID</th><th>关联文章</th><th>用户昵称</th><th>评论内容</th><th>状态</th><th>管理备注</th><th>时间</th><th>操作</th></tr></thead>
+          <tbody><tr v-for="it in items" :key="it.id"><td>{{ it.id }}</td><td>{{ it.articleTitle }}</td><td>{{ it.userNickname }}</td><td>{{ it.content }}</td><td>{{ formatStatus(it.status) }}</td><td>{{ it.adminNote || '-' }}</td><td>{{ it.createdAt }}</td><td><button class="btn btn--outline" @click="patch(it,'visible','审核通过')">通过</button><button class="btn btn--outline" @click="patch(it,'hidden','管理员隐藏')">隐藏</button><button class="btn btn--outline" @click="patch(it,'pending','待审核')">待审核</button><button class="btn btn--outline" @click="patch(it,'deleted','管理员删除')">删除</button></td></tr></tbody></table>
       </div>
-      <div class="pagination">
-        <button :disabled="page <= 1" @click="page--, load()">上一页</button>
-        <span>第 {{ page }} 页</span>
-        <button :disabled="!hasNext" @click="page++, load()">下一页</button>
-      </div>
-    </div>
-  </section>
+    </section>
+  </AdminLayout>
 </template>
-
 <script setup>
 import { onMounted, ref } from 'vue'
+import AdminLayout from '../../components/AdminLayout.vue'
 import { getAdminComments, updateCommentStatus } from '../../api/admin'
-
-const loading = ref(false)
-const error = ref('')
-const status = ref('')
-const page = ref(1)
-const size = ref(10)
-const hasNext = ref(false)
+import { formatStatus, normalizeList } from '../../utils/format'
 const items = ref([])
-
-const statusClass = (value) => {
-  if (value === 'pending') return 'status--pending'
-  if (value === 'visible') return 'status--success'
-  if (value === 'hidden' || value === 'deleted') return 'status--danger'
-  return ''
-}
-
-const load = async () => {
-  loading.value = true
-  error.value = ''
-  try {
-    const data = await getAdminComments({ status: status.value, page: page.value, size: size.value })
-    items.value = (data.records || data.list || []).map((row) => ({ ...row, _next: row.status }))
-    hasNext.value = data.totalPages ? page.value < data.totalPages : items.value.length >= size.value
-  } catch (err) {
-    error.value = err.message
-  } finally {
-    loading.value = false
-  }
-}
-
-const update = async (item) => {
-  await updateCommentStatus(item.id, { status: item._next, adminNote: '' })
-  await load()
-}
-
+const status = ref('')
+const load = async () => { const data = await getAdminComments({ status: status.value, page: 1, size: 20 }); items.value = normalizeList(data) }
+const patch = async (item, next, note) => { await updateCommentStatus(item.id, { status: next, adminNote: note }); await load() }
 onMounted(load)
 </script>

@@ -1,78 +1,45 @@
 <template>
-  <section class="page-hero admin-page">
-    <div class="container">
-      <h1>后台数据总览</h1>
-      <p>实时查看平台互动与内容运营状态。</p>
-    </div>
-  </section>
+  <AdminLayout>
+    <section class="section">
+      <h1>数据总览</h1>
 
-  <section class="section admin-page">
-    <div class="container">
-      <div v-if="loading" class="loading">加载中...</div>
-      <div v-else-if="error" class="error">{{ error }}</div>
-      <template v-else>
-        <div class="grid grid--3">
-          <div class="kpi-card" v-for="item in stats" :key="item.key">
-            <span>{{ item.label }}</span>
-            <strong>{{ item.value }}</strong>
-          </div>
+      <div class="kpi-grid">
+        <div class="kpi-card" v-for="s in stats" :key="s.key">
+          <span>{{ s.title }}</span>
+          <strong>{{ s.value }}</strong>
         </div>
+      </div>
 
-        <div class="grid grid--2" style="margin-top: 16px">
-          <div class="card chart-card">
-            <h3>热门文章</h3>
-            <ul><li v-for="item in data.popularArticles || []" :key="item.id">{{ item.title }}</li></ul>
-          </div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead><tr><th>用户</th><th>最新评论</th></tr></thead>
-              <tbody>
-                <tr v-for="item in data.latestComments || []" :key="item.id">
-                  <td>{{ item.nickname || item.username }}</td>
-                  <td>{{ item.content }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </template>
-    </div>
-  </section>
+      <h3>热门文章排行</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>文章标题</th><th>所属分类</th><th>浏览量</th><th>点赞数</th><th>评论数</th><th>转发数</th><th>综合热度</th></tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in data.popularArticles || []" :key="item.articleId || item.title">
+              <td>{{ item.title }}</td><td>{{ item.categoryName }}</td><td>{{ item.viewCount }}</td><td>{{ item.likeCount }}</td><td>{{ item.commentCount }}</td><td>{{ item.shareCount }}</td>
+              <td><div class="score-bar"><span :style="{ width: `${((item.totalScore || 0) / maxScore) * 100}%` }" />{{ item.totalScore || 0 }}</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </AdminLayout>
 </template>
-
 <script setup>
 import { computed, onMounted, ref } from 'vue'
+import AdminLayout from '../../components/AdminLayout.vue'
 import { getDashboard } from '../../api/admin'
-
-const loading = ref(false)
-const error = ref('')
 const data = ref({})
-
-const DASHBOARD_STAT_LABELS = {
-  userCount: '用户数量',
-  articleCount: '文章数量',
-  likeCount: '点赞数量',
-  commentCount: '评论数量',
-  shareCount: '分享数量',
-  viewCount: '浏览数量'
-}
-
-const stats = computed(() =>
-  Object.entries(DASHBOARD_STAT_LABELS).map(([key, label]) => ({
-    key,
-    label,
-    value: data.value[key] ?? 0
-  }))
-)
-
-onMounted(async () => {
-  loading.value = true
-  try {
-    data.value = await getDashboard()
-  } catch (err) {
-    error.value = err.message
-  } finally {
-    loading.value = false
-  }
-})
+const maxScore = computed(() => Math.max(1, ...(data.value.popularArticles || []).map((i) => i.totalScore || 0)))
+const stats = computed(() => [
+  { key: 'user', title: '总用户数', value: data.value.userCount || 0 },
+  { key: 'article', title: '总文章数', value: data.value.articleCount || 0 },
+  { key: 'like', title: '总点赞数', value: data.value.likeCount || 0 },
+  { key: 'comment', title: '总评论数', value: data.value.commentCount || 0 },
+  { key: 'share', title: '总分享数', value: data.value.shareCount || 0 },
+  { key: 'view', title: '总浏览数', value: data.value.viewCount || 0 }
+])
+onMounted(async () => { data.value = (await getDashboard()) || {} })
 </script>
