@@ -1,49 +1,6 @@
-<template>
-  <section class="page-hero admin-page"><div class="container"><h1>互动排行</h1><p>按综合分查看互动热度。</p></div></section>
-  <section class="section admin-page">
-    <div class="container">
-      <div class="page-actions">
-        <select v-model="limit" @change="load"><option :value="10">10</option><option :value="20">20</option><option :value="50">50</option></select>
-      </div>
-      <div v-if="loading" class="loading">加载中...</div>
-      <div v-else-if="error" class="error">{{ error }}</div>
-      <div v-else class="table-wrap">
-        <table class="data-table">
-          <thead><tr><th>articleId</th><th>title</th><th>category</th><th>view</th><th>like</th><th>comment</th><th>share</th><th>score</th></tr></thead>
-          <tbody>
-            <tr v-for="item in items" :key="item.articleId">
-              <td>{{ item.articleId }}</td><td>{{ item.title }}</td><td>{{ item.categoryName }}</td>
-              <td><span class="tag">{{ item.viewCount }}</span></td><td><span class="tag">{{ item.likeCount }}</span></td>
-              <td><span class="tag">{{ item.commentCount }}</span></td><td><span class="tag">{{ item.shareCount }}</span></td>
-              <td><span class="status status--success">{{ item.totalScore }}</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-</template>
-
+<template><AdminLayout><section class="section"><h1>互动统计</h1><div class="grid grid--4"><div class="kpi-card">总浏览量 {{sum.view}}</div><div class="kpi-card">总点赞量 {{sum.like}}</div><div class="kpi-card">总评论数 {{sum.comment}}</div><div class="kpi-card">总转发数 {{sum.share}}</div></div><div class="table-wrap"><table class="data-table"><thead><tr><th>文章ID</th><th>文章标题</th><th>所属分类</th><th>浏览量</th><th>点赞数</th><th>评论数</th><th>转发数</th><th>综合热度</th></tr></thead><tbody><tr v-for="i in items" :key="i.articleId"><td>{{i.articleId}}</td><td>{{i.title}}</td><td>{{i.categoryName}}</td><td>{{i.viewCount}}</td><td>{{i.likeCount}}</td><td>{{i.commentCount}}</td><td>{{i.shareCount}}</td><td><div class="score-bar"><span :style="{width:(i.totalScore/max*100||0)+'%'}"></span>{{i.totalScore}}</div></td></tr></tbody></table></div></section></AdminLayout></template>
 <script setup>
-import { onMounted, ref } from 'vue'
-import { getInteractions } from '../../api/admin'
-
-const loading = ref(false)
-const error = ref('')
-const items = ref([])
-const limit = ref(10)
-
-const load = async () => {
-  loading.value = true
-  error.value = ''
-  try {
-    items.value = await getInteractions({ limit: limit.value })
-  } catch (err) {
-    error.value = err.message
-  } finally {
-    loading.value = false
-  }
-}
-
-onMounted(load)
+import { computed,onMounted,ref } from 'vue';import AdminLayout from '../../components/AdminLayout.vue';import { getInteractions } from '../../api/admin'
+const items=ref([]);const max=computed(()=>Math.max(1,...items.value.map(i=>i.totalScore||0)));const sum=computed(()=>items.value.reduce((a,i)=>({view:a.view+(i.viewCount||0),like:a.like+(i.likeCount||0),comment:a.comment+(i.commentCount||0),share:a.share+(i.shareCount||0)}),{view:0,like:0,comment:0,share:0}))
+onMounted(async()=>{items.value=await getInteractions({limit:20})||[]})
 </script>
