@@ -5,17 +5,30 @@ import picPeople from '../picture/华夏文脉数字展馆背景图-民为邦本
 import picFestival from '../picture/华夏文脉数字展馆背景图-端午年俗.png'
 import picInnovation from '../picture/华夏文脉数字展馆背景图-革故鼎新.png'
 
+const pictureModules = import.meta.glob('../picture/*.{png,jpg,jpeg,webp,svg}', {
+  eager: true,
+  import: 'default'
+})
+
+const findPictureByName = (keywords = []) => {
+  const list = Object.entries(pictureModules)
+  const target = list.find(([path]) => keywords.some((keyword) => path.includes(keyword)))
+  return target?.[1]
+}
+
 export const pictures = {
   calligraphy: picCalligraphy,
   solarTerms: picSolarTerms,
   mortise: picMortise,
   people: picPeople,
   festival: picFestival,
-  innovation: picInnovation
+  innovation: picInnovation,
+  login: findPictureByName(['登录.png', 'login.png']) || picCalligraphy,
+  register: findPictureByName(['注册.png', 'register.png']) || picFestival
 }
 
-export const loginAsideImage = pictures.calligraphy
-export const registerAsideImage = pictures.festival
+export const loginAsideImage = pictures.login
+export const registerAsideImage = pictures.register
 export const fallbackArticleCover = pictures.innovation
 export const fallbackDetailCover = pictures.people
 export const dashboardHeroImage = pictures.solarTerms
