@@ -61,7 +61,7 @@ const categories = ref([])
 
 const categoryInfo = computed(() => categories.value.find((c) => c.slug === normalizedSlug.value) || {})
 const categoryTitle = computed(() => categoryInfo.value.name || getCategoryName(normalizedSlug.value))
-const categoryDescription = computed(() => categoryInfo.value.description || `${categoryTitle.value}专题文章 / 文化解读 / 登录后可互动`)
+const categoryDescription = computed(() => categoryInfo.value.description || `${categoryTitle.value}专题文章 / 文化解读`)
 const heroStyle = computed(() => ({ '--page-hero-bg': `url(${getCategoryHeroImage(normalizedSlug.value)})` }))
 
 const loadList = async () => {
