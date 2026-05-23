@@ -2,8 +2,7 @@
   <section class="auth-page auth-page--register" :style="{ '--auth-aside-bg': `url(${registerAsideImage})` }">
     <div class="auth-card">
       <aside class="auth-aside">
-        <h1>注册展馆账号</h1>
-        <p>创建账号后可访问文化专题、文章详情与素材来源页。</p>
+        
       </aside>
 
       <div class="auth-main">
