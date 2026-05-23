@@ -6,7 +6,6 @@
       <p>在现代网页中重读传统文化的思想、器物与精神</p>
       <div class="hero__actions">
         <button class="btn btn--primary" type="button" @click="enterMuseum">进入展馆</button>
-        <router-link class="btn btn--outline" to="/register">注册体验</router-link>
       </div>
     </div>
   </section>
@@ -33,7 +32,6 @@
           </div>
           <p>{{ category.description || '登录后查看完整内容' }}</p>
           <div class="category-card__foot">
-            <span>{{ auth.isLoggedIn ? '登录后可互动' : '登录后查看完整内容' }}</span>
             <span>查看专题 →</span>
           </div>
         </button>

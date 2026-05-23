@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 
 const routes = [
-  { path: '/', component: () => import('../views/Home.vue') },
+  { path: '/', component: () => import('../views/Index.vue') },
   { path: '/login', component: () => import('../views/Login.vue') },
   { path: '/register', component: () => import('../views/Register.vue') },
   { path: '/category/:slug', component: () => import('../views/Category.vue'), meta: { requiresAuth: true } },
