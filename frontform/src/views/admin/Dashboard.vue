@@ -1,10 +1,10 @@
 <template>
   <AdminLayout>
-    <section class="section">
-      <h1>数据总览</h1>
+    <section class="section admin-dashboard">
+      <header class="dashboard-hero" :style="{ '--dashboard-hero-bg': `url(${dashboardHeroImage})` }"><h1>数据总览</h1><p>查看用户、文章、点赞、评论、转发与浏览统计</p></header>
 
-      <div v-if="loading" class="loading">正在加载数据总览...</div>
-      <div v-else-if="error" class="error">{{ error }}</div>
+      <div v-if="isLoading" class="loading">正在加载数据总览...</div>
+      <div v-else-if="loadError" class="error">{{ loadError }}</div>
       <template v-else>
         <div class="kpi-grid">
           <div v-for="s in stats" :key="s.key" class="kpi-card">
@@ -12,7 +12,7 @@
             <strong>{{ s.value }}</strong>
           </div>
         </div>
-      </div>
+      
 
         <h3>热门文章排行</h3>
         <div v-if="!popularArticles.length" class="empty">暂无热门文章数据</div>
@@ -55,8 +55,11 @@
 import { computed, onMounted, ref } from 'vue'
 import AdminLayout from '../../components/AdminLayout.vue'
 import { getDashboard } from '../../api/admin'
+import { dashboardHeroImage } from '../../utils/pictureMap'
 
 const data = ref({})
+const isLoading = ref(false)
+const loadError = ref('')
 
 const popularArticles = computed(() => data.value.popularArticles || [])
 const maxScore = computed(() => Math.max(1, ...popularArticles.value.map((i) => i.totalScore || 0)))
@@ -70,14 +73,14 @@ const stats = computed(() => [
 ])
 
 const load = async () => {
-  loading.value = true
-  error.value = ''
+  isLoading.value = true
+  loadError.value = ''
   try {
     data.value = (await getDashboard()) || {}
   } catch {
-    error.value = '数据总览加载失败，请检查后端服务或管理员权限。'
+    loadError.value = '数据总览加载失败，请检查后端服务或管理员权限。'
   } finally {
-    loading.value = false
+    isLoading.value = false
   }
 }
 

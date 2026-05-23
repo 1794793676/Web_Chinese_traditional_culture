@@ -1,5 +1,5 @@
 <template>
-  <section class="page-hero">
+  <section class="page-hero detail-hero" :style="heroStyle">
     <div class="container">
       <p class="muted">首页 / {{ article.categoryName || '文化专题' }} / {{ article.title || '文章详情' }}</p>
       <p><span class="tag">{{ article.categoryName || '传统文化' }}</span></p>
@@ -16,7 +16,7 @@
         <template v-else>
           <div class="cover-frame">
             <img v-if="!coverFailed" :src="displayCover" :alt="article.title" @error="coverFailed = true" />
-            <div v-else class="detail-cover-fallback">华夏文脉</div>
+            <img v-else :src="fallbackDetailCover" :alt="article.title || '默认封面'" class="cover-fallback-image" />
           </div>
 
           <div v-if="isHtml" class="article-content" v-html="article.content" />
@@ -74,6 +74,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { createComment, getArticleDetail, likeArticle, recordView, unlikeArticle } from '../api/article'
 import { getFallbackCover } from '../utils/format'
+import { fallbackDetailCover, getCategoryHeroImage } from '../utils/pictureMap'
 import CommentList from '../components/CommentList.vue'
 import SharePanel from '../components/SharePanel.vue'
 
@@ -89,7 +90,8 @@ const commentListRef = ref(null)
 
 const isHtml = computed(() => /<[^>]+>/.test(article.value?.content || ''))
 const paragraphLines = computed(() => String(article.value?.content || '').split('\n').filter(Boolean))
-const displayCover = computed(() => article.value.coverUrl || getFallbackCover(article.value))
+const displayCover = computed(() => article.value.coverUrl || getFallbackCover(article.value) || fallbackDetailCover)
+const heroStyle = computed(() => ({ '--page-hero-bg': `url(${getCategoryHeroImage(article.value?.categorySlug || 'thought')})` }))
 
 const refreshDetail = async () => {
   article.value = await getArticleDetail(slug.value)
